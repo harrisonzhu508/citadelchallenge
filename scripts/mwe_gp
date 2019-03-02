@@ -1,0 +1,92 @@
+import gpytorch
+import models.gp_regression as gp
+import torch
+from torch import Tensor
+import pandas as pd
+import numpy as np
+import matplotlib
+matplotlib.use('TkAgg')
+from matplotlib import pyplot as plt
+plt.style.use('seaborn-darkgrid')
+
+def main():
+
+    # load data
+    data = pd.read_csv("../data/BLAH.csv")
+    
+    train = 
+    test  = 
+
+    # convert to tensors
+    train_x = Tensor(train.values)
+    train_y = Tensor(train.values)
+
+    test_x = Tensor(test.values)
+    test_y = Tensor(test.values)
+    
+    # enable CUDA
+    if torch.cuda.is_available():
+        train_x = train_x.cuda()
+        train_y = train_y.cuda()
+        test_x = test_x.cuda()
+    
+    # initialize mean function, kernsl likelihood and model objects
+    likelihood = gpytorch.likelihoods.GaussianLikelihood()
+    mean_function = torch.nn.Linear(train_x.shape[1], 1)
+    kernel_t = gpytorch.kernels.RBFKernel()
+    kernel_s = gpytorch.kernels.MaternKernel()
+    gp_model = gp.naive_GP(mean_function, kernel_t, kernel_s, train_x, train_y, likelihood)
+    
+    if torch.cuda.is_available():
+        likelihood = likelihood.cuda()
+        gp_model = gp_model.cuda()
+    
+    print("Start Training \n")
+    gp_model = gp.train_model(train_x, train_y, gp_model, likelihood, epochs=250)
+    # posterior prediction
+    posterior_pred = gp.predict(test_x, gp_model, likelihood)
+    
+    if torch.cuda.is_available():
+        posterior_mean = posterior_pred.mean.cpu()
+        print("Test RSME:{}".format(torch.norm(test_y - posterior_mean)))
+
+    else:
+        posterior_mean = posterior_pred.mean
+        print("Test RSME:{}".format((torch.norm(test_y - posterior_mean) / test_y.shape[1])))
+    
+    #posterior_csv = test.iloc[:, 1:]
+    #posterior_csv["yield_mean"] = posterior_mean.numpy()
+    ## save posteriors
+    #posterior_csv.to_csv("../notebooks/test_pred.csv")
+
+    #print("\n Completed. Predictions written to ../notebooks/test_pred.csv")
+
+
+    #plt.figure(0)
+    #plt.scatter([i for i in range(1,223)], test_y.cpu(), marker = ".")
+    #plt.scatter([i for i in range(1,223)], posterior_pred.mean.cpu().numpy())
+    #plt.show()
+
+    #with torch.no_grad():
+    #    # Initialize plot
+    #    f, ax = plt.subplots(1, 1, figsize=(12, 12))
+#
+    #    # Get upper and lower confidence bounds
+    #    lower, upper = posterior_pred.confidence_region()
+    #    # Plot predictive means as blue line
+    #    ax.plot([i for i in range(1,posterior_mean.shape[0]+1)], posterior_mean.numpy(), 'b')
+    #    ax.plot([i for i in range(1,posterior_mean.shape[0]+1)], test_y.numpy(), '.')
+    #    # Shade between the lower and upper confidence bounds
+    #    ax.fill_between([i for i in range(1,posterior_mean.shape[0]+1)], lower.cpu().numpy(), upper.cpu().numpy(), alpha=0.5)
+    #    ax.legend(['Mean', 'Observed Data', 'Confidence'])
+    #    plt.savefig("../notebooks/gp1.png")
+if __name__ == "__main__":
+    
+    print("Is CUDA available?{}. How many?{}".format(torch.cuda.is_available(), torch.cuda.device_count()))
+    
+    main()
+
+    
+
+
+
