@@ -103,5 +103,8 @@ venv.bak/
 # mypy
 .mypy_cache/
 
+#annoying data files
 .DS_Store
 *.csv
+Icon\r
+
