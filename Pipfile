@@ -15,6 +15,9 @@ numpy = "*"
 matplotlib = "*"
 seaborn = "*"
 pandas = "*"
+sphinx = "*"
+recommonmark = "*"
+sphinx-rtd-theme = "*"
 
 [requires]
 python_version = "3.6"
