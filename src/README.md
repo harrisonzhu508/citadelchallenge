@@ -1,4 +1,5 @@
 # Code directory
+[![Documentation Status](https://readthedocs.org/projects/uk-citadel-team/badge/?version=latest)](https://uk-citadel-team.readthedocs.io/en/latest/?badge=latest)
 
 Minimal requirements:
 

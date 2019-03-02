@@ -1,6 +1,7 @@
 Welcome to 2019 UK-Citadel-Team's documentation!
 ================================================
 
+.. image:: https://readthedocs.org/projects/uk-citadel-team/badge/?version=latest
 
 .. toctree::
    :maxdepth: 2
