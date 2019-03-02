@@ -111,5 +111,4 @@ Icon\r
 # projects
 .Rproj.user
 packrat/lib*/
-
-#don't wanna include tarballs!
+packrat/src/
