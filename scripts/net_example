@@ -7,12 +7,9 @@ from sklearn.preprocessing import RobustScaler
 import torch.nn.init as init
 from torch.autograd import Variable
 
-# Device configuration
-device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
-
 # Net Structure #
 # an example #
-class netBaseline(nn.Module):
+class Net(nn.Module):
     """Neural network baseline. Inherits nn.Module Class
 
     """
