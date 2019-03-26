@@ -2,7 +2,6 @@
 Module for Gaussian process regression
 
 """
-import numpy as np
 import gpytorch
 import torch
 import gc        
@@ -18,10 +17,10 @@ class Simple_GP(gpytorch.models.ExactGP):
         train_y: training labels: Nx1 dimensions
         likellihood: Specify the likelihood function - from gpytorch classes
     """
-    def __init__(self, train_x, train_y, likelihood):
+    def __init__(self, train_x, train_y, likelihood, kernel, mean_function):
         super(Spatiotemporal_GP, self).__init__(mean_function, kernel, train_x, train_y, likelihood)
         #self.mean_module = gpytorch.means.ConstantMean()
-        self.covar_module = spatial_kernel
+        self.covar_module = kernel
         self.mean_module = mean_function
     
     def forward(self, x):
@@ -45,7 +44,7 @@ class Spatiotemporal_GP(gpytorch.models.ExactGP):
         train_y: training labels: Nx1 dimensions
         likellihood: Specify the likelihood function - from gpytorch classes
     """
-    def __init__(self, train_x, train_y, likelihood):
+    def __init__(self, train_x, train_y, likelihood, mean_function, temporal_kernel, spatial_kernel):
         super(Spatiotemporal_GP, self).__init__(mean_function, temporal_kernel, spatial_kernel, train_x, train_y, likelihood)
         #self.mean_module = gpytorch.means.ConstantMean()
         self.covar_module_t = temporal_kernel
