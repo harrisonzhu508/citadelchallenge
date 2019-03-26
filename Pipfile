@@ -21,6 +21,9 @@ sphinx-rtd-theme = "*"
 gc = "*"
 gpytorch = "*"
 sklearn = "*"
+qt5-9-6 = "*"
+spyder = "*"
+pyqt5 = "==5.11.2"
 
 [requires]
 python_version = "3.6"
