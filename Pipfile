@@ -24,6 +24,7 @@ sklearn = "*"
 qt5-9-6 = "*"
 spyder = "*"
 pyqt5 = "==5.11.2"
+sphinx-press-theme = "*"
 
 [requires]
 python_version = "3.6"

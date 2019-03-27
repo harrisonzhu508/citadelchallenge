@@ -26,7 +26,7 @@ source_parsers = {
 
 # -- Project information -----------------------------------------------------
 
-project = 'UK-Citadel-Team'
+project = 'Home'
 copyright = '2019, Harrison Zhu, Taketomo Isazawa, Benjamin Hillyard, Parley Yang'
 author = 'Harrison Zhu, Taketomo Isazawa, Benjamin Hillyard, Parley Yang'
 
@@ -51,7 +51,7 @@ extensions = [
     'sphinx.ext.mathjax',
     'sphinx.ext.viewcode',
 ]
-
+mathjax_path="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 
@@ -59,7 +59,7 @@ templates_path = ['_templates']
 # You can specify multiple suffix as a list of string:
 #
 
-source_suffix = ['.rst', '.md', '.ipynb']
+source_suffix = ['.rst', '.md', '.ipynb', ".html"]
 #source_suffix = '.rst'
 
 # The master toctree document.

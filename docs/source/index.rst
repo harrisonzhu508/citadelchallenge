@@ -1,38 +1,7 @@
-Welcome to 2019 UK-Citadel-Team's documentation!
+Team 20 documentation!
 ================================================
-
-.. image:: https://readthedocs.org/projects/uk-citadel-team/badge/?version=latest
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
-   gp.md
-   nn.md
-   mc.md
-
-Before Starting
-===============
-Minimal requirements
-
-.. code:: python
-
-    pipenv
-    pyenv
-    python==3.6
-
-To setup:
-
-.. code:: bash
-
-    pipenv install --dev
-
-
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
