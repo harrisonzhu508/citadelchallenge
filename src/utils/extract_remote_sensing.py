@@ -29,7 +29,7 @@ def process(start_date, end_date, database, feature):
 
 	"""
 
-	elif database == "gridmet":
+	if database == "gridmet":
 		data = gridmet
 	else:
 		raise Exception("ImageCollection not defined. Check whether input is modis, gridmet or noah")
