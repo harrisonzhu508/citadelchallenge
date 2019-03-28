@@ -107,8 +107,9 @@ venv.bak/
 .DS_Store
 *.csv
 Icon\r
+data/
 
 # projects
 .Rproj.user
 packrat/lib*/
-packrat/src/ 
+packrat/src/
