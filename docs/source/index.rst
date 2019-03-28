@@ -5,3 +5,4 @@ Team 20 documentation!
    :maxdepth: 2
    :caption: Contents:
 
+   setup.md

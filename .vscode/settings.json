@@ -1,4 +1,5 @@
 {
     "python.pythonPath": "/Users/harrisonzhu/.local/share/virtualenvs/citadelchallenge-bhaB5fPV/bin/python",
-    "restructuredtext.confPath": "${workspaceFolder}/docs/source"
+    "restructuredtext.confPath": "${workspaceFolder}/docs/source",
+    "python.linting.pylintEnabled": true
 }
