@@ -7,6 +7,7 @@ Description
 
 Team members:
 -------------
+.. image:: img/logo.png
 `Taketomo Isazawa <http://www.mole.phy.cam.ac.uk/people/ti250.php>`_, 
 University of Cambridge, 1st year PhD in Natural Language Processing.
 
@@ -17,13 +18,13 @@ University of Cambridge, 1st year PhD in Natural Language Processing.
 University of Oxford, MSc in Statistics.
 
 `Parley Yang <https://www.linkedin.com/in/parleyyang/>`_, University of Cambridge, 
-MPhil in  Research.
+MPhil in Economic Research.
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
-
+   
    setup.md
    gp.rst
    test.rst
-   references.md
+   references.rst
