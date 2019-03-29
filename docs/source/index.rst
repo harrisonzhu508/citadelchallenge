@@ -26,3 +26,4 @@ MPhil in  Research.
    setup.md
    gp.rst
    test.rst
+   references.md
