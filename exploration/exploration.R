@@ -7,16 +7,41 @@
 # 
 library(dplyr)
 library(sqldf)
-
-
+library(randomForest)
 
 # work
-remote <- read.csv("../data/processed/remote_sensing.csv")
-influenza <- read.csv("../data/influenza_activity.csv")
+influenza <- read.csv("../data/processed/influenza.csv")
+train <- influenza[influenza$year <= 2014,]
+train <- train[complete.cases(train),]
+test <- influenza[influenza$year <= 2017 & influenza$year >= 2015,]
+test <- test[complete.cases(test),]
 
-merge(influenza, remote, by.x = )
+train <- train[train$ContinentName == "South America",]
+test <- test[test$ContinentName == "South America",]
 
-head(remote)
-head(influenza)
-colnames(influenza)
+train_x <- train[,-ncol(train)]
+train_y <- train[,ncol(train)]
+test_x <- test[,-ncol(test)]
+test_y <- test[,ncol(test)]
 
+
+
+# random forest
+model_rf <- randomForest(train_y ~ CapitalLatitude + CapitalLongitude + year + month + 
+                           tmmn + tmmx + NDVI,data=train_x)
+varImpPlot(model_rf)
+
+pred_test <- predict(model_rf, train_x)
+
+sqrt(mean((pred_test - test_y)^2))
+
+plot(pred_test, train_y, cex=0.3)
+abline(a = 0, b = 1)
+
+
+
+head(train)
+head(test)
+colnames(train_x)
+max(train_y)
+max(test_y)

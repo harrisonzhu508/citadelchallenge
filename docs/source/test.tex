@@ -1,0 +1,106 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{fancyhdr}
+\usepackage{wrapfig}
+\usepackage{amsmath, amssymb}
+\usepackage{gensymb}
+\usepackage[toc,page]{appendix}
+
+\usepackage{scrextend}
+\usepackage[english]{babel}
+\usepackage{blindtext}
+
+
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+\makeatletter
+\def\BState{\State\hskip-\ALG@thistlm}
+\makeatother
+
+
+\usepackage[utf8]{inputenc}
+\usepackage[misc]{ifsym}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{array,booktabs}
+\usepackage{parskip}
+
+\usepackage[T1]{fontenc}
+\usepackage{libertine}
+\usepackage{graphicx}
+\usepackage[svgnames]{xcolor}
+\usepackage{framed}
+
+\newcommand*\openquote{\makebox(26,-22){\scalebox{5}{``}}}
+\newcommand*\closequote{\makebox(26,-22){\scalebox{5}{''}}}
+\colorlet{shadecolor}{white}
+
+\makeatletter
+\newif\if@right
+\def\shadequote{\@righttrue\shadequote@i}
+\def\shadequote@i{\begin{snugshade}\begin{quote}\openquote}
+\def\endshadequote{%
+  \if@right\hfill\fi\closequote\end{quote}\end{snugshade}}
+\@namedef{shadequote*}{\@rightfalse\shadequote@i}
+\@namedef{endshadequote*}{\endshadequote}
+\makeatother
+
+ 
+ \usepackage[svgnames]{xcolor}
+\usepackage{listings}
+\lstset{language=R,
+    basicstyle=\small\ttfamily,
+    stringstyle=\color{DarkGreen},
+    otherkeywords={0,1,2,3,4,5,6,7,8,9},
+    morekeywords={TRUE,FALSE},
+    deletekeywords={data,frame,length,as,character},
+    keywordstyle=\color{blue},
+    commentstyle=\color{DarkGreen},
+}
+
+ \usepackage{bbm}
+\usepackage{mathtools}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{P014}
+\fancyhead[RE,LO]{Datathon}
+\fancyfoot[CE,CO]{\leftmark}
+\fancyfoot[LE,RO]{\thepage}
+
+\title{Bayesian Approach}
+\author{Citadel Datathon Final }
+\date{April 2019}
+
+\usepackage{natbib}
+\usepackage{graphicx}
+
+\usepackage[T1]{fontenc}
+\usepackage{titling}
+\setlength{\droptitle}{-3cm}   
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+A major infectious disease surveillance body, the Centre for Disease Control in the Untied States, currently deploy an adaptation of Serfling's method (cite here) for influenza modelling. The method uses cyclic regression to model the weekly proportion of deaths from pneumonia and influenza. Since then adaptations have incorporated indicators such as counts of patient visits for influenza like illness (ILI). However, regardless of modern modifications the methodology has a particular flaw in its assumption that observations are independent and identically distributed.
+
+In this section we attempt to shift the methodology towards the Bayesian framework in order to provide better epidemic thresholds that are adjusted for seasonal effects. In doing so, we build prior and observation models for the number of individuals infected by influenza within a specific region. After building the models we simulate from the prior to test its likeness to reality and ensure the prior model is sufficiently grounded in reality to produce justified posterior inference. Once we are satisfied with the model we deploy Approximate Bayesian Computation (ABC) to generate approximate posterior samples and proceed to make pobabilistic statements to inform policy makers. 
+
+\section{Prior Elicitation}
+We begin by outlining the prior and observation models in this setting. Whilst the systematic use of parameterised distributions is not always justifiable, when building the prior we arbitrarily restrict ourselves to a parameterised density where we can make subjective evaluations of the parameters in line with our knowledge of the world.
+
+\subsection{Prior Model}
+We build a model for the number of individuals infected by influenza in a given week for a two year period. The parameters are $ \Theta = (X_{1:104},\mu, \theta, \alpha, \rho, \ell)$, with notation defined as $(X_{1:104}) \vcentcolon= (X_{1},...,X_{104})$. From which, we model the weekly flu process $(X_{i})_{i=1}^{104}$ over a 2 year period (for example 2018 to 2019) as a weekly mean with an autoregressive process. By considering the seasonality of infection count we use a single AR process for each winter, since these winters vary in strands of influenza active, health care spending, temperature and so on. Hence we have, $X_{t}|X_{t-1},\phi = m_{t}+y_{t}$ with $y_{t} \stackrel{}{\sim} AR(\rho,50)$ and $\phi = (\mu, \theta, \rho, \ell, \alpha)$. The mean in week $t$ is given by 
+$$
+m_{t} = \mu + \theta t + \alpha sin^8\Big(\frac{\pi}{52}t - \ell\pi\Big)
+$$
+
+
+That is to say the weekly mean is a baseline infection count $\mu$, $\theta t$ to describe secular trend, and a suitably scaled and lagged sine function to capture seasonality. 
+
+The prior $\pi(\Theta)$ is composed of the following: 
+
+\end{document}

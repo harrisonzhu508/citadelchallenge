@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Welcome to 2019 UK-Citadel-Team’s documentation! &mdash; UK-Citadel-Team 0.0.1 documentation</title>
+  <title>Team 18 documentation! &mdash; Home 0.0.1 documentation</title>
   
 
   
@@ -25,6 +25,7 @@
         <script type="text/javascript" src="_static/underscore.js"></script>
         <script type="text/javascript" src="_static/doctools.js"></script>
         <script type="text/javascript" src="_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -35,7 +36,7 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Gaussian Processes" href="gp.html" /> 
+    <link rel="next" title="Setup and Installation" href="setup.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -49,7 +50,7 @@
           
 
           
-            <a href="#" class="icon icon-home"> UK-Citadel-Team
+            <a href="#" class="icon icon-home"> Home
           
 
           
@@ -81,9 +82,8 @@
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="gp.html">Gaussian Processes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="nn.html">Neural Networks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mc.html">Markov Chain Monte Carlo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Setup and Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gp.html">Spatiotemporal Modelling</a></li>
 </ul>
 
             
@@ -98,7 +98,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="#">UK-Citadel-Team</a>
+          <a href="#">Home</a>
         
       </nav>
 
@@ -129,7 +129,7 @@
     
       <li><a href="#">Docs</a> &raquo;</li>
         
-      <li>Welcome to 2019 UK-Citadel-Team’s documentation!</li>
+      <li>Team 18 documentation!</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -150,48 +150,25 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="welcome-to-2019-uk-citadel-team-s-documentation">
-<h1>Welcome to 2019 UK-Citadel-Team’s documentation!<a class="headerlink" href="#welcome-to-2019-uk-citadel-team-s-documentation" title="Permalink to this headline">¶</a></h1>
-<img alt="https://readthedocs.org/projects/uk-citadel-team/badge/?version=latest" src="https://readthedocs.org/projects/uk-citadel-team/badge/?version=latest" />
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">target:</th><td class="field-body"><a class="reference external" href="https://uk-citadel-team.readthedocs.io/en/latest/?badge=latest">https://uk-citadel-team.readthedocs.io/en/latest/?badge=latest</a></td>
-</tr>
-<tr class="field-even field"><th class="field-name">alt:</th><td class="field-body">Documentation Status</td>
-</tr>
-</tbody>
-</table>
+  <div class="section" id="team-18-documentation">
+<h1>Team 18 documentation!<a class="headerlink" href="#team-18-documentation" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
 <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="gp.html">Gaussian Processes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="nn.html">Neural Networks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mc.html">Markov Chain Monte Carlo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Setup and Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="setup.html#step-1">Step 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="setup.html#step-2">Step 2</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="gp.html">Spatiotemporal Modelling</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="gp.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gp.html#references">References</a></li>
+</ul>
+</li>
 </ul>
 </div>
-</div>
-<div class="section" id="before-starting">
-<h1>Before Starting<a class="headerlink" href="#before-starting" title="Permalink to this headline">¶</a></h1>
-<p>Minimal requirements</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pipenv</span>
-<span class="n">pyenv</span>
-<span class="n">python</span><span class="o">==</span><span class="mf">3.6</span>
-</pre></div>
-</div>
-<p>To setup:</p>
-<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pipenv</span> <span class="n">install</span> <span class="o">--</span><span class="n">dev</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="indices-and-tables">
-<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
-<ul class="simple">
-<li><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></li>
-<li><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></li>
-<li><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></li>
-</ul>
+<div class="math notranslate nohighlight">
+\[a^2 + b^2 = c^2\]</div>
 </div>
 
 
@@ -202,7 +179,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="gp.html" class="btn btn-neutral float-right" title="Gaussian Processes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="setup.html" class="btn btn-neutral float-right" title="Setup and Installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
     </div>

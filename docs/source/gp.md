@@ -1,0 +1,35 @@
+# Spatiotemporal Modelling
+
+## Introduction 
+Suppose $$\{X_i,y_i\}_i$$ as our features and response (number of positive influenza cases). We will assume the following underlying relationship:
+
+$$
+y_i = f(x_i) + \epsilon_i,
+$$
+
+where $$x_i\in\mathbb{R}^p$$ is the feature, $$\epsilon_i\sim N(0,\sigma^2)$$ and $$f$$ is the underlying function. Since $$x_i$$ contains spatial and temporal features, the standard regression methods of generalised additive models (GAMs), gradient boosting and regression trees are not adapted to this problem. In addition, pure time series models such as Long-short term memory (LSTM) recurrent neural networks, SARIMA and ARMA-GARCH models also do not take in account of the spatial variation.
+
+On the other hand, stochastic processes such as Gaussian processes (GP) or solutions to stochastic partial differential equations (SPDE) are well-adapted to what we would like to accomplish. 
+
+SPDEs are the most natural approach to modelling spatiotemporal phenomenon, by adding a driven white noise to a partial differential equation (PDE) to obtain
+$$
+Lu = f + \xi\circ dW,
+$$
+where $$L$$ is a differential operator, $$f$$ is a function and $$\xi\circ dW$$ is a driven white noise. However, there is limited software to provide solutions to these SPDEs. `R-INLA` is a library that uses the Bayesian method integrated nested Laplace approximation (INLA) to construct weak solutions to linear fractional SPDEs, but this places too much restriction of the underlying SPDE and would result in blackbox modelling.
+## A Spatiotemporal Model
+
+In this study, we will thus use GPs as a spatiotemporal framework to study spatiotemporal variations. We let $$f$$ have a Gaussian process prior, giving
+$$
+f\sim GP(\mu(\cdot), k(\cdot,\cdot)),
+$$
+where $$\mu(\cdot)$$ and $$k(\cdot,\cdot)$$ are chosen mean and covariance functions. We also call $k(\cdot,\cdot)$ a kernel by convention.
+
+The choice of the mean is usually zero mean, constant mean, polynomial or splines. This helps us capture the trend of $$y_i$$. 
+
+However, perhaps what would be more important is capturing the covariance between different features.
+
+
+
+
+
+## References
