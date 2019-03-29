@@ -1,4 +1,4 @@
-Team 20 documentation!
+Team 18 documentation!
 ================================================
 
 .. toctree::
@@ -6,3 +6,7 @@ Team 20 documentation!
    :caption: Contents:
 
    setup.md
+
+.. math::
+
+    a^2 + b^2 = c^2

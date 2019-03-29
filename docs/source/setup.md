@@ -21,3 +21,5 @@ earthengine authenticate
 python -c "import ee; ee.Initialize()"
 # If you don't get an error, you are good to go
 ```
+
+\\[ x = {-b \pm \sqrt{b^2-4ac} \over 2a} \\]
