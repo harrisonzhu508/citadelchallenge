@@ -9,12 +9,21 @@ library(dplyr)
 library(sqldf)
 library(randomForest)
 
-# work
+# load data
+d <- read.csv("../data/health_indicators.csv")
+colnames(d)
+
+
 influenza <- read.csv("../data/processed/influenza.csv")
+
+#train test split
 train <- influenza[influenza$year <= 2014,]
 train <- train[complete.cases(train),]
 test <- influenza[influenza$year <= 2017 & influenza$year >= 2015,]
 test <- test[complete.cases(test),]
+
+write.csv(train, "../data/processed/modelling_data/influenza_train.csv", row.names = FALSE)
+write.csv(test, "../data/processed/modelling_data/influenza_test.csv", row.names = FALSE)
 
 train <- train[train$ContinentName == "South America",]
 test <- test[test$ContinentName == "South America",]

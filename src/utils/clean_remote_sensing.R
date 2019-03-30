@@ -10,22 +10,20 @@
 library(dplyr)
 library(sqldf)
 
-rm01 <- read.csv("../data/remote_sensing/2000_01.csv")
-path <- "../data/remote_sensing/"
+path <- "../../data/processed/noaa"
 
-files <- list.files(path = path, pattern = ".csv", 
-                    all.files = FALSE, full.names = FALSE,
-                    recursive = FALSE, ignore.case = FALSE,
-                    include.dirs = FALSE, no.. = FALSE)
+country_code <- read.csv("../../data/country_codes.csv")
+influenza <- read.csv("../../data/influenza_activity.csv")
+influenza <- influenza[,c(1,2,3,4,5,20)]
+colnames(influenza)
 
-for (file in files) 
-# insert code to process dataframe
-{ 
-  print("Processing %s" %--% file)
-  data <- read.csv("../data/processed/remote_sensing/%s" %--% file)
-  data$tmmn <- data$tmmn * 0.1
-  data$tmmx <- data$tmmx * 0.1
-  
-  write.csv(data, "../data/processed/remote_sensing/%s" %--% file)
-}
+weekly_remote <- read.csv("../../data/processed/noaa/joined_remote.csv")
 
+plc_holder <- merge(influenza, weekly_remote, by.x = c("country_code", "year", "week")
+                    , by.y = c("country_code", "year", "week"))
+head(influenza)
+head(plc_holder)
+
+colnames(save_data)
+colnames(save_data)[c(11,12,13,14,15,16)] <- c("surface_height", "temperature", "evaporation",
+                                               "humidity", "Pressure_surface", "num_influenza")

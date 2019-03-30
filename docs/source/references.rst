@@ -16,6 +16,10 @@ N. Cressie and C. K. Wikle.Statistics for spatio-temporal data. Wiley, 2011.
 A. C. Davison. Statistical Models. Cambridge Series in Statistical and Probabilistic Mathematics. 
 CambridgeUniversity Press, 2003. doi: 10.1017/CBO9780511815850.
 
+N. Gorelick, M. Hancher, M. Dixon, S. Ilyushchenko, D. Thau, and R. Moore.  
+Google earth engine:Planetary-scale geospatial analysis for everyone. Remote Sensing of Environment, 2017. 
+doi: 10.1016/j.rse.2017.06.031. URLhttps://doi.org/10.1016/j.rse.2017.06.031.
+
 Hairer, M., 2009. An introduction to stochastic PDEs. arXiv preprint arXiv:0907.4178.
 
 Hochreiter, S. and Schmidhuber, J., 1997. Long short-term memory. Neural computation, 9(8), pp.1735-1780.

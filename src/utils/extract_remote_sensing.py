@@ -7,7 +7,7 @@ Datasource: https://developers.google.com/earth-engine/datasets/catalog/IDAHO_EP
 TERRACLIMATE AND MODIS
 
 	- MODIS/006/MOD13Q1
-	- IDAHO_EPSCOR/TERRACLIMATE
+	- NOAA/CFSV2/FOR6H
 
 @author: harrisonzhu
 """
@@ -18,10 +18,10 @@ from datetime import datetime
 
 ee.Initialize()
 
-terraclimate = ee.ImageCollection("IDAHO_EPSCOR/TERRACLIMATE")
+noaa = ee.ImageCollection("NOAA/CFSV2/FOR6H")
 ndvi = ee.ImageCollection("MODIS/006/MOD13Q1")
 
-def process(start_date, end_date, database, features_list):
+def process(week, start_date, end_date, database, features_list):
 	"""extract and process climatic data for year
 
 	Input:
@@ -34,8 +34,8 @@ def process(start_date, end_date, database, features_list):
         Output:
 	"""
 
-	if database == "terraclimate":
-		data = terraclimate
+	if database == "noaa":
+		data = noaa
 	elif database == "ndvi":
 		data = ndvi
 	else:
@@ -47,9 +47,8 @@ def process(start_date, end_date, database, features_list):
 	# convert dates to ee data types
 	month = end_date[5:7]
 	year = end_date[:4]
-
 	# select feature
-	data_reduced = data.select("NDVI").filterDate(ee.Date(start_date), ee.Date(end_date)).mean()
+	data_reduced = data.select(features_list).filterDate(ee.Date(start_date), ee.Date(end_date)).mean()
 
 	# load regions: countries from a public fusion table, removing non-conus states
 	# by using a custom filter
@@ -64,17 +63,17 @@ def process(start_date, end_date, database, features_list):
 
 	# add a new column for year to each feature in the features
 	features = features.map(
-		lambda feature: feature.set("month",year + "-" + month)
+		lambda feature: feature.set("date",year + "-" + month + "-" + "{}".format(week))
 	)
 
 	# Export ---------------------------------------------------------------------
 	out = batch.Export.table.toDrive(
 	collection = features,\
-	description = 'MODIS_{}_{}'.format(year, month),\
-	folder = "remote_sensing",\
+	description = '{}_{}'.format(year, week),\
+	folder = "noaa",\
 	fileFormat = 'CSV',
-	selectors = "month, Country, mean")
-	
+	selectors = "date, Country, {}".format(", ".join(features_list)))
+
 
 	# send batch to process as csv in server
 	batch.Task.start(out)
@@ -84,17 +83,22 @@ def process(start_date, end_date, database, features_list):
 
 def main():
 	#["pr", "rmax", "rmin", "erc", "eto", "etr"]
-	datatype = "ndvi"
-	#features_list = ["tmmn", "tmmx", "pr", "def", "aet", "srad", "vap"]
-	features_list = ["NDVI"]
+	datatype = "noaa"
+	features_list = ["Geopotential_height_surface",\
+				"Temperature_height_above_ground",\
+                "Potential_Evaporation_Rate_surface_6_Hour_Average",\
+                "Specific_humidity_height_above_ground",\
+                "Pressure_surface"]
+	#features_list = ["NDVI"]
 	for year in range(2000, 2019):
-		for month in range(1, 13):
+		for week in range(1, 52):
+			start_date = "{}-W{}".format(year, week)
+			end_date = "{}-W{}".format(year, week+1)
 
-			start_date = datetime(year=year, month=month, day=1)
-			end_date = datetime(year=year, month=month, day=28)
+			start_date = datetime.strptime(start_date + '-1', "%Y-W%W-%w")
+			end_date = datetime.strptime(end_date + '-1', "%Y-W%W-%w")
 			start_date = start_date.strftime("%Y-%m-%d")
 			end_date = end_date.strftime("%Y-%m-%d")
-			process(start_date, end_date, datatype, features_list)
-
+			process(week, start_date, end_date, datatype, features_list)
 if __name__ == "__main__":
 	main()

@@ -42,33 +42,48 @@ class Spatiotemporal_GP(gpytorch.models.ExactGP):
     input:
 
         mean_function: mean function - from gpytorch classes or torch.nn
-        temporal_kernel: temporal kernel - from gpytorch classes
-        spatial_kernel: spatial kernel - from gpytorch classes
         train_x: training features: Nxp dimensions
         train_y: training labels: Nx1 dimensions
-        likellihood: Specify the likelihood function - from gpytorch classes
+        likelihood: Specify the likelihood function - from gpytorch classes
     """
     def __init__(self, train_x, train_y, likelihood, mean_function, temporal_kernel, spatial_kernel):
         super(Spatiotemporal_GP, self).__init__(train_x, train_y, likelihood)
         #self.mean_module = gpytorch.means.ConstantMean()
-        self.covar_module_t = temporal_kernel
-        self.covar_module_s = spatial_kernel
-        self.mean_module = mean_function
+
+        self.covar_season = gpytorch.kernels.PeriodicKernel()
+        self.covar_season.period_length(1) # year seasonality indicating 1
+
+        self.covar_month = gpytorch.kernels.MaternKernel()
+        self.covar_spatial = gpytorch.kernels.MaternKernel()
+        self.covar_remote = gpytorch.kernels.MaternKernel()
+        self.covar_social = gpytorch.kernels.MaternKernel()
+
+        self.mean_module = torch.nn.Linear(train_x.shape[1], 1)
     
     def forward(self, x):
         """forward pass of GP model
 
         """
-
-        s = x.narrow(1, 1, x.shape[1]-1)
-        t = x.narrow(1, 0, 1)
-
+        year = x.narrow(1,0,1)
+        month = x.narrow(1,1,1)
+        spatial = x.narrow(1,2,2)
+        remote = x.narrow(1,4,4)
+        social = x.narrow(1,5,1)
+        # prevent period to reset
         mean = self.mean_module(x).view(-1)
-        covar_s = self.covar_module_s(s)  
-        covar_t = self.covar_module_t(t)  
-        covar_x = covar_s*covar_t
+
+        #compute covariances
+        self.covar_season.period_length(1) # year seasonality indicating 1
+        covar_season = self.covar_season(year)
+        covar_month = self.covar_month(month)
+        covar_spatial = self.covar_spatial(spatial)
+        covar_remote = self.covar_remote(remote)
+        covar_social = self.covar_social(social)
         
-        return gpytorch.distributions.MultivariateNormal(mean, covar_x)
+        covariance = (covar_season + covar_month) * (covar_spatial + covar_remote)\
+                    + covar_social + covar_month 
+
+        return gpytorch.distributions.MultivariateNormal(mean, covariance)
 
 def train_model(train_x, train_y, model, likelihood, epochs = 50):
     """training procedure
@@ -160,14 +175,15 @@ def main():
     train = train.dropna()
     test = pd.read_csv("../../../data/processed/modelling_data/influenza_test.csv")
     test = test.dropna()
-    features_index = [1,2] + [i for i in range(8,24)]
-    label_index = 24    
+    
+    print("Number train:{}".format(train.shape[0]))
+    print("Number test:{}".format(test.shape[0]))
 
-    train_x = Tensor(train.iloc[:, features_index].values)
-    train_y = Tensor(train.iloc[:, label_index].values)
+    train_x = Tensor(train.iloc[:, :-1].values)
+    train_y = Tensor(train.iloc[:, -1].values)
 
-    test_x = Tensor(test.iloc[:, features_index].values)
-    test_y = Tensor(test.iloc[:, label_index].values)
+    test_x = Tensor(test.iloc[:, :-1].values)
+    test_y = Tensor(test.iloc[:, -1].values)
     
     if torch.cuda.is_available():
         train_x = train_x.cuda()
@@ -208,7 +224,6 @@ def main():
         #plt.ylim((0, 2000))
         #plt.xlim((0, 2000))
         plt.show()
-
 
 if __name__ == "__main__":
 

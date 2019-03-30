@@ -125,11 +125,12 @@ Using Lasso regularised regression, we select the following features for our Gau
 - Actual evapotranspiration, derived using a one-dimensional soil water balance model 
 - Vapor pressure
 - Average working hours per year
-- Healthcare expenditure PPP
 - Number of physicians per 1000 people
 - Toal number smokers over age 18 
 - Year 
 - Month
+
+15, 16, 18, 20
 
 In particular, we found that spatial, temporal and the number of physicians to be highly 
 significant features to the occurrence of influenza. Of course, as GPs are nonparametric models,
@@ -140,7 +141,7 @@ rigorous treatment of reproducing kernel Hilbert spaces for Gaussian processes).
 Model specification
 -------------------
 
-To treat the seasonal trend, we will choose a kernel :math:`k_{\text{se}}(t', t)` for years :math:`t,t'`.
+To treat the seasonal trend, we will choose a kernel :math:`k_{\text{se}}(t', t) = ` for years :math:`t,t'`.
 
 Experimental Results
 --------------------
