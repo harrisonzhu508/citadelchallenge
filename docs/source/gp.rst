@@ -40,8 +40,8 @@ solutions to linear fractional SPDEs, but this places too much
 restriction of the underlying SPDE and would result in blackbox
 modelling. 
 
-Gaussian Processes Regression
------------------------------
+Gaussian Processes Review
+--------------------------
 
 In this study, we will thus use GPs as a spatiotemporal framework to
 study spatiotemporal variations. We let :math:`f` have a Gaussian process prior, giving
@@ -82,7 +82,7 @@ we have a graphical model of :math:`p` dimensions (:math:`p` types of inputs). B
 .. image:: ./img/gp_field.png
 
 The data
-----------------------
+--------
 
 Below is a spatiotemporal exploratory analysis of the number of influenza cases from the ``influenza`` dataset. 
 We obtained the coordinates of the capitals of each country and performed an SQL left join of ``influenza`` on
@@ -110,8 +110,9 @@ For example, Bhatt et al., 2017 looked at mapping disease over space-time using 
 Chen et al, 2019 looked at seasonal influenza spread in Shenzhen, China and Senanayake et al., 2016 on weekly flu
 occurrence in the USA. 
 
-Motivated by Bhatt et al., 2017, we use live satellite imagery to obtain aggregated remote sensing data of
-temperature, precipitation, humidity etc... to augment our existing feature space. The data can be found from 
+Motivated by Bhatt et al., 2017, we use live satellite imagery (NOOA, MODIS, TERRACLIMATE) 
+to obtain aggregated remote sensing data of temperature, precipitation, 
+humidity etc... to augment our existing feature space. The data can be found from 
 Google Earth Engine API (Gorelick et al., 2017) newly-developed by Google. An extraction pipeline is illustrated below.
 
 .. image:: ./img/ee_pipeline.png
@@ -149,3 +150,7 @@ Model 3: XGBoost
 
 Experimental Results
 --------------------
+
+.. raw:: html
+
+	<iframe src="_static/xgboostgp_2018.html" height="530px" width="100%"></iframe>

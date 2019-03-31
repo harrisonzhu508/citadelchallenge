@@ -10,6 +10,7 @@ from torch import Tensor
 import pandas as pd
 from matplotlib import pyplot as plt
 from sklearn.metrics import confusion_matrix
+from sklearn import metrics
 plt.style.use('seaborn-darkgrid')
 import gc
 gc.collect()
@@ -23,10 +24,10 @@ test = test.dropna()
 print("Number train:{}".format(train.shape))
 print("Number test:{}".format(test.shape))
 
-train_x = Tensor(train.iloc[:, :9].values)
+train_x = Tensor(train.iloc[:, 1:10].values)
 train_y = Tensor(train.iloc[:, -1].values)
 
-test_x = Tensor(test.iloc[:, :9].values)
+test_x = Tensor(test.iloc[:, 1:10].values)
 test_y = Tensor(test.iloc[:, -1].values)
 
 if torch.cuda.is_available():
@@ -185,3 +186,5 @@ def main():
         print(confusion_matrix(test_y.cpu().numpy(), posterior_pred.mean.ge(0.5).cpu().numpy()))
     
 
+if __name__ == "__main__":
+    main()
