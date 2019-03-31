@@ -7,7 +7,7 @@ Datasource: https://developers.google.com/earth-engine/datasets/catalog/IDAHO_EP
 TERRACLIMATE AND MODIS
 
 	- MODIS/006/MOD13Q1
-	- NOAA/CFSV2/FOR6H
+	- IDAHO_EPSCOR/TERRACLIMATE
 
 @author: harrisonzhu
 """

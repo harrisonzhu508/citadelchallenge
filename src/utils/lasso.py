@@ -24,17 +24,15 @@ class VariableNames:
     hours_worked = 'Hours_worked_per_year'
     expenditure_ppp = 'expenditure_PPP'
     num_physician = 'num_physician'
-    smoking = 'smoking'
     year = 'year'
     month = 'month'
     num_positive = 'num_influenza_positive'
 
 
-regions_interested = ["European Region of WHO"]
-# regions_interested = ["Region of the Americas of WHO"]
-# regions_interested = ["Western Pacific Region of WHO"]
-variables_interested = [VariableNames.capital_lat,
-                        VariableNames.capital_long,
+regions_interested = ["European Region of WHO", "Region of the Americas of WHO", "Western Pacific Region of WHO"]
+variables_interested = [
+                        # VariableNames.capital_lat,
+                        # VariableNames.capital_long,
                         VariableNames.tmmn,
                         VariableNames.tmmx,
                         VariableNames.pr,
@@ -42,14 +40,29 @@ variables_interested = [VariableNames.capital_lat,
                         VariableNames.aet,
                         VariableNames.srad,
                         VariableNames.vap,
-                        VariableNames.ndvi,
                         VariableNames.hours_worked,
                         VariableNames.expenditure_ppp,
                         VariableNames.num_physician,
-                        VariableNames.smoking,
-                        VariableNames.year,
-                        VariableNames.month,
                         ]
+
+# Scale so everything between 0 and 1, using either the limits, e.g. for long lat,
+# and the maximum numbers for others
+# shows the min and max numbers so can be scaled between.
+variables_scales = {
+                    VariableNames.capital_lat: (0, 90.),
+                    VariableNames.capital_long: (0, 180.),
+                    VariableNames.tmmn: (-29.54, 21.47),
+                    VariableNames.tmmx: (-21.33, 33.82),
+                    VariableNames.pr: (0.59, 546.75),
+                    VariableNames.def_: (0, 1806),
+                    VariableNames.aet: (0, 1389.73),
+                    VariableNames.srad: (23.13, 3189.91),
+                    VariableNames.vap: (94.67, 2864.35),
+                    VariableNames.ndvi: (-919.58, 8071.03),
+                    VariableNames.hours_worked: (1289.2, 2359.0),
+                    VariableNames.expenditure_ppp: (100.3, 428.2),
+                    VariableNames.num_physician: (0.9, 6.25),
+                    }
 
 xs = []
 ys = []
@@ -73,7 +86,11 @@ with open('../../data/processed/influenza.csv') as f:
                     na_found = True
                     break
                 else:
-                    x.append(float(row[variable_name]))
+                    to_append = float(row[variable_name])
+                    if variable_name in variables_scales.keys():
+                        scale = variables_scales[variable_name]
+                        to_append = (to_append - scale[0]) / (scale[1] - scale[0])
+                    x.append(to_append)
             if not na_found:
                 if int(row[VariableNames.year]) >= 2012:
                     xs_test.append(x)
@@ -85,10 +102,7 @@ with open('../../data/processed/influenza.csv') as f:
 print(len(ys))
 print(len(ys_test))
 print(na_variables)
-reg = linear_model.Lasso(alpha=0.1)
+reg = linear_model.ElasticNet(max_iter=100000)
 reg.fit(xs, ys)
 for (variable_name, coefficient) in zip(variables_interested, reg.coef_):
     print(variable_name, coefficient)
-predictions = reg.predict(xs_test)
-print('Root Mean squared error: ', np.sqrt(mean_squared_error(predictions, ys_test)))
-print('R2 score: ', r2_score(predictions, ys_test))

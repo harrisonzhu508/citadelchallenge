@@ -1,11 +1,11 @@
-Team 18 - Spatiotemporal Mapping of Influenza Outbreaks
+How can we better allocate resources to contain influenza?
 ======================================================
 
 Description
 -----------
 
 
-Team members:
+Team 18 members:
 -------------
 .. image:: img/logo.png
 `Taketomo Isazawa <http://www.mole.phy.cam.ac.uk/people/ti250.php>`_,
@@ -24,8 +24,10 @@ MPhil in Economic Research.
    :maxdepth: 2
    :caption: Contents:
 
-   setup.md
+   introduction.rst
    datasets.rst
+   feature_selection.rst
    gp.rst
    Bayes.rst
    references.rst
+   setup.md
