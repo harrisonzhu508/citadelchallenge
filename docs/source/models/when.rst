@@ -72,6 +72,7 @@ Another way to understand Gaussian processes is to think of it as a graphical mo
 1-dimensional example visualisation of a Gaussian process random field [#rasmussen]_.
 
 .. image:: ../img/gp_field.png
+	:scale: 50%
 
 While we will also deploy a Gaussian process classification model, we will omit the details as the theory is more complicated and requires variational inference. If we were to go through the derivation, however, we would find that the optimal predictor for a classification problem with the 0-1 loss is the Bayes' classifier.
 
