@@ -107,7 +107,7 @@ As shown below, peaks are nicely captured.
 VAR example: DEU and its neighbourhoods
 =================
 
-The concept of Vector Autoregression (VAR) is simply an ARIMA (p,d,0) model with :math:`X_{t}\in\mathbb{R}^n` where :math:`n\geq 2`, i.e. the variable is now a proper vector, rather than a scalar.
+The concept of Vector Autoregression (VAR) is simply an ARIMA (p,0,0) model with :math:`X_{t}\in\mathbb{R}^n` where :math:`n\geq 2`, i.e. the variable is now a proper vector, rather than a scalar.
 
 It comes to a natural question that which variables should one pick. As analysed above, and as per concerned by this report, DEU should be an obvious country to investigate. DEU's surrounding countries, which has various features, could also be included, as the transmission of influenza could thus be understood in such a broader-contingent way.
 
@@ -119,8 +119,16 @@ As a matter of geographical fact, (note: see `datasets section <datasets.html>`_
 `Figure link <https://public.tableau.com/profile/harrison4446#!/vizhome/outbreak_influenza/Spatialoutbreak/>`_. 
 
 
-Now, by observing each individual countries, we found that NLD, DNK, POL, and CHE have no significant data before 2009, LUX has no data before 2003, AUT has no data before 2011, and FRA has no data before 2013. Hence, to run the VAR smoothly, we drop FRA and AUT, and only consider years after 2008. Additionally, CZE has numerous empty observations throughout, which 
+Now, by observing each individual countries, we found that NLD, DNK, POL, and CHE have no significant data before 2009, LUX has no data before 2003, AUT has no data before 2011, and FRA has no data before 2013. Hence, to run the VAR smoothly, we drop FRA and AUT, and only consider years after 2008. Additionally, CZE has numerous empty observations throughout, which would make the VAR restricted due to shrunk sample size. Hence CZE is dropped, too.
 
+Hence, we now consider the remaining 8 countries together, and stuck them into our vector.
+
+Due to data availability, the maximum p that would sustain the regression would be 8. Hence run all  :math:`p \in \{0,1,...,8\}` and find the one with the least Schwarz Bayesian Information Criterion (SBIC). We get  :math:`p =2` being optimal.
+
+In order to compare whether VAR does good to our model fitting, we consider a univariate AR(p) model for DEU and see if by considering wider dataset, whether the VAR fitting could be of good. We run all possible p until 52, and by BIC, found :math:`p =3` to be optimal. The two models' fitting results as follows: 
+
+
+.. image:: ./img/DEUcomparison.jpg
 
 
 
