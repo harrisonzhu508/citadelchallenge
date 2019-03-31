@@ -69,9 +69,9 @@ Likewise, by observing the ACF and PACF, we found 1-4 significant lags in both A
 
 The prediction, as shown below, are actually similar amongst the two. However, as one can see, perform poorly when facing spikes.
 
-.. image:: ./img/ARIMA124.png
+.. image:: ./img/ARIMA124.jpg
 
-.. image:: ./img/ARIMA323.png
+.. image:: ./img/ARIMA323.jpg
 
 
 Germany (DEU)
