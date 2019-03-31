@@ -2,15 +2,15 @@
 Bayesian Approach
 =================
 
-Introduction
+Motivation
 ============
 
 A major infectious disease surveillance body, the Centre for Disease
-Control in the US, currently deploy an adaptation[#first]_) for influenza modelling. The method uses
+Control in the US, currently deploy an adaptation [#first]_) for influenza modelling. The method uses
 cyclic regression to model the weekly proportion of deaths from
 pneumonia and influenza. Since then adaptations have incorporated
 indicators such as counts of patient visits for influenza like illness
-(ILI), [#second]_,[#third]_. However, regardless of modern modifications the methodology is limited by its unfounded assumption that observations are independent and
+(ILI) [#second]_, [#third]_. However, regardless of modern modifications the methodology is limited by its unfounded assumption that observations are independent and
 identically distributed.
 
 In this section we attempt to shift the methodology towards the Bayesian
@@ -176,9 +176,7 @@ Bayes factors depend on estimates of the marginal likelihood for the
 observation in question, that is, the first year falling in line with
 recorded data. We make use of the following consistent estimator:
 
-:math:` \Theta^{t} \stackrel{}{\sim} \pi(\Theta|\mathcal{M}_{k})`
-*Calculate*:
-:math:`\hat{p} = n^{-1}\sum_{i=1}^{n}\pi(Y_{1:52}|\Theta^{i},\mathcal{M}_{k}) `
+.. image:: ./img/naive.png.png
 
 When implemented using :math:`n=100,000` the approximation produced
 unstable results despite efforts to reduce computational underflow. To
@@ -225,7 +223,7 @@ for improved emergency planning and resource allocation. The methodology
 further provides an opportunity to look at the posterior for different regions of a country. Medical professionals can then
 strategically allocate their resources within their country to areas with higher probability of outbreak. 
 
-To demonstrate its usefullness we consdier 2018 model predictions given 2017 cycle observations. Below we find that the observation for 2018 fell within our reasonablly tight HPD interval. Given that the European Centre for Disease Prevention and Control recognised 2018 as reasonably large season we are encoraged by the fact the observations still fell within our bounds, [#forth]_. Note we observe the peak of the season above the mean prediction. 
+To demonstrate its usefullness we consdier 2018 model predictions given 2017 cycle observations. Below we find that the observation for 2018 fell within our reasonablly tight HPD interval. Given that the European Centre for Disease Prevention and Control recognised 2018 as reasonably large season we are encoraged by the fact the observations still fell within our bounds [#forth]_. Note we observe the peak of the season above the mean prediction. 
 
 .. image:: ./img/forecast2018.png
 
@@ -241,7 +239,7 @@ Shortcomings
 
 Whilst we achieved success in developing a model that reframed and extended the existing approach, there are a few shortcomings to be mentioned. Firstly, it is generally difficult to assess whether arbitrary features of the prior do not predominate our posterior analysis. The question of robustness has been tackled in the literature and further work could extend this by considering the prior belonging to a class of distributions as proposed by Berger’s classification [#five]_. Attempts could then be made to derive bounds on posterior quantities and hence produce analysis less sensitive to the choice of prior. 
 
-Beyond criticism of the arbitrariness and importance of the prior, we consider the use of ABC. The applications of ABC are often based on improved versions of the basic rejection scheme [#six]_, and have already yielded valuable insights into questions concerning the rate of spread of pathogens [#seven]_,[#eight]_. Past applications have typically focused on parameter estimation rather than posterior prediction. In our case, ABC provides the benefit of independant samples. However, true posterior samples could be found by the implimentation of Hamiltonian Monte Carlo [#nine]_. 
+Beyond criticism of the arbitrariness and importance of the prior, we consider the use of ABC. The applications of ABC are often based on improved versions of the basic rejection scheme [#six]_, and have already yielded valuable insights into questions concerning the rate of spread of pathogens [#seven]_, [#eight]_. Past applications have typically focused on parameter estimation rather than posterior prediction. In our case, ABC provides the benefit of independant samples. However, true posterior samples could be found by the implimentation of Hamiltonian Monte Carlo [#nine]_. 
 
 Finally, the Naive approximation of Bayes factors in this setting proved unstable. Future work could focus on deploying more stable estimators for the marginal likelihood, such as a Harmonic approximation.
 
