@@ -1,3 +1,5 @@
+.. _additional_datasets:
+
 ==============================
 Additional Datasets considered
 ==============================
