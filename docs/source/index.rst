@@ -1,9 +1,7 @@
-How can we better allocate resources to contain influenza?
-======================================================
+Efficient Resource Allocation for Influenza Outbreaks
+==========================================================
 
-Description
------------
-
+Please navigate our submission via the contents side bar!
 
 Team 18 members:
 -------------
