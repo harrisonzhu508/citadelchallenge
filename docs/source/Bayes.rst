@@ -6,7 +6,7 @@ Motivation
 ============
 
 A major infectious disease surveillance body, the Centre for Disease
-Control in the US, currently deploy an adaptation [#first]_ for influenza modelling. The method uses
+Control in the US, currently deploy an adaptation of Serfling's method [#first]_ for influenza modelling. The method uses
 cyclic regression to model the weekly proportion of deaths from
 pneumonia and influenza. Since then adaptations have incorporated
 indicators such as counts of patient visits for influenza like illness
