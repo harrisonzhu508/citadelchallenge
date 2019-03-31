@@ -25,6 +25,7 @@ We also have a Bayesian model that accurately predicts the severity of the next 
 Applications
 ==============
 
+
 Based off this, we can make the following policy suggestions:
 
 
