@@ -141,6 +141,8 @@ As a exploratory note, we see BEL to have zero as median, which means more than 
 
 We also realised that, even by dropping BEL and CZE, data missing are still ample, and effective observations of the entire vector becomes scarer than required, which does bad to the availability of VAR(p) regressions. Hence, we fill all the empty entires by zero, which could be understood as a reasonable action --- those countries which didn't opt to report for a few weeks shall just be assumed they have nothing to report. This may be a trouble if the dataset of interest is in 2000s period, when countries purely do not opt to report independent of any number-related facts. In 2013-16 however, missing filligns occur at the time when no major outbreak occured and usually before and after zero or small number of reports being made. Hence such filling should not distort the nature of the data, whilst benefit largely to the subsequent modelling.
 
+After the above operations, we notice that :math:`p \in \{0,1,...,20\}` is the technically feasible set of lags, thus regress it and obtain the SBIC. We found VAR(9) to be the best, which 
+
 
 
 
