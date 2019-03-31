@@ -55,7 +55,7 @@ So-called presenteeism, when ill workers come into work due to societal pressure
 
 Instead, we looked at the number of hours worked as a proxy for this. If there is a high degree of presenteeism, this should manifest in the number of hours that people work. This data was found for OECD countries in the form of number of hours worked per year [#workinghours]_. The value was processed so that the number of hours worked was constant through the calendar year as the measurements given were in the form of hours worked per year; it didn't make sense to divide the data any further as in reality there is seasonality to the number of hours worked per month.
 
-Spatiotemporal Data
+Remote Sensing Data
 ===================
 
 Influenza viruses can survive much longer at low humidity and low temperatures, partially contributing to the seasonality of flu outbreaks [#flutemp]_. 
@@ -79,23 +79,27 @@ For example, Bhatt et al., 2017 [#bhatt]_ looked at mapping disease over space-t
 Chen et al., 2019 [#chen]_ looked at seasonal influenza spread in Shenzhen, China and Senanayake et al., 2016 [#senanayake]_ on weekly flu
 occurrence in the USA. 
 
-Motivated by Bhatt et al., 2017, we use live satellite imagery (NOOA, MODIS, TERRACLIMATE) 
+Motivated by Bhatt et al., 2017 [#bhatt]_, we use live satellite imagery (NOOA, TerraClimate) 
 to obtain aggregated remote sensing data of temperature, precipitation, 
 humidity etc... to augment our existing feature space. The data can be found from 
-Google Earth Engine API (Gorelick et al., 2017) newly-developed by Google. An extraction pipeline is illustrated below.
+Google Earth Engine API [#gorelick]_ newly-developed by Google. An extraction pipeline is illustrated below.
 
 .. image:: ./img/ee_pipeline.png
 
-Using Lasso regularised regression, we select the following features for our Gaussian process model
+The extraction procedure is complicated, as all the computations for extracting the final ``csv`` is done in the Google Cloud Server, which has specific data structures for everything, through requests using the Python API. The satellite images are stored in the ``ImageCollection`` data structure as a collection of images. We first obtain the ``ImageCollection``, select the range of dates we are interested in and then reduce the collection to a single image by taking the mean of all the features and pixels. We then obtain the coordinates of every country through a nations ``FeatureCollection``, perform a mean ``reduction`` over 4000x4000m squares over each country to obtain the average feature values of each country during the specified range of dates. Finally, we make a request to export to a single ``csv`` and save it into Google Drive.
+
+For our study, we extract monthly and weekly remote sensing data from NOAA and TerraClimate respectively [#gorelick]_. We then merge all the monthly or weekly data together and then perform SQL joins with the coordinates of the capitals of each country and the ``influenza_activity.csv`` dataset.
+
+Using Lasso regularised regression and ElasticNet, we select the following features for use in spatiotemporal modelling later on:
 
 - Capital city latitude 
 - Capital city longitude 
-- Weekly temperature 
+- Temperature 
 - Evapotranspiration, derived using a one-dimensional soil water balance model 
 - Surface pressure
 - Surface Height
 - Year 
-- Month
+- Week
 
 Google Trends
 ================

@@ -1,15 +1,15 @@
 .. _bayesian:
 
-=================
-Bayesian Approach
-=================
+======================
+How big will an influenza epidemic be?
+======================
 
 Motivation
-============
+----------
 
-Before we start modelling the severity of influenza seasons, we investigated the state-of-the-art for this field. As the leading national pubilc health institute in the United States and one of the world's premier infectious disease surveillance bodies, the Centre for Disease Control (CDC) represents the status quo in influenza modelling. The CDC currently deploy an adaptation of Serfling's method [#first]_, which uses cyclic regression to model the weekly proportion of deaths from pneumonia and influenza. Adaptations to the basic model have incorporated indicators such as counts of patient visits for influenza like illness (ILI) [#second]_ [#third]_. However, regardless of modern modifications, the methodology is limited by its unfounded assumption that observations are independent and identically distributed.
+Before we start modelling the severity of influenza seasons, we investigated the state-of-the-art for this field. As the leading national public health institute in the United States and one of the world's premier infectious disease surveillance bodies, the Centre for Disease Control (CDC) represents the status quo in influenza modelling. The CDC currently deploy an adaptation of Serfling's method [#first]_, which uses cyclic regression to model the weekly proportion of deaths from pneumonia and influenza. Adaptations to the basic model have incorporated indicators such as counts of patient visits for influenza like illness (ILI) [#second]_ [#third]_. However, regardless of modern modifications, the methodology is limited by its unfounded assumption that observations are independent and identically distributed.
 
-We attempt to shift the methodology towards the Bayesian
+**In this contribution**, we attempt to shift the methodology towards the Bayesian
 framework in order to provide better epidemic thresholds that are
 adjusted for seasonal effects. In doing so, we build prior and
 observation models for the number of individuals infected by influenza
@@ -21,7 +21,7 @@ Bayesian Computation (ABC) to generate approximate posterior samples and
 proceed to make probabilistic statements to inform policy makers.
 
 Prior Elicitation
-=================
+-----------------
 
 We begin by outlining the prior and observation models in this setting.
 Whilst the systematic use of parametrised distributions is not always
@@ -37,17 +37,17 @@ a given week for a two year period. Whilst the model is agnostic to
 geographical location, we focus on specifying the prior distribution in
 line with European influenza cycles. The parameters are
 :math:`\Theta = (X_{1:104},\mu, \theta, \alpha, \rho, \ell)`.
-The notation is defined as follows: :math:`(X_{1:104}) := (X_{1},...,X_{104})`, where :math:`(X_{i})` is the number of positive influenza samples recorded in week :math:`i`, and the others are parameters for the model, as defined below.
-Using these parameters, we model the weekly flu process :math:`(X_{i})_{i=1}^{104}` over a 2 year period (for example 2018 to 2019) as a weekly mean with an
+The notation is defined as follows: :math:`(X_{1:104}) := (X_1,\ldots,X_{104})`, where :math:`X_i` is the number of positive influenza samples recorded in week :math:`i`, and the others are parameters for the model, as defined below.
+Using these parameters, we model the weekly flu process :math:`(X_i)_{i=1}^{104}` over a 2 year period (for example 2018 to 2019) as a weekly mean with an
 autoregressive (AR) process. By considering the seasonality of infection
 count we use a single AR process for each winter, since each winter has a number of hidden variables. For example, the strands of influenza active, health care spending, temperature and so on differ depending on the year. By only considering short time periods, we lower the risk of being affected by the change of these hidden variables.
 
-Putting this all together, we have :math:`X_{t}|X_{t-1},\phi = m_{t}+y_{t}` with
-:math:`y_{t} \stackrel{}{\sim} AR(\rho,50)` and
+Putting this all together, we have :math:`X_t|X_{t-1},\phi = m_t+y_t` with
+:math:`y_t \stackrel{}{\sim} AR(\rho,50)` and
 :math:`\phi = (\mu, \theta, \rho, \ell, \alpha)`. The mean in week
 :math:`t` is given by
 
-.. math:: m_{t} = \mu + \theta t + \alpha sin^8\Big(\frac{\pi}{52}t - \ell\pi\Big)
+.. math:: m_{t} = \mu + \theta t + \alpha sin^8\Big(\frac{\pi}{52}t - \ell\pi\Big).
 
 That is to say, the weekly mean is a baseline infection count
 :math:`\mu`, with :math:`\theta t` to describe the secular trend, and a
@@ -58,11 +58,11 @@ The prior :math:`\pi(\Theta)` is composed of the following:
 .. math::
 
    \begin{aligned}
-   & X_{1}|\phi \stackrel{}{\sim} \mathcal{N}\Big(m_{1} ,\frac{50^2}{1-\rho^2}\Big) & & \mu \stackrel{}{\sim} \mathcal{U}(0,1000) \\
-   & X_{27}|\phi \stackrel{}{\sim} \mathcal{N}\Big(m_{1} ,\frac{50^2}{1-\rho^2}\Big) & & \theta \stackrel{}{\sim} \mathcal{U}(0,0.5)  \\
-   & X_{79}|\phi \stackrel{}{\sim} \mathcal{N}\Big(m_{1} ,\frac{50^2}{1-\rho^2}\Big) & & \rho \stackrel{}{\sim} \mathcal{U}(0.6,0.9) \\
-   & X_{t}|X_{t-1}, \phi \stackrel{}{\sim} \mathcal{N}\Big(m_{t} + \rho(X_{t-1}-m_{t-1}), 50^2\Big) & & \ell \stackrel{}{\sim} \mathcal{U}(0.7,1) \\
-   &      && \alpha \stackrel{}{\sim} \mathcal{U}(3000,25000)\end{aligned}
+   & X_{1}|\phi \stackrel{}{\sim} \mathcal{N}\Big(m_{1} ,\frac{50^2}{1-\rho^2}\Big) & & \mu \stackrel{}{\sim} \mbox{Unif}(0,1000) \\
+   & X_{27}|\phi \stackrel{}{\sim} \mathcal{N}\Big(m_{1} ,\frac{50^2}{1-\rho^2}\Big) & & \theta \stackrel{}{\sim} \mbox{Unif}(0,0.5)  \\
+   & X_{79}|\phi \stackrel{}{\sim} \mathcal{N}\Big(m_{1} ,\frac{50^2}{1-\rho^2}\Big) & & \rho \stackrel{}{\sim} \mbox{Unif}(0.6,0.9) \\
+   & X_{t}|X_{t-1}, \phi \stackrel{}{\sim} \mathcal{N}\Big(m_{t} + \rho(X_{t-1}-m_{t-1}), 50^2\Big) & & \ell \stackrel{}{\sim} \mbox{Unif}(0.7,1) \\
+   &      && \alpha \stackrel{}{\sim} \mbox{Unif}(3000,25000)\end{aligned}
 
 for :math:`t \in \{2,...,26,28,...,78,80,...,104\}`.
 
@@ -76,7 +76,7 @@ Given this prior model we have the following decomposition:
     &= \pi(X_{104}|X_{103},\phi)\pi(X_{1:103}|\phi)\pi(\alpha)\pi(\rho)\pi(\ell)\pi(\theta)\pi(\mu)\\
     &= \bigg[\prod_{i=2}^{26}\pi(X_{i}|X_{i-1},\phi)\bigg]\pi(X_{1}|\phi)\bigg[\prod_{i=28}^{78}\pi(X_{i}|X_{i-1},\phi)\bigg]\pi(X_{27}|\phi)\\
     &\times \bigg[\prod_{i=80}^{104}\pi(X_{i}|X_{i-1},\phi)\bigg]\pi(X_{79}|\phi)
-   \pi(\alpha)\pi(\rho)\pi(\ell)\pi(\theta)\pi(\mu)\end{aligned}
+   \pi(\alpha)\pi(\rho)\pi(\ell)\pi(\theta)\pi(\mu)\end{aligned}.
 
 Observation Model
 -----------------
@@ -86,7 +86,7 @@ second year given the observations in the first. The data from the first year in
 
 .. math::
 
-	 Y_{1:52} = X_{1:52} + (\epsilon_{i})_{i=1}^{52}
+	 Y_{1:52} = X_{1:52} + (\epsilon_i)_{i=1}^{52},
 
 where :math:`\epsilon_{i} \stackrel{iid}{\sim} \mathcal{N}(0,1)`. Thus
 we have
@@ -100,7 +100,7 @@ As our prior model is a reductive representation of a complex random
 phenomena, it is vital to evaluate the model for likeness to the
 real world to ensure our posterior inference is justified.
 
-We first consider 100,000 samples from the prior model in **Figure XXX**.
+We first consider 100,000 samples from the prior model in the below figure.
 This graph demonstrates likeness to real observed data for Europe over
 the past 5 years. Additionally, the credible
 intervals plotted show a sufficiently large range of realisations. The
@@ -110,7 +110,7 @@ a reasonable fit to the reality of the weekly average of 4611 patients in 2018 i
 .. image:: ../img/synthetic.png
 
 It is important to scrutinise the prior for informativeness with respect
-to the quantities we are particularly interested in. In Figure XXX the
+to the quantities we are particularly interested in. In the below figure, the
 approximate distribution of average and maximum counts for 100,000
 samples are given. Both are satisfactory since they fall roughly
 uniform across wide intervals. The weekly average of 4611 in 2018 falls
@@ -132,33 +132,33 @@ our analysis were not sensitive to this range of priors. For example in
 our choice of :math:`\mu`, which provides the base-level for the weekly
 mean :math:`m_{t}`, we considered variants of uniform, normal and
 triangle distributions, including
-:math:`\mathcal{N}(10000,3),\mathcal{U}(3000,25000)` and
+:math:`\mathcal{N}(10000,3),\mbox{Unif}(3000,25000)` and
 :math:`\text{Tri}(3000,25000,10000)`. We observed reasonable similarity
 between the distributions and ultimately decided to work with the
 uniform distribution since it best represented our prior beliefs.
 
 Model Choice
-============
+-----------------
 
 We are interested in understanding whether or not our current model,
 :math:`\mathcal{M}_{1}`, is adequate. In doing so, we compare its
 performance with alternative models whose difference with our current
-model is the sine function raised to a high power. That is, for alternative models:math:`\mathcal{M}_{2}, \mathcal{M}_{3}, \mathcal{M}_{4}, \mathcal{M}_{5}` and :math:`\mathcal{M}_{6}`, we alter the weekly mean number of influenza
+model is the sine function raised to a high power. That is, for alternative models :math:`\mathcal{M}_{2}, \mathcal{M}_{3}, \mathcal{M}_{4}, \mathcal{M}_{5}` and :math:`\mathcal{M}_{6}`, we alter the weekly mean number of influenza
 positive virus as:
 
 .. math::
 
    \begin{aligned}
-    \mathcal{M}_{2} &:  m_{t} = \mu + \theta t + \alpha sin^{10}\Big(\frac{\pi}{52}t - \ell\pi\Big) \\
-    \mathcal{M}_{3} &:  m_{t} = \mu + \theta t + \alpha sin^{12}\Big(\frac{\pi}{52}t - \ell\pi\Big) \\
-    \mathcal{M}_{4} &:  m_{t} = \mu + \theta t + \alpha sin^{16}\Big(\frac{\pi}{52}t - \ell\pi\Big) \\
-    \mathcal{M}_{5} &:  m_{t} = \mu + \theta t + \alpha sin^{20}\Big(\frac{\pi}{52}t - \ell\pi\Big) \\
-    \mathcal{M}_{6} &:  m_{t} = \mu + \theta t + \alpha sin^{30}\Big(\frac{\pi}{52}t - \ell\pi\Big)  \end{aligned}
+    \mathcal{M}_{2} &:  m_{t} = \mu + \theta t + \alpha \sin^{10}\Big(\frac{\pi}{52}t - \ell\pi\Big) \\
+    \mathcal{M}_{3} &:  m_{t} = \mu + \theta t + \alpha \sin^{12}\Big(\frac{\pi}{52}t - \ell\pi\Big) \\
+    \mathcal{M}_{4} &:  m_{t} = \mu + \theta t + \alpha \sin^{16}\Big(\frac{\pi}{52}t - \ell\pi\Big) \\
+    \mathcal{M}_{5} &:  m_{t} = \mu + \theta t + \alpha \sin^{20}\Big(\frac{\pi}{52}t - \ell\pi\Big) \\
+    \mathcal{M}_{6} &:  m_{t} = \mu + \theta t + \alpha \sin^{30}\Big(\frac{\pi}{52}t - \ell\pi\Big).  \end{aligned}
 
 Note that all models considered are even powers of sine as we know the weekly mean number of influenza positive virus to be always positive.
 Here a finite number of model comparisons is made. If one wants to
 consider an infinite number of models a more delicate construction of
-the unconditional probabilities :math:`(p_{i} : i \in \mathbf{N})` is
+the unconditional probabilities :math:`(p_{i} : i \in \mathbb{N})` is
 required (for example adhering to notions of coherence). Assuming an
 equal prior weighting, we progress to consider Bayes factors.
 
@@ -181,12 +181,12 @@ consistently :math:`\mathcal{M}_{1}`, so we proceed with
 :math:`\mathcal{M}_{1}`.
 
 Posterior sampling
-==================
+------------------
 
 Now that we are confident with the prior model, we proceed to generate approximate
 samples of the posterior distribution given observed European data.
 Whilst it would be possible to generate true posterior samples, for
-example by using Metropolis Hastings and assessing the quality of fit
+example by using Metropolis-Hastings and assessing the quality of fit
 with ACFs, trace plots, and checking that marginal distributions agree,
 we instead deploy ABC to generate approximate uncorrelated samples.
 
@@ -196,7 +196,7 @@ Approximate Bayesian Computation
 With the aim to make probabilistic statements about 2019 we deploy
 approximate Bayesian computation to target the posterior. In doing so,
 we generate samples from :math:`\pi(\Theta|Y_{1:52})` where
-:math:`Y_{1:52}` are given in :code:`influenza\_activity.csv`.
+:math:`Y_{1:52}` are given in ``influenza_activity.csv``.
 
 Below we observe the first year of some synthetic data, with samples
 accepted by ABC in green. These samples provide a satisfactory fit to
@@ -205,7 +205,7 @@ the observed process.
 .. image:: ../img/ABC.png
 
 Results
-=======
+-----------------
 
 Using the posterior distribution we can inform policy makers about the
 probable magnitudes of the outbreaks, allowing
@@ -229,7 +229,7 @@ with a 95% credible interval at (14507,20085), putting the 2019 flu season on tr
 We also believe that this could provide an alternative epidemic threshold to that currently used by the Centre for Disease Control; if we were to find that the number of infections lies outside the HPD region, this would be an indication that we are failing to control the outbreaks and on the verge of an epidemic, and suitable measures should be taken.
 
 Shortcomings
-=============
+-----------------
 
 Whilst we achieved success in developing a model that reframed and extended the existing approach, there are a few shortcomings to be mentioned. Firstly, it is generally difficult to assess whether arbitrary features of the prior  predominate our posterior analysis. The question of robustness has been tackled in the literature and we could extend our models by considering the prior belonging to a class of distributions as proposed by Berger’s classification [#five]_. Attempts could then be made to derive bounds on posterior quantities and hence produce analysis that is less sensitive to the choice of prior.
 
@@ -239,8 +239,8 @@ Finally, the Naive approximation of Bayes factors in this setting proved unstabl
 
 
 .. [#first] Robert E. Serfling. (1963). Methods for Current Statistical Analysis of Excess Pneumonia-Influenza Deaths. Public Health Reports (1896-1970), 78(6), 494-506. doi:10.2307/4591848
-.. [#second] L. Simenson, K. Fukuda, L. B. Schonberg, and N. J. Cox. The impact of influenza epidemics on hospitalizations. The Journal of Infectious Diseases, 181:831–837, 2000.
-.. [#third] F. C. Tsui, M. M. Wagner, V. Dato, and C. C. H. Chang. Value ICD-9-Coded chief complaints for detection of epidemics. In Proceedings of the Annual AMIA Fall Symposium, 2001.
+.. [#second] L.Simenson, K. Fukuda, L. B. Schonberg, and N. J. Cox. The impact of influenza epidemics on hospitalizations. The Journal of Infectious Diseases, 181:831–837, 2000.
+.. [#third] F.C. Tsui, M. M. Wagner, V. Dato, and C. C. H. Chang. Value ICD-9-Coded chief complaints for detection of epidemics. In Proceedings of the Annual AMIA Fall Symposium, 2001.
 .. [#forth] https://ecdc.europa.eu/en/seasonal-influenza/season-2017-18
 .. [#five] (Berger’s (1990a))
 .. [#six] Beaumont, M.A. et al. (2002) Approximate Bayesian Computation in population genetics. Genetics 162, 2025–2035
