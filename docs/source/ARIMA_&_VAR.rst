@@ -131,4 +131,4 @@ In order to compare whether VAR does good to our model fitting, we consider a un
 .. image:: ./img/DEUcomparison.jpg
 
 
-
+MSE suggests the baseline AR(3) model to be 20% better than the more advanced VAR(2) model, which is counter-intuitive. This fact can also be seen by the above graph, where VAR predictions seem to be jumping too largely at the event of outbreaks.

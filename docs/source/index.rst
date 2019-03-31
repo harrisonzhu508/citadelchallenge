@@ -26,3 +26,5 @@ MPhil in Economic Research.
    introduction.rst
    datasets.rst
    models.rst
+   psm.rst
+   ARIMA_&_VAR.rst
