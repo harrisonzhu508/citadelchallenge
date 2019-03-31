@@ -57,6 +57,11 @@ Test against the following hypothesis:
 
 .. math:: H_0: \mathbb{E}[{uphill}_{ABS,t}] = \mathbb{E}[{uphill}_{PRES,t}] 
 
+.. math:: H_A: \mathbb{E}[{uphill}_{ABS,t}] = \mathbb{E}[{uphill}_{PRES,t}] 
+
+
+
+
 
 
 Time Series
