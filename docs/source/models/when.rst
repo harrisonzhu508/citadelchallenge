@@ -129,7 +129,7 @@ Shortcomings
 
 As mentioned in the analysis, we have mainly focused on predicting the occurrence of outbreaks, rather than the exact number of cases. To predict the latter, there have been multiple recent studies on stochastic partial differential equations and INLA [#lindgren]_. Our team decided to implement a Bayesian model to do this, which is detailed in :ref:`the next section <bayesian>`.
 
-Finally, there is also an existing framework for extreme value statistics that would be a more suitable model for predicting either the extreme events or looking at the probability of threshold exceedances. Moreover, the current remote sensing data focusses on capital cities, while a finer grain data source would improve the quality of the fit.
+Finally, there is also an existing framework for extreme value statistics that would be a more suitable model for predicting either the extreme events or looking at the probability of threshold exceedances. However, spatiotemporal extremes is still an active area of research, and we expect more contributions in this field that can have applications to disease mapping in the future. Moreover, the current remote sensing data focusses on capital cities, while a finer grain data source would improve the quality of the fit.
 
 .. [#bhatt] Bhatt, S., Cameron, E., Flaxman, S.R., Weiss, D.J., Smith, D.L. and Gething, P.W., 2017. Improved prediction accuracy for disease risk mapping using Gaussian process stacked generalization. Journal of The Royal Society Interface, 14(134), p.20170520.
 
