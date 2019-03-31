@@ -66,6 +66,8 @@ The histogram confirms such slight trend, where PRES has slightly more rightward
 
 .. image:: ./hist1.jpg
 
+Compared to a standard normal distribution where Skewness is zero and Kurtosis is three, :math:`{uphill}_{PRES,t}` has a fairly positive skewness of 3.16 and kurtosis of 34.2, whilst for the ABS one, the skewness is only -0.192 and kurtosis being 7.42. The above reflects further that PRES has more uphill momentum than ABS, despite statistical conclusion can not be drawn rigorously. 
+
 
 Likewise, when testing against the following hypothesis:
 
