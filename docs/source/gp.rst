@@ -137,7 +137,7 @@ Experimental Results
 --------------------
 To conduct prediction, we first learn the underlying function :math:`f` and then obtain a prediction of the number of influenza cases. It is clear from the nature of the data that outbreaks are often extreme, and therefore without extreme value or SPDE theory it unfeasible to make predictions of the peaks with Gaussian processes. However, the GP is very good at capturing the trend, and therefore we take 5% of the maximum value of the number of influenza cases for each country as the threshold for classifying an outbreak there respectively.
 
-To conduct hyperparameter tuning and training, we trained our models using the PyTorch framework on 2 62GB RAM Tesla K40c GPUs on Ubuntu 16.04.5. We found that our newly proposed model was most suitable for policy-making purposes, as it provides adequate predictions and uncertainty quantification. The pure Gaussian process model was good at estimating the trend but performed poorly when looking at the magnitude. The Deep Gaussian process similarly had the same issue, which justifies the use of the transfer learning with the XGBoost prior function. The below figure illustrates an optimal prediction of whether there is an outbreak or not in space-time. The dataset is explain in the previous section  {INSERT HYPERLINK!}. 
+To conduct hyperparameter tuning and training, we trained our models using the PyTorch framework on 2 62GB RAM Tesla K40c GPUs on Ubuntu 16.04.5. In particular, we used the library ``gpytorch`` [#gpy]_. We found that our newly proposed model was most suitable for policy-making purposes, as it provides adequate predictions and uncertainty quantification. The pure Gaussian process model was good at estimating the trend but performed poorly when looking at the magnitude. The Deep Gaussian process similarly had the same issue, which justifies the use of the transfer learning with the XGBoost prior function. The below figure illustrates an optimal prediction of whether there is an outbreak or not in space-time. The dataset is explain in the previous section  {INSERT HYPERLINK!}. 
 
 .. raw:: html
 
@@ -152,3 +152,4 @@ Potential improvements
 
 As already mentioned in the analysis, we have mainly focused ourselves with predicting the occurrence of outbreaks, rather than the exact number of cases. To predict the latter, there has been recent studies on stochastic partial differential equations and INLA (Lindgren et al., 2015) that fit naturally into this framework. Finally, there is also an existing framework for extreme value statistics that would be a more suitable model for predicting either the extreme events or looking at the probability of threshold exceedances. 
 
+.. [#gpy] https://gpytorch.readthedocs.io/en/latest/index.html

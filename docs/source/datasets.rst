@@ -58,7 +58,52 @@ Instead, we looked at the number of hours worked as a proxy for this. If there i
 Spatiotemporal Data
 ================
 
-Influenza viruses can survive much longer at low humidity and low temperatures, partially contributing to the seasonality of flu outbreaks [#flutemp]_. To measure this, we use data from Google Earth Engine. MORE TO COME BY HARRISON.
+Influenza viruses can survive much longer at low humidity and low temperatures, partially contributing to the seasonality of flu outbreaks [#flutemp]_. 
+
+We obtained the coordinates of the capitals of each country and performed an SQL left join of ``influenza`` on
+the coordinates. We picked the coordinates of the capitals because these would usually indicate the regions with
+most of the population.
+
+To use the dragging cursor, click on the play icon and select the second icon.
+
+We can make the following observations.
+
+- Influenza outbreaks seems to appear in clusters of regions. Especially for Europe and Central + South America.
+One of our goals could be to identity how the spread occurs over space and time.
+- There are more outbreak reports in Europe and fewer in South America. This may be due to better surveying and medical
+infrastructure in Europe. Another subject of study for us would be to use the existing data for 
+South America to interpolate what could happen in countries where there is little or no observation, 
+using a spatiotemporal model.
+
+.. raw:: html
+
+	<iframe src="_static/spatial_outbreak.html" height="530px" width="100%"></iframe>
+`Figure link <https://public.tableau.com/profile/harrison4446#!/vizhome/outbreak_influenza/Spatialoutbreak/>`_. Our previous visualisation and studies view that there is a yearly seasonality. Many recent studies have been 
+on studying the relationship of spatiotemporal spread of influenza and diseases over a particular regional clusters. 
+For example, Bhatt et al., 2017 looked at mapping disease over space-time using a GP in sub-Saharan Africa, 
+Chen et al, 2019 looked at seasonal influenza spread in Shenzhen, China and Senanayake et al., 2016 on weekly flu
+occurrence in the USA. 
+
+Motivated by Bhatt et al., 2017, we use live satellite imagery (NOOA, MODIS, TERRACLIMATE) 
+to obtain aggregated remote sensing data of temperature, precipitation, 
+humidity etc... to augment our existing feature space. The data can be found from 
+Google Earth Engine API (Gorelick et al., 2017) newly-developed by Google. An extraction pipeline is illustrated below.
+
+.. image:: ./img/ee_pipeline.png
+
+Using Lasso regularised regression, we select the following features for our Gaussian process model
+
+- Capital city latitude 
+- Capital city longitude 
+- Weekly temperature 
+- Evapotranspiration, derived using a one-dimensional soil water balance model 
+- Surface pressure
+- Surface Height
+- Year 
+- Month
+
+In particular, we found that spatial, temporal and the number of physicians to be highly 
+significant features to the occurrence of influenza.
 
 Google Trends
 ================
