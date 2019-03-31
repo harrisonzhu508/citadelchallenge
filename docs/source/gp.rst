@@ -1,10 +1,12 @@
+.. _gp:
+
 Spatiotemporal Modelling
 ========================
 
 Motivation
 ----------
 
-For policy makers, it would be a paramount importance to understand when and where outbreaks of influenza will occur: allowing for suitable allocation of resources for disaster prevention and planning. The study of the spatiotemporal and geographical factors to disease outbreaks have only recently become a source of research interest (Bhatt et al., 2017; Chen et al, 2019).
+For policy makers, it would be a paramount importance to understand when and where outbreaks of influenza will occur: allowing for suitable allocation of resources for disaster prevention and planning. The study of the spatiotemporal and geographical factors to disease outbreaks have only recently become a source of research interest [#bhatt]_ [#chen]_.
 
 **In this contribution**, we propose 3 classes of models: Gaussian process regression, Deep Gaussian processes and, to the best of our knowledge, a new Gaussian process mixture with XGBoost mean function model to provide a surveillance model for influenza outbreaks.
 
@@ -19,13 +21,13 @@ where :math:`x_i\in\mathbb{R}^p` is the feature, :math:`\epsilon_i\sim N(0,\sigm
 and :math:`f`
 is the underlying function. Since :math:`x_i` contains spatial and temporal features, 
 the standard regression methods
-of generalised additive models (GAMs) (Davison, 2003), gradient boosting and regression
-trees (Bishop, 2006) are not adapted to this problem, and does not help us 
+of generalised additive models (GAMs) [#davison]_, gradient boosting and regression
+trees [#bishop]_ are not adapted to this problem, and does not help us 
 understand the underlying causality/correlation. In addition, pure time series
-models such as Long-short term memory (LSTM) recurrent neural networks (Hochreiter et al., 1997),
-SARIMA and ARMA-GARCH models (Davison, 2003) also do not take in account of the spatial
-variation. On the other hand, stochastic processes such as Gaussian processes (GP) (Rasmussen et al., 2006)
-or solutions to stochastic partial differential equations (SPDE) (Hairer, 2009) are
+models such as Long-short term memory (LSTM) recurrent neural networks [#hochreiter]_,
+SARIMA and ARMA-GARCH models [#davison]_ also do not take in account of the spatial
+variation. On the other hand, stochastic processes such as Gaussian processes (GP) [#rasmussen]_
+or solutions to stochastic partial differential equations (SPDE) [#hairer]_ are
 well-adapted to what we would like to accomplish.
 
 Influenza outbreaks often contain complicated causal relationships between many different social, geographical and political factors. SPDEs are the most natural approach to modelling spatiotemporal
@@ -38,7 +40,7 @@ equation (PDE) to obtain
 
 where :math:`L` is a differential operator, :math:`f` is a function and :math:`\xi\circ dW`
 is a driven white noise. However, there is limited software to provide
-solutions to these SPDEs. ``R-INLA`` (Lindgren et al., 2015) is a library that uses the Bayesian
+solutions to these SPDEs. ``R-INLA`` [#lindgren]_ is a library that uses the Bayesian
 method integrated nested Laplace approximation (INLA) to construct weak
 solutions to linear fractional SPDEs, but this places too much
 restriction of the underlying SPDE and would result in black-box
@@ -61,18 +63,18 @@ constant mean, polynomial or splines. This helps us capture the trend of :math:`
 what would be more important is capturing the covariance between different features. It is 
 worth mentioning that GP regression is a form of non-parametric (infinite-dimensional) regression.
 Suppose we have observed some data :math:`X,y` with :math:`N` observation and we are given a 
-test set :math:`X_*` with :math:`K` observations,  where we would like to predict :math:`y_*`. 
+test set :math:`X_*` with :math:`M` observations,  where we would like to predict :math:`y_*`. 
 Then using the  Sherman-Morrison-Woodbury identity on the joint posterior of the GP, 
-we obtain the posterior predictive distribution of :math:`f_*` (Rasmussen et al, 2006)
+we obtain the posterior predictive distribution of :math:`f_*` [#rasmussen]_
 
 .. math::
 
-    f_*| X,y,f\sim N_K(K_*(K + \sigma^2I_N)^{-1}[f + \mu], K_{**} - K_*(K + \sigma^2I_N)^{-1}K_*^T),
+    f_*| X,y,f\sim N_M(K_*(K + \sigma^2I_N)^{-1}[f + \mu], K_{**} - K_*(K + \sigma^2I_N)^{-1}K_*^T),
 
 where the notations are :math:`f, f_*` denote the value of the function for the training and test set,
 for the GP function, :math:`K, K_*,K_{**}` are the covariance matrices of the training, test-training and
 test sets, and :math:`\mu` is taken to be the short hand for the mean of the training set. In addition, 
-standard results from decision theory (Rasmussen et al., 2006) show that taking the loss
+standard results from decision theory [#rasmussen]_ show that taking the loss
 function as the expected square error gives the optimal prediction as 
 
 .. math::
@@ -107,7 +109,7 @@ radial basis kernel:
 	k_{\text{se}}(x', x) =  \exp\Bigg(-\frac{(x_1-x_2)^T(x_1-x_2)}{l} \Bigg),
 
 where :math:`l` is the length scale. The theory of reproducing
-Hilbert kernel spaces (see http://www.stats.ox.ac.uk/~sejdinov/teaching/atml14/Theory_2014.pdf) justifies our
+Hilbert kernel spaces [#sej]_ justifies our
 claim, since if the underlying functional relationship of the weekly effect is sufficiently regular (Holder-Sobolev of
 certain exponents), then we are able to estimate it well with a GP. 
 
@@ -137,7 +139,7 @@ Experimental Results
 --------------------
 To conduct prediction, we first learn the underlying function :math:`f` and then obtain a prediction of the number of influenza cases. It is clear from the nature of the data that outbreaks are often extreme, and therefore without extreme value or SPDE theory it unfeasible to make predictions of the peaks with Gaussian processes. However, the GP is very good at capturing the trend, and therefore we take 5% of the maximum value of the number of influenza cases for each country as the threshold for classifying an outbreak there respectively.
 
-To conduct hyperparameter tuning and training, we trained our models using the PyTorch framework on 2 62GB RAM Tesla K40c GPUs on Ubuntu 16.04.5. In particular, we used the library ``gpytorch`` [#gpy]_. We found that our newly proposed model was most suitable for policy-making purposes, as it provides adequate predictions and uncertainty quantification. The pure Gaussian process model was good at estimating the trend but performed poorly when looking at the magnitude. The Deep Gaussian process similarly had the same issue, which justifies the use of the transfer learning with the XGBoost prior function. The below figure illustrates an optimal prediction of whether there is an outbreak or not in space-time. The dataset is explain in the previous section  {INSERT HYPERLINK!}. 
+To conduct hyperparameter tuning and training, we trained our models using the PyTorch framework on 2 62GB RAM Tesla K40c GPUs on Ubuntu 16.04.5. In particular, we used the library ``gpytorch`` [#gpy]_. We found that our newly proposed model was most suitable for policy-making purposes, as it provides adequate predictions and uncertainty quantification. The pure Gaussian process model was good at estimating the trend but performed poorly when looking at the magnitude. The Deep Gaussian process similarly had the same issue, which justifies the use of the transfer learning with the XGBoost prior function. The below figure illustrates an optimal prediction of whether there is an outbreak or not in space-time. The dataset is explain in the `datasets section <datasets.html>`_. 
 
 .. raw:: html
 
@@ -153,3 +155,38 @@ Potential improvements
 As already mentioned in the analysis, we have mainly focused ourselves with predicting the occurrence of outbreaks, rather than the exact number of cases. To predict the latter, there has been recent studies on stochastic partial differential equations and INLA (Lindgren et al., 2015) that fit naturally into this framework. Finally, there is also an existing framework for extreme value statistics that would be a more suitable model for predicting either the extreme events or looking at the probability of threshold exceedances. 
 
 .. [#gpy] https://gpytorch.readthedocs.io/en/latest/index.html
+
+.. [#sej] http://www.stats.ox.ac.uk/~sejdinov/teaching/atml14/Theory_2014.pdf
+
+.. [#bhatt] Bhatt, S., Cameron, E., Flaxman, S.R., Weiss, D.J., Smith, D.L. and Gething, P.W., 2017. 
+Improved prediction accuracy for disease risk mapping using Gaussian process stacked 
+generalization. Journal of The Royal Society Interface, 14(134), p.20170520.
+
+.. [#bishop] Bishop, C.M., 2006. Pattern recognition and machine learning. Springer.
+
+.. [#chen] Chen, S., Xu, J., Wu, Y., Wang, X., Fang, S., Cheng, J., Liu, X. 2019. Predicting temporal propagation of 
+seasonal influenza using improved gaussian process model. Journal of Biomedical Informatics, 93, 103144. 
+https://doi.org/https://doi.org/10.1016/j.jbi.2019.103144
+
+.. [#cressie] N. Cressie and C. K. Wikle.Statistics for spatio-temporal data. Wiley, 2011.
+
+.. [#davison] A. C. Davison. Statistical Models. Cambridge Series in Statistical and Probabilistic Mathematics. 
+CambridgeUniversity Press, 2003. doi: 10.1017/CBO9780511815850.
+
+.. [#gorelick] N. Gorelick, M. Hancher, M. Dixon, S. Ilyushchenko, D. Thau, and R. Moore.  
+Google earth engine:Planetary-scale geospatial analysis for everyone. Remote Sensing of Environment, 2017. 
+doi: 10.1016/j.rse.2017.06.031. URLhttps://doi.org/10.1016/j.rse.2017.06.031.
+
+.. [#hairer] Hairer, M., 2009. An introduction to stochastic PDEs. arXiv preprint arXiv:0907.4178.
+
+.. [#hochreiter] Hochreiter, S. and Schmidhuber, J., 1997. Long short-term memory. Neural computation, 9(8), pp.1735-1780.
+
+.. [#lindgren] Lindgren, F. and Rue, H., 2015. Bayesian spatial modelling with R-INLA. Journal of Statistical Software, 63(19), pp.1-25.
+
+.. [#Senanayake] Ransalu Senanayake, Simon O'Callaghan, and Fabio Ramos. 2016. Predicting 
+spatio–temporal propagation of seasonal influenza using variational Gaussian process regression. 
+In Proceedings of the Thirtieth AAAI Conference on Artificial Intelligence (AAAI'16). AAAI Press 3901-3907.
+
+.. [#Rasmussen] Williams, C.K. and Rasmussen, C.E., 2006. Gaussian processes for machine learning (Vol. 2, No. 3, p. 4). 
+Cambridge, MA: MIT Press.
+
