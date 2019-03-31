@@ -87,27 +87,10 @@ To treat the seasonal effects, we choose a kernel
 for years :math:`t,t'`, where :math:`f` and :math:`l'` are the kernel frequency and length scale respectively. We encode a prior distribution
 for the frequency to favour the value 1, as we believe that influenza outbreak occurs annually during winter.
 
-Our exploratory data analysis indicated a relatively smooth trend for the weekly effects, justifying the use of a radial basis kernel:
+Our exploratory data analysis indicated a relatively smooth trend for the weekly effects, justifying the use of a radial basis kernel. Our claim is supported by the theory of reproducing Hilbert spaces [#sej]_, since if the underlying functional relationship of the weekly effect is sufficiently regular (Holder-Sobolev of
+certain exponents), then a GP will provide a good estimate. For the spatial and remote sensing features, we use Matérn covariance kernels, which has similar properties as the radial basis kernel.
 
-.. math::
-
-    k(x', x) =  \exp\Bigg(-\frac{(x_1-x_2)^T(x_1-x_2)}{l} \Bigg),
-
-where :math:`l` is the length scale.
-Our claim is supported by the theory of reproducing Hilbert spaces [#sej]_, since if the underlying functional relationship of the weekly effect is sufficiently regular (Holder-Sobolev of
-certain exponents), then a GP will provide a good estimate.
-
-For the spatial and remote sensing features, we use Matérn covariance kernels. This is defined as
-
-.. math::
-
-    k(x', x) =  \frac{2^{1-\nu}}{\Gamma(\nu)}(\sqrt{2\nu}d)K_\nu(\sqrt{2\nu}d),
-
-where :math:`K_\nu` is the modified Bessel function, :math:`v'`` the smoothness parameter, and :math:`d` is defined to be :math:`||x_1-x_2||_\Theta`, where :math:`\Theta` is a lengthscale parameter in matrix form.
-
-Although more complicated kernels were tried, we found that the most straightforward kernel, consisting of a sum of all four kernels, was the most effective.
-
-We will use by a zero mean by default for simplicity.
+Although more complicated kernels were tried, we found that the most straightforward kernel, consisting of a sum of all four kernels, was the most effective. We will use by a zero mean by default for simplicity.
 
 Model 2: Deep Gaussian processes
 --------------------------------
