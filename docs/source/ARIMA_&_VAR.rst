@@ -7,7 +7,7 @@ Univariate ARIMA & VAR trials
 Motivation & Introduction
 ============
 
-A usual method to approach a time series  :math:`(X_{t})_{t=1}^{T}` is to observe its ARIMA structure. By ARIMA(p,d,q), we refer to
+A usual method to approach a time series  :math:`(X_{t})_{t=1}^{T}` is to observe its Autoregressive Integrated Moving Average (ARIMA) structure. By ARIMA(p,d,q), we refer to
 
 .. math:: \Delta^d (X_{t}) = a+\sum_{j=1}^p \theta_j \Delta^d (X_{t-j}) +\sum_{j=1}^q  \psi_j \varepsilon_{t-j} + \varepsilon_t
 with :math:`\varepsilon_t \sim iidN(0,\sigma^2)` as a usual distributional assumption.
@@ -15,7 +15,7 @@ with :math:`\varepsilon_t \sim iidN(0,\sigma^2)` as a usual distributional assum
 
 
 
-We start by looking at univariate case, which `X_{t}\in\mathbb{R}`.
+We start by looking at univariate case, which :math:`X_{t}\in\mathbb{R}`.
 
 
 ============
@@ -107,14 +107,19 @@ As shown below, peaks are nicely captured.
 VAR example: DEU and its neighbourhoods
 =================
 
+The concept of Vector Autoregression (VAR) is simply an ARIMA (p,d,0) model with :math:`X_{t}\in\mathbb{R}^n` where :math:`n\geq 2`, i.e. the variable is now a proper vector, rather than a scalar.
 
+It comes to a natural question that which variables should one pick. As analysed above, and as per concerned by this report, DEU should be an obvious country to investigate. DEU's surrounding countries, which has various features, could also be included, as the transmission of influenza could thus be understood in such a broader-contingent way.
 
-Note: see `datasets section <datasets.html>`_ and the below map for further details. To use the dragging cursor, click on the play icon and select the second icon.
+As a matter of geographical fact, (note: see `datasets section <datasets.html>`_ and the below map for further details. To use the dragging cursor, click on the play icon and select the second icon) Germany boarders with Denmark (DNK), Netherlands (NLD), Belgium (BEL), Luxembourg (LUX), France (FRA), Switzerland (CHE), Austria (AUT), Czech Republic (CZE), and Poland (POL). 
 
 .. raw:: html
 
 	<iframe src="_static/spatial_outbreak.html" height="530px" width="100%"></iframe>
-`Figure link <https://public.tableau.com/profile/harrison4446#!/vizhome/outbreak_influenza/Spatialoutbreak/>`_. O 
+`Figure link <https://public.tableau.com/profile/harrison4446#!/vizhome/outbreak_influenza/Spatialoutbreak/>`_. 
+
+
+Now, by observing each individual countries, we found that NLD, DNK, POL, and CHE have no significant data before 2009, LUX has no data before 2003, AUT has no data before 2011, and FRA has no data before 2013. Hence, to run the VAR smoothly, we drop FRA and AUT, and only consider years after 2008. Additionally, CZE has numerous empty observations throughout, which 
 
 
 
