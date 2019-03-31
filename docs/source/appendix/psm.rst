@@ -33,15 +33,22 @@ We believe that a potential explanation for this is the effect of presenteeism c
 Methodology
 =====
 
+We obtain the working hour of dependent work data from OECD dataset during 2000-2017, and as is aimed by the report, the focus is restricted to the Europe region outlined by WHO. Amongst the 24 countries who reported, a yearly average is calculated, above which gets allocated to the group PRES (Presenteeism), and the rest to the group ABS (Absenteeism). There are 10 countries which stays in ABS throughout 2000-2017, 10 countries in PRES throughout, and the remaining 4 has switched for at least once. Those 4 are ruled out of the dataset for simplicity. Full breakdown can be seen in the below map.
+
+.. image:: ../img/pmap2.png
+
+
+
+
 
 Construction
-~~~
+~~~~~~
 
 Descriptive Statistics
 ~~~~
 
 Time Series
-~~~
+~~~~~~
 
 .. [#elasticnet] https://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.124.4696
 .. [#temperatureflu] https://jvi.asm.org/content/88/14/7692s
