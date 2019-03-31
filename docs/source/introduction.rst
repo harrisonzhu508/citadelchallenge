@@ -16,3 +16,14 @@ We first start by cleaning the data we have and adding other datasets we believe
 .. [#usfludeaths] https://www.cdc.gov/flu/about/burden/2017-2018.htm
 .. [#2009pandemic] https://www.who.int/mediacentre/news/statements/2009/h1n1_pandemic_phase6_20090611/en/
 .. [#nhsbudget] https://www.theguardian.com/society/2018/may/22/hospitals-struggling-to-afford-new-equipment-after-nhs-budget-cuts
+
+
+
+
+
+
+
+
+
+
+

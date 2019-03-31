@@ -17,15 +17,19 @@ with :math:`\varepsilon_t \sim iidN(0,\sigma^2)` as a usual distributional assum
 
 We start by looking at univariate case, which `X_{t}\in\mathbb{R}`.
 
-.. image:: ./img/USA.png
 
 
 Univariate examples
 ============
 
-
 USA
 -----------
+
+We pick a country which has small empty reports over 2000-2018 and large numbers so that spikes c.f. usual observations can be seen clearly. USA seems to be a good choice, with time plot as follows:
+
+.. image:: ./img/USA.png
+
+
 
 
 
