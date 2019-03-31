@@ -3,7 +3,7 @@ Univariate ARIMA & VAR trials
 =================
 
 
-
+============
 Motivation & Introduction
 ============
 
@@ -18,7 +18,7 @@ with :math:`\varepsilon_t \sim iidN(0,\sigma^2)` as a usual distributional assum
 We start by looking at univariate case, which `X_{t}\in\mathbb{R}`.
 
 
-
+============
 Univariate examples
 ============
 
@@ -95,14 +95,27 @@ By getting 1-5 significant lags via sample ACF and 1-2 significant lags via samp
 - ARIMA(5,0,2), which has the lowest BIC and the lowest AIC;
 - ARIMA(3,0,2), which has the second lowest BIC and the third lowest AIC.
 
+As shown below, peaks are nicely captured.
+
+.. image:: ./img/DEUARIMA.png
 
 
 
 
 
-
+=================
 VAR example: DEU and its neighbourhoods
-============
+=================
+
+
+
+Note: see `datasets section <datasets.html>`_ and the below map for further details. To use the dragging cursor, click on the play icon and select the second icon.
+
+.. raw:: html
+
+	<iframe src="_static/spatial_outbreak.html" height="530px" width="100%"></iframe>
+`Figure link <https://public.tableau.com/profile/harrison4446#!/vizhome/outbreak_influenza/Spatialoutbreak/>`_. O 
+
 
 
 
