@@ -25,8 +25,6 @@ We also have a Bayesian model that accurately predicts the severity of the next 
 Applications
 ==============
 
-Applying this data to the 2018 flu season, we made the following predictions:
-
 Based off this, we can make the following policy suggestions:
 
 
