@@ -24,10 +24,11 @@ MPhil in Economic Research.
    :maxdepth: 2
    :caption: Contents:
 
+   executive_summary.rst
    introduction.rst
    datasets.rst
-   feature_selection.rst
    gp.rst
    test.rst
+   models.rst
    references.rst
    setup.md
