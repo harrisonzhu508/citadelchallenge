@@ -2,7 +2,7 @@
 Introduction
 =================
 
-It is estimated that every year, more than 291,000 people die from seasonal flu-related illnesses [#fludeaths]_. While there are diseases that cause more deaths, we know how to virtually completely prevent them. For example, tuberclosis claimed 1.6 million deaths in 2017 [#tbdeaths]_, but only around 500 of those deaths were in the United States [#ustbdeaths]_. Diseases like tuberclosis, cholera, or measles have been effectively 'solved' in developed countries. All that we need to do is to 'port' these solutions to the developing world. It may cost money, it may take time, but we know what works.
+It is estimated that every year, more than 291,000 people die from seasonal flu-related illnesses [#fludeaths]_. While there are diseases that cause more deaths, we know how to almost entirely prevent them. For example, tuberclosis claimed 1.6 million deaths in 2017 [#tbdeaths]_, but only around 500 of those deaths were in the United States [#ustbdeaths]_. Diseases like tuberclosis, cholera, or measles have been effectively 'solved' in developed countries. All that we need to do is to 'port' these solutions to the developing world. It may cost money, it may take time, but we know what works.
 
 Influenza is different. Approximately 80,000 people died in the United States in 2017 alone [#usfludeaths]_, and as recently as 2009, the World Health Organisation declared an influenza pandemic [#2009pandemic]_. Especially with  influenza's extremely fast rate of mutation, it is unlikely that we will be able to find a fundamental solution to influenza any time in the near future, making it vital that we find ways to contain the spread of influenza.
 
