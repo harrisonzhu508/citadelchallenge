@@ -62,26 +62,22 @@ Influenza viruses can survive much longer at low humidity and low temperatures, 
 
 We obtained the coordinates of the capitals of each country and performed an SQL left join of ``influenza`` on
 the coordinates. We picked the coordinates of the capitals because these would usually indicate the regions with
-most of the population.
-
-To use the dragging cursor, click on the play icon and select the second icon.
-
-We can make the following observations.
+most of the population. We can make the following observations.
 
 - Influenza outbreaks seems to appear in clusters of regions. Especially for Europe and Central + South America.
 One of our goals could be to identity how the spread occurs over space and time.
 - There are more outbreak reports in Europe and fewer in South America. This may be due to better surveying and medical
 infrastructure in Europe. Another subject of study for us would be to use the existing data for 
 South America to interpolate what could happen in countries where there is little or no observation, 
-using a spatiotemporal model.
+using a spatiotemporal model. **To use the dragging cursor**, click on the play icon and select the second icon.
 
 .. raw:: html
 
 	<iframe src="_static/spatial_outbreak.html" height="530px" width="100%"></iframe>
 `Figure link <https://public.tableau.com/profile/harrison4446#!/vizhome/outbreak_influenza/Spatialoutbreak/>`_. Our previous visualisation and studies view that there is a yearly seasonality. Many recent studies have been 
 on studying the relationship of spatiotemporal spread of influenza and diseases over a particular regional clusters. 
-For example, Bhatt et al., 2017 looked at mapping disease over space-time using a GP in sub-Saharan Africa, 
-Chen et al, 2019 looked at seasonal influenza spread in Shenzhen, China and Senanayake et al., 2016 on weekly flu
+For example, Bhatt et al., 2017 [#bhatt]_ looked at mapping disease over space-time using a GP in sub-Saharan Africa, 
+Chen et al, 2019 [#chen]_ looked at seasonal influenza spread in Shenzhen, China and [#]_ on weekly flu
 occurrence in the USA. 
 
 Motivated by Bhatt et al., 2017, we use live satellite imagery (NOOA, MODIS, TERRACLIMATE) 
@@ -120,3 +116,11 @@ We used the query terms of 'fever' and 'cough' as indications that people have t
 .. [#workinghours] https://stats.oecd.org/index.aspx?DataSetCode=ANHRS
 .. [#flutemp] http://sitn.hms.harvard.edu/flash/2014/the-reason-for-the-season-why-flu-strikes-in-winter/
 .. [#googletrends] http://static.googleusercontent.com/media/research.google.com/en/us/archive/papers/detecting-influenza-epidemics.pdf , https://www.mitpressjournals.org/doi/full/10.1162/NECO_a_00756#.Vu5zr0eAY4A
+
+.. [#chen] Chen, S., Xu, J., Wu, Y., Wang, X., Fang, S., Cheng, J., Liu, X. 2019. Predicting temporal propagation of seasonal influenza using improved gaussian process model. Journal of Biomedical Informatics, 93, 103144. https://doi.org/https://doi.org/10.1016/j.jbi.2019.103144
+
+.. [#bhatt] Bhatt, S., Cameron, E., Flaxman, S.R., Weiss, D.J., Smith, D.L. and Gething, P.W., 2017. Improved prediction accuracy for disease risk mapping using Gaussian process stacked generalization. Journal of The Royal Society Interface, 14(134), p.20170520.
+
+.. [#gorelick] N.Gorelick, M. Hancher, M. Dixon, S. Ilyushchenko, D. Thau, and R. Moore.  Google earth engine:Planetary-scale geospatial analysis for everyone. Remote Sensing of Environment, 2017. doi: 10.1016/j.rse.2017.06.031. URLhttps://doi.org/10.1016/j.rse.2017.06.031.
+
+.. [#senanayake] Ransalu Senanayake, Simon O'Callaghan, and Fabio Ramos. 2016. Predicting spatio–temporal propagation of seasonal influenza using variational Gaussian process regression. In Proceedings of the Thirtieth AAAI Conference on Artificial Intelligence (AAAI'16). AAAI Press 3901-3907.

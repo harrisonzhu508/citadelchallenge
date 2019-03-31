@@ -139,7 +139,7 @@ Experimental Results
 --------------------
 To conduct prediction, we first learn the underlying function :math:`f` and then obtain a prediction of the number of influenza cases. It is clear from the nature of the data that outbreaks are often extreme, and therefore without extreme value or SPDE theory it unfeasible to make predictions of the peaks with Gaussian processes. However, the GP is very good at capturing the trend, and therefore we take 5% of the maximum value of the number of influenza cases for each country as the threshold for classifying an outbreak there respectively.
 
-To conduct hyperparameter tuning and training, we trained our models using the PyTorch framework on 2 62GB RAM Tesla K40c GPUs on Ubuntu 16.04.5. In particular, we used the library ``gpytorch`` [#gpy]_. We found that our newly proposed model was most suitable for policy-making purposes, as it provides adequate predictions and uncertainty quantification. The pure Gaussian process model was good at estimating the trend but performed poorly when looking at the magnitude. The Deep Gaussian process similarly had the same issue, which justifies the use of the transfer learning with the XGBoost prior function. The below figure illustrates an optimal prediction of whether there is an outbreak or not in space-time. The dataset is explain in the `datasets section <datasets.html>`_. 
+To conduct hyperparameter tuning and training, we trained our models using the PyTorch framework on a GPU compute cluster with 2 62GB RAM Tesla K40c GPUs on Ubuntu 16.04.5. In particular, we used the library ``gpytorch`` [#gpy]_. We found that our newly proposed model was most suitable for policy-making purposes, as it provides adequate predictions and uncertainty quantification. The pure Gaussian process model was good at estimating the trend but performed poorly when looking at the magnitude. The Deep Gaussian process similarly had the same issue, which justifies the use of the transfer learning with the XGBoost prior function. The below figure illustrates an optimal prediction of whether there is an outbreak or not in space-time. The dataset is explain in the `datasets section <datasets.html>`_. **To use the dragging cursor**, click on the play icon and select the second icon.
 
 .. raw:: html
 
@@ -158,24 +158,13 @@ As already mentioned in the analysis, we have mainly focused ourselves with pred
 
 .. [#sej] http://www.stats.ox.ac.uk/~sejdinov/teaching/atml14/Theory_2014.pdf
 
-.. [#bhatt] Bhatt, S., Cameron, E., Flaxman, S.R., Weiss, D.J., Smith, D.L. and Gething, P.W., 2017. 
-Improved prediction accuracy for disease risk mapping using Gaussian process stacked 
-generalization. Journal of The Royal Society Interface, 14(134), p.20170520.
+.. [#bhatt] Bhatt, S., Cameron, E., Flaxman, S.R., Weiss, D.J., Smith, D.L. and Gething, P.W., 2017. Improved prediction accuracy for disease risk mapping using Gaussian process stacked generalization. Journal of The Royal Society Interface, 14(134), p.20170520.
 
 .. [#bishop] Bishop, C.M., 2006. Pattern recognition and machine learning. Springer.
 
-.. [#chen] Chen, S., Xu, J., Wu, Y., Wang, X., Fang, S., Cheng, J., Liu, X. 2019. Predicting temporal propagation of 
-seasonal influenza using improved gaussian process model. Journal of Biomedical Informatics, 93, 103144. 
-https://doi.org/https://doi.org/10.1016/j.jbi.2019.103144
+.. [#chen] Chen, S., Xu, J., Wu, Y., Wang, X., Fang, S., Cheng, J., Liu, X. 2019. Predicting temporal propagation of seasonal influenza using improved gaussian process model. Journal of Biomedical Informatics, 93, 103144. https://doi.org/https://doi.org/10.1016/j.jbi.2019.103144
 
-.. [#cressie] N. Cressie and C. K. Wikle.Statistics for spatio-temporal data. Wiley, 2011.
-
-.. [#davison] A. C. Davison. Statistical Models. Cambridge Series in Statistical and Probabilistic Mathematics. 
-CambridgeUniversity Press, 2003. doi: 10.1017/CBO9780511815850.
-
-.. [#gorelick] N. Gorelick, M. Hancher, M. Dixon, S. Ilyushchenko, D. Thau, and R. Moore.  
-Google earth engine:Planetary-scale geospatial analysis for everyone. Remote Sensing of Environment, 2017. 
-doi: 10.1016/j.rse.2017.06.031. URLhttps://doi.org/10.1016/j.rse.2017.06.031.
+.. [#davison] A.C. Davison. Statistical Models. Cambridge Series in Statistical and Probabilistic Mathematics. CambridgeUniversity Press, 2003. doi: 10.1017/CBO9780511815850.
 
 .. [#hairer] Hairer, M., 2009. An introduction to stochastic PDEs. arXiv preprint arXiv:0907.4178.
 
@@ -183,10 +172,5 @@ doi: 10.1016/j.rse.2017.06.031. URLhttps://doi.org/10.1016/j.rse.2017.06.031.
 
 .. [#lindgren] Lindgren, F. and Rue, H., 2015. Bayesian spatial modelling with R-INLA. Journal of Statistical Software, 63(19), pp.1-25.
 
-.. [#Senanayake] Ransalu Senanayake, Simon O'Callaghan, and Fabio Ramos. 2016. Predicting 
-spatio–temporal propagation of seasonal influenza using variational Gaussian process regression. 
-In Proceedings of the Thirtieth AAAI Conference on Artificial Intelligence (AAAI'16). AAAI Press 3901-3907.
-
-.. [#Rasmussen] Williams, C.K. and Rasmussen, C.E., 2006. Gaussian processes for machine learning (Vol. 2, No. 3, p. 4). 
-Cambridge, MA: MIT Press.
+.. [#rasmussen] Williams, C.K. and Rasmussen, C.E., 2006. Gaussian processes for machine learning (Vol. 2, No. 3, p. 4). Cambridge, MA: MIT Press.
 
