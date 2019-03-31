@@ -1,7 +1,7 @@
 .. _bayesian:
 
 ======================
-How big will an influenza epidemic be?
+How big will an influenza outbreak be?
 ======================
 
 Motivation

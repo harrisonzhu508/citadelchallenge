@@ -46,10 +46,18 @@ For each country, we calculate its percentage weekly change if the observation i
 
 What drives us the interest is the speed of going up or down in terms of the outbreak. More mathematically, it is the change in the percentage change that is being important. Moreover, uphill may have different performance compared to downhill, given the rich weekly dataset being available, we proceed by dividing the uphill part and downhill part, as well as make the change in the percentage change:
 
+.. math:: \forall x \in \{ABS,PRES\}, \\ \text{define  } \hspace{1cm} {uphill}_{x,t}:= \mathbb{1}[x_t>0]\Delta x_t \\  \hspace{2cm} {downhill}_{x,t}:= \mathbb{1}[x_t\leq 0]\Delta x_t
 
+Now, we run some interesting statistical tests to see if factually the speed of changes in infection could be different across these two groups. 
 
-Descriptive Statistics
+Descriptive Statistical Tests
 ~~~~
+
+Test against the following hypothesis: 
+
+.. math:: H_0: \mathbb{E}[{uphill}_{ABS,t}] = \mathbb{E}[{uphill}_{PRES,t}] 
+
+
 
 Time Series
 ~~~~~~
