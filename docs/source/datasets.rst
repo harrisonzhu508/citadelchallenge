@@ -56,7 +56,7 @@ So-called presenteeism, when ill workers come into work due to societal pressure
 Instead, we looked at the number of hours worked as a proxy for this. If there is a high degree of presenteeism, this should manifest in the number of hours that people work. This data was found for OECD countries in the form of number of hours worked per year [#workinghours]_. The value was processed so that the number of hours worked was constant through the calendar year as the measurements given were in the form of hours worked per year; it didn't make sense to divide the data any further as in reality there is seasonality to the number of hours worked per month.
 
 Spatiotemporal Data
-================
+===================
 
 Influenza viruses can survive much longer at low humidity and low temperatures, partially contributing to the seasonality of flu outbreaks [#flutemp]_. 
 
