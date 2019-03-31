@@ -79,10 +79,10 @@ For example, Bhatt et al., 2017 [#bhatt]_ looked at mapping disease over space-t
 Chen et al., 2019 [#chen]_ looked at seasonal influenza spread in Shenzhen, China and Senanayake et al., 2016 [#senanayake]_ on weekly flu
 occurrence in the USA. 
 
-Motivated by Bhatt et al., 2017, we use live satellite imagery (NOOA, MODIS, TERRACLIMATE) 
+Motivated by Bhatt et al., 2017 [#bhatt]_, we use live satellite imagery (NOOA, MODIS, TERRACLIMATE) 
 to obtain aggregated remote sensing data of temperature, precipitation, 
 humidity etc... to augment our existing feature space. The data can be found from 
-Google Earth Engine API (Gorelick et al., 2017) newly-developed by Google. An extraction pipeline is illustrated below.
+Google Earth Engine API [#gorelick]_ newly-developed by Google. An extraction pipeline is illustrated below.
 
 .. image:: ./img/ee_pipeline.png
 
