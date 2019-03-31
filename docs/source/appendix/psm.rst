@@ -33,16 +33,20 @@ We believe that a potential explanation for this is the effect of presenteeism c
 Methodology
 =====
 
+
+Construction
+~~~~~~
+
 We obtain the working hour of dependent work data from OECD dataset during 2000-2017, and as is aimed by the report, the focus is restricted to the Europe region outlined by WHO. Amongst the 24 countries who reported, a yearly average is calculated, above which gets allocated to the group PRES (Presenteeism), and the rest to the group ABS (Absenteeism). There are 10 countries which stays in ABS throughout 2000-2017, 10 countries in PRES throughout, and the remaining 4 has switched for at least once. Those 4 are ruled out of the dataset for simplicity. Full breakdown can be seen in the below map.
 
 .. image:: ../img/pmap2.png
 
 
+For each country, we calculate its percentage weekly change if the observation is non-zero or empty. In case of zero or empty, we assume the weekly change to be zero. (See `Univariate ARIMA & VAR trials <ARIMA_&_VAR.html>`_ for further explanations.) Then, compute, for each group, the arithmatic average of the percentage change across time. Therefore we now get two series :math:`\{PRES_t\}_{t=1}^{990}` and :math:`\{ABS_t\}_{t=1}^{990}` measuring average percentage change (weekly) across countries within each group.
+
+What drives us the interest is the speed of going up or down in terms of the outbreak. More mathematically, it is the change in the percentage change that is being important. Moreover, uphill may have different performance compared to downhill, given the rich weekly dataset being available, we proceed by dividing the uphill part and downhill part, as well as make the change in the percentage change:
 
 
-
-Construction
-~~~~~~
 
 Descriptive Statistics
 ~~~~
