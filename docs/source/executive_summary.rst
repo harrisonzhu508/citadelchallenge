@@ -1,5 +1,5 @@
 =================
-How can we better allocate resources to contain influenza?
+Efficient resource allocation during influenza cycles
 =================
 
 Introduction
@@ -26,7 +26,7 @@ Applications
 ==============
 
 
-Based off this, we can make the following policy suggestions:
+Based off our analysis, we can make the following policy suggestions:
 
 
 

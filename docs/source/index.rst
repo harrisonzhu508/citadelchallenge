@@ -23,7 +23,6 @@ MPhil in Economic Research.
    :caption: Contents:
 
    executive_summary.rst
-   introduction.rst
    datasets.rst
    models.rst
    appendix.rst
