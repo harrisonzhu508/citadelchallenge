@@ -119,6 +119,7 @@ We conducted hyperparameter tuning and training using the PyTorch framework on t
 `Figure source <https://public.tableau.com/profile/harrison4446#!/vizhome/gp_prediction/Sheet1?publish=yes/>`_. The Gaussian Process mixture with XGBoost mean function results in an AUC (area under curve) on the ROC(Receiver Operating Characteristic) curve of 0.762, as shown below. From a policy perspective, within reasonable bounds, the proportion of false negatives is more important, as a false positive will only strengthen the prevention of an outbreak. We find that out of 382 test points in 2018, we have a 95% credible interval of (10.2%,13.1%) on the percentage of false negatives, with the optimal prediction yielding 11.8%.
 
 .. image:: ../img/xgboost_GP.png
+	:scale: 60 %
 
 We also observe exactly what we hypothesised - the spread of influenza in space - in the above diagram. We can see that when an outbreak is observed in 1 country, it spreads very rapidly to neighbouring countries (especially visible during the transition from week 49 to 50).
 
