@@ -42,9 +42,9 @@ We obtain the working hour of dependent work data from OECD dataset during 2000-
 .. image:: ../img/pmap2.png
 
 
-For each country, we calculate its percentage weekly change if the observation is non-zero or empty. In case of zero or empty, we assume the weekly change to be zero. (See `Univariate ARIMA & VAR trials <ARIMA_&_VAR.html>`_ for further explanations.) Then, compute, for each group, the arithmatic average of the percentage change across time. Therefore we now get 
+For each country, we calculate its percentage weekly change if the observation is non-zero or empty. In case of zero or empty, we assume the weekly change to be zero. (See `Univariate ARIMA & VAR trials <ARIMA_&_VAR.html>`_ for further explanations.) Then, compute, for each group, the arithmatic average of the percentage change across time. Therefore we now get two series :math:`\{PRES_t\}_{t=1}^{990}` and :math:`\{ABS_t\}_{t=1}^{990}` measuring average percentage change (weekly) across countries within each group.
 
-
+What drives us the interest is the speed of going up or down in terms of the outbreak. More mathematically, it is the change in the percentage change that is being important. Moreover, uphill may have different performance compared to downhill, given the rich weekly dataset being available, we proceed by dividing the uphill part and downhill part, as well as make the change in the percentage change:
 
 
 
