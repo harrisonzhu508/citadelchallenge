@@ -152,7 +152,7 @@ To conduct hyperparameter tuning and training, we trained our models using the P
 Shortcomings
 ------------
 
-As already mentioned in the analysis, we have mainly focused on predicting the occurrence of outbreaks, rather than the exact number of cases. To predict the latter, there has been recent studies on stochastic partial differential equations and INLA [#lindgren]_ that fit naturally into this framework. Finally, there is also an existing framework for extreme value statistics that would be a more suitable model for predicting either the extreme events or looking at the probability of threshold exceedances. 
+As already mentioned in the analysis, we have mainly focused on predicting the occurrence of outbreaks, rather than the exact number of cases. To predict the latter, there has been recent studies on stochastic partial differential equations and INLA [#lindgren]_ that fit naturally into this framework. Finally, there is also an existing framework for extreme value statistics that would be a more suitable model for predicting either the extreme events or looking at the probability of threshold exceedances. Moreover, the current remote sensing data is of capital cities. A finer grain data source would improve the quality of the fit. 
 
 .. [#gpy] https://gpytorch.readthedocs.io/en/latest/index.html
 
