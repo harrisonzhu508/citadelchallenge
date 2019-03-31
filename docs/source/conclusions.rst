@@ -12,12 +12,8 @@ As described in the :ref:`Discussion section <discussion>`, policy makers could 
 
 Based off our research, we believe that the answer to the question
 
-.. centered::
-
-    *'How can we better allocate resources to contain influenza?'*
+*'How can we better allocate resources to contain influenza?'*
 
 is as follows:
 
-.. centered::
-
-    We can better allocate resources to contain influenza by creating accurate predictive models which allow budgets to be made and preventative measures to be taken that will effectively contain any outbreaks before they can become epidemics.
+*We can better allocate resources to contain influenza by creating accurate predictive models which allow budgets to be made and preventative measures to be taken that will effectively contain any outbreaks before they can become epidemics.*
