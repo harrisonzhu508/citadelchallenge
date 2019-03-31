@@ -8,49 +8,137 @@
 library(dplyr)
 library(sqldf)
 library(randomForest)
+library(tseries)
 
 # load data
-d <- read.csv("../data/health_indicators.csv")
-colnames(d)
+
+complete_countries <- c("Belgium", "Germany", "Italy", "Luxembourg", 
+                      "Netherlands", "Portugal", "Slovenia",
+                      "Spain","United Kingdom")
+original <- read.csv("../data/processed/weekly_influenza_original.csv")
+
+head(influenza)
+head(inf_original)
+head(plc_holder)
+head(original)
+
+influenza <- original[original$Country %in% complete_countries,]
+unique(influenza$Country)
+
+par(mfrow = c(1,3))
+for (country in complete_countries[1:3]) 
+{
+  print(country)
+  hist(influenza[influenza$Country == country,]$num_influenza)
+}
+par(mfrow = c(1,3))
+for (country in complete_countries[4:6]) 
+{
+  print(country)
+  hist(influenza[influenza$Country == country,]$num_influenza)
+}
+par(mfrow = c(1,3))
+for (country in complete_countries[7:9]) 
+{
+  print(country)
+  hist(influenza[influenza$Country == country,]$num_influenza)
+}
+for (country in complete_countries)
+{
+  #rescale countries based on proportions
+  influenza$num_scaled <- 
+}
 
 
-influenza <- read.csv("../data/processed/influenza.csv")
+
+influenza$outbreak <- as.numeric((influenza$num_influenza > 50))
+
+head(influenza)
+influenza <- select(influenza, c("year", "week", "CapitalLatitude",
+                                 "CapitalLongitude", "surface_height",
+                                 "temperature", "evaporation", "humidity",
+                                 "humidity", "Pressure_surface", "num_influenza",
+                                 "outbreak"))
 
 #train test split
-train <- influenza[influenza$year <= 2014,]
-train <- train[complete.cases(train),]
-test <- influenza[influenza$year <= 2017 & influenza$year >= 2015,]
-test <- test[complete.cases(test),]
+train <- influenza[influenza$year <= 2016 & influenza$year >= 2010,]
+test <- influenza[influenza$year <= 2018 & influenza$year >= 2017,]
 
-write.csv(train, "../data/processed/modelling_data/influenza_train.csv", row.names = FALSE)
-write.csv(test, "../data/processed/modelling_data/influenza_test.csv", row.names = FALSE)
+head(train)
 
-train <- train[train$ContinentName == "South America",]
-test <- test[test$ContinentName == "South America",]
+write.csv(train, "../data/processed/modelling_data/weekly_SWEurope_train.csv", row.names = FALSE)
+write.csv(test, "../data/processed/modelling_data/weekly_SWEurope_test.csv", row.names = FALSE)
 
 train_x <- train[,-ncol(train)]
 train_y <- train[,ncol(train)]
 test_x <- test[,-ncol(test)]
 test_y <- test[,ncol(test)]
 
+head(train)
+head(train_y)
+
+par(mfrow = c(1,2))
+plot(train$num_influenza)
+plot(train$temperature, type = "l")
+
+
+colnames(train_x)
+#xgboost
+# XGboost requires a special data structure
+library(xgboost)
+library(Matrix)
+d_train <- sparse.model.matrix(train_y~ year + week + temperature + CapitalLatitude
+                               + CapitalLongitude + surface_height
+                               + evaporation + humidity + Pressure_surface, data=train_x)
+d_test <- sparse.model.matrix(test_y~ year + week + temperature + CapitalLatitude
+                              + CapitalLongitude + surface_height
+                              + evaporation + humidity + Pressure_surface, data=test_x)
+# Build XGboost classifier
+model_xgboost <- xgboost(data = d_train, label = train_y, max.depth = 7, eta = 0.1, nthread = 4, nrounds = 2000, objective = "reg:logistic",
+                         reg_lambda=1)
+# Importance plots
+importance_xgboost <- xgb.importance(feature_names = colnames(d_train), model = model_xgboost)
+head(importance_xgboost)
+xgb.plot.importance(importance_matrix = importance_xgboost)
+
+pred_test <- predict(model_xgboost, d_test)
+
+plot(test_y)
+lines(pred_test)
+
+sum(as.numeric(pred_test >= 0.5) == test_y)
+
+library(pROC)
+table(as.numeric(pred_test >= 0.5) , test_y)
+
+plot(roc(test_y, as.numeric(pred_test>=0.5)), print.auc=TRUE, col = 'red', lwd = 3,
+     main = "ROC-AUC Plot of XGBoost Model")
+
+roc_obj <- roc(test_y, as.numeric(pred_test>=0.5))
+auc(roc_obj)
+
+plot(pred_test, type = "l")
+points(test_y, cex=0.2)
 
 
 # random forest
-model_rf <- randomForest(train_y ~ CapitalLatitude + CapitalLongitude + year + month + 
-                           tmmn + tmmx + NDVI,data=train_x)
+model_rf <- randomForest(train_y ~ temperature + week + year,data=train_x)
 varImpPlot(model_rf)
 
-pred_test <- predict(model_rf, train_x)
+pred_test <- predict(model_rf, test_x)
 
-sqrt(mean((pred_test - test_y)^2))
+sum(as.numeric(pred_test >= 0.5) == test_y)
 
-plot(pred_test, train_y, cex=0.3)
-abline(a = 0, b = 1)
+library(pROC)
+table(as.numeric(pred_test >= 0.5) , test_y)
+
+plot(roc(test_y, as.numeric(pred_test>=0.5)), print.auc=TRUE, col = 'red', lwd = 3)
+
+roc_obj <- roc(test_y, as.numeric(pred_test>=0.5))
+auc(roc_obj)
+
+plot(pred_test, type = "l")
+points(test_y, cex=0.2)
 
 
 
-head(train)
-head(test)
-colnames(train_x)
-max(train_y)
-max(test_y)

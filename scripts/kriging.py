@@ -1,7 +1,3 @@
-"""
-Module for Gaussian process regression
-
-"""
 import gpytorch
 import torch
 import gc   
@@ -53,7 +49,7 @@ class Spatiotemporal_GP(gpytorch.models.ExactGP):
     def __init__(self, train_x, train_y, likelihood):
         super(Spatiotemporal_GP, self).__init__(train_x, train_y, likelihood)
 
-        self.mean_module = gpytorch.means.ConstantMean()
+        self.mean_module = gpytorch.means.ZeroMean()
 
         self.covar_season = gpytorch.kernels.PeriodicKernel()
         self.covar_season.period_length = Tensor([1])
@@ -72,7 +68,7 @@ class Spatiotemporal_GP(gpytorch.models.ExactGP):
         year = x.narrow(1,0,1)
         week = x.narrow(1,1,1)
         spatial = x.narrow(1,2,2)
-        remote = x.narrow(1,4,5)
+        remote = x.narrow(1,5,1)
         #social = x.narrow(1,8,1)
         # prevent period to reset
         mean = self.mean_module(x).view(-1)
@@ -85,7 +81,7 @@ class Spatiotemporal_GP(gpytorch.models.ExactGP):
         covar_remote = self.covar_remote(remote)
         #covar_social = self.covar_social(social)
         
-        covariance = (covar_season + covar_week) * (covar_remote + covar_spatial)\
+        covariance = covar_season + covar_remote + covar_spatial\
                       + covar_week
 
         return gpytorch.distributions.MultivariateNormal(mean, covariance)
@@ -187,6 +183,8 @@ def main():
 
     train_x = Tensor(train.iloc[:, :-1].values)
     train_y = Tensor(train.iloc[:, -1].values)
+    train_max = train_y.max(0)[0]
+    train_y = train_y/train_max * 2 - 1
 
     test_x = Tensor(test.iloc[:, :-1].values)
     test_y = Tensor(test.iloc[:, -1].values)
@@ -222,6 +220,60 @@ def main():
     #plt.scatter([i for i in range(1,223)], posterior_pred.mean.cpu().numpy())
     #plt.show()
 
+    
+    with torch.no_grad():
+    # Initialize plot
+        f, ax = plt.subplots(1, 1, figsize=(12, 12))
+        plt.plot(test_y.cpu().numpy(), test_y.cpu().numpy())
+        ax.scatter(train_max*(posterior_pred.mean.cpu().numpy() + 1)/2, test_y.cpu().numpy(), marker=".")
+        #plt.ylim((0, 2000))
+        #plt.xlim((0, 2000))
+        plt.show()
+
+def main2():
+    gc.collect()
+    train = pd.read_csv("weekly_SWEurope_train.csv")
+    train = train.dropna()
+    test = pd.read_csv("weekly_SWEurope_test.csv")
+    test = test.dropna()
+
+
+    print("Number train:{}".format(train.shape[0]))
+    print("Number test:{}".format(test.shape[0]))
+
+    train_x = Tensor(train.iloc[:, :-2].values)
+    train_y = Tensor(train.iloc[:, -1].values)
+
+    test_x = Tensor(test.iloc[:, :-2].values)
+    test_y = Tensor(test.iloc[:, -1].values)
+
+    if torch.cuda.is_available():
+        train_x = train_x.cuda()
+        train_y = train_y.cuda()
+        test_x = test_x.cuda()
+
+    # initialize likelihood and model
+    likelihood = gpytorch.likelihoods.GaussianLikelihood()
+    gp_model = Spatiotemporal_GP(train_x, train_y, likelihood)
+
+    if torch.cuda.is_available():
+        likelihood = likelihood.cuda()
+        gp_model = gp_model.cuda()
+
+    print("Start Training \n")
+    gp_model = train_model(train_x, train_y, gp_model, likelihood, epochs=200)
+    # posterior prediction
+    posterior_pred = predict(test_x, gp_model, likelihood)
+
+    if torch.cuda.is_available():
+        posterior_mean = posterior_pred.mean.cpu()
+        print("Test RSME:{}".format(torch.norm(test_y - posterior_mean)/ posterior_mean.shape[0]))
+
+    else:
+        posterior_mean = posterior_pred.mean
+        print("Test RSME:{}".format((torch.norm(test_y - posterior_mean) / poste
+                                     rior_mean.shape[0])))
+
     with torch.no_grad():
     # Initialize plot
         f, ax = plt.subplots(1, 1, figsize=(12, 12))
@@ -231,3 +283,13 @@ def main():
         #plt.xlim((0, 2000))
         plt.show()
 
+    with torch.no_grad():
+        # Initialize plot
+        f, ax = plt.subplots(1, 1, figsize=(15, 15))
+        plt.plot(posterior_mean.cpu().numpy())
+        plt.plot(test_y.cpu().numpy())
+        plt.legend(['Predictions', 'Observations'])
+
+
+if __name__ == "__main__":
+    main2()

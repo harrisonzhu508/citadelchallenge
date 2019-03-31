@@ -120,17 +120,12 @@ Using Lasso regularised regression, we select the following features for our Gau
 
 - Capital city latitude 
 - Capital city longitude 
-- Monthly minimum temperature 
-- Monthly maximum temperature 
-- Actual evapotranspiration, derived using a one-dimensional soil water balance model 
-- Vapor pressure
-- Average working hours per year
-- Number of physicians per 1000 people
-- Toal number smokers over age 18 
+- Weekly temperature 
+- Evapotranspiration, derived using a one-dimensional soil water balance model 
+- Surface pressure
+- Surface Height
 - Year 
 - Month
-
-15, 16, 18, 20
 
 In particular, we found that spatial, temporal and the number of physicians to be highly 
 significant features to the occurrence of influenza. Of course, as GPs are nonparametric models,
@@ -138,10 +133,19 @@ keeping these variables will not have a bad effect on the model fit as GPs are a
 regular underlying functions (see http://www.stats.ox.ac.uk/~sejdinov/teaching/atml14/Theory_2014.pdf for a 
 rigorous treatment of reproducing kernel Hilbert spaces for Gaussian processes).
 
-Model specification
--------------------
+Model 1: Gaussian process
+-------------------------
 
 To treat the seasonal trend, we will choose a kernel :math:`k_{\text{se}}(t', t) = ` for years :math:`t,t'`.
+
+Model 2: Deep Kernel Learning 
+-----------------------------
+
+Suppose now that we have a latent feature extractor :math:`g:\mathbb{R}^p\rightarrow\mathbb{R}^2`, and 
+:math:`f:\mathbb{R}^2\rightarrow\mathbb{R}^1` being a Gaussian process. 
+
+Model 3: XGBoost
+-----------------------------
 
 Experimental Results
 --------------------
