@@ -145,14 +145,14 @@ To conduct hyperparameter tuning and training, we trained our models using the P
 
 	<iframe src="_static/xgboostgp_2018.html" height="530px" width="100%"></iframe>
 
-`Figure link <https://public.tableau.com/profile/harrison4446#!/vizhome/gp_prediction/Sheet1?publish=yes/>`_. Our new model gives us an AUC (area under curve) of 0.762, as illustrated below. From a policy perspective, it is important to see the proportion of false negatives, as a false positive will only strengthen the prevention of an outbreak. We observe that out of 382 test points in 2018, we have a 95% credible interval of (10.2%,13.1%) of the percentage of false negatives, with the optimal prediction yielding 11.8%. We also observe what we have expected - the spread of influenza in space - from the above diagram. We can see that when an outbreak occurs in 1 country, it will very rapidly spread to the neighbouring country over time.
+`Figure link <https://public.tableau.com/profile/harrison4446#!/vizhome/gp_prediction/Sheet1?publish=yes/>`_. Our new model gives us an AUC (area under curve) of 0.762, as illustrated below. From a policy perspective, it is important to see the proportion of false negatives, as a false positive will only strengthen the prevention of an outbreak. We observe that out of 382 test points in 2018, we have a 95% credible interval of (10.2%,13.1%) of the percentage of false negatives, with the optimal prediction yielding 11.8%. We also observe what we have expected - the spread of influenza in space - from the above diagram. We can see that when an outbreak occurs in 1 country, it will very rapidly spread to the neighbouring country over time (especially seen during the transition from week 49 to 50). 
 
 .. image:: ./img/xgboost_GP.png
 
 Shortcomings
 ------------
 
-As already mentioned in the analysis, we have mainly focused on predicting the occurrence of outbreaks, rather than the exact number of cases. To predict the latter, there has been recent studies on stochastic partial differential equations and INLA [#lindgren]_ that fit naturally into this framework. Finally, there is also an existing framework for extreme value statistics that would be a more suitable model for predicting either the extreme events or looking at the probability of threshold exceedances. 
+As already mentioned in the analysis, we have mainly focused on predicting the occurrence of outbreaks, rather than the exact number of cases. To predict the latter, there has been recent studies on stochastic partial differential equations and INLA [#lindgren]_ that fit naturally into this framework. Finally, there is also an existing framework for extreme value statistics that would be a more suitable model for predicting either the extreme events or looking at the probability of threshold exceedances. Moreover, the current remote sensing data is of capital cities. A finer grain data source would improve the quality of the fit. 
 
 .. [#gpy] https://gpytorch.readthedocs.io/en/latest/index.html
 
