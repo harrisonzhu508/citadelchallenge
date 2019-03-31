@@ -107,15 +107,15 @@ As shown below, peaks are nicely captured.
 VAR example: DEU and its neighbourhoods
 =================
 
-Yo
 
-**To use the dragging cursor**, click on the play icon and select the second icon.
+
+Note: see `datasets section <datasets.html>`_ and the below map for further details. To use the dragging cursor, click on the play icon and select the second icon.
 
 .. raw:: html
 
 	<iframe src="_static/spatial_outbreak.html" height="530px" width="100%"></iframe>
 `Figure link <https://public.tableau.com/profile/harrison4446#!/vizhome/outbreak_influenza/Spatialoutbreak/>`_. O 
 
-`datasets section <datasets.html>`_ 
+
 
 
