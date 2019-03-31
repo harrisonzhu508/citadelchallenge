@@ -35,13 +35,19 @@ Indeed, compared to the globe, despite some other countries like Australia have 
 
 Now, write the sequence as :math:`(USA_{t})_{t=1}^{T}`, and let us firstly check the stationarity: we run a Dickey-Fluller test on the sequence, and obtained a p-value of 0.022; a Dicky-Fuller on :math:`\Delta USA_t` to be having a p-value of 0.013; and on :math:`\Delta \Delta USA_t` gets a p-value of 0.009. Hence, upon the choice of significance level, we can have the following conclusion:
 
-- djkfl
+- If we choose the significance level to be the classical 5% or anything above 2.3%, then we conclude :math:`USA_t \sim I(0)`, i.e. we can investigate :math:`USA_{t}` directly.
 
-- fdklxm
+- If we choose the significance level to be a rigorous 1% for instance, then we conclude  :math:`USA_t \sim I(2)`, i.e. we can only investigate :math:`\Delta \Delta USA_{t}` directly.
+
+For both circumstances, we can now carry on by reading the sample estimation on the ACF (Auto Correlation Function) and PACF (Partial Auto Correlation Function) to determine how many lags to use, i.e. we are now investigating USAt ∼ ARIMA(p, d, q) where d ∈ {0, 2}.
+
 
 
 Germany (DEU)
 -----------
+
+
+
 
 
 
