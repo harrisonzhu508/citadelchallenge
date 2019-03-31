@@ -25,8 +25,9 @@ MPhil in Economic Research.
    :caption: Contents:
 
    introduction.rst
-   setup.md
    datasets.rst
+   feature_selection.rst
    gp.rst
    test.rst
    references.rst
+   setup.md
