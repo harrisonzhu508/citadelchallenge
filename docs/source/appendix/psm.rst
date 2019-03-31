@@ -55,7 +55,8 @@ Descriptive Statistical Tests
 
 Test against the following hypothesis: 
 
-\\H
+.. math:: H_0: \mathbb{E}[{uphill}_{ABS,t}] = \mathbb{E}[{uphill}_{PRES,t}] 
+
 
 
 Time Series
