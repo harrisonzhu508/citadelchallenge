@@ -25,6 +25,8 @@ MPhil in Economic Research.
    executive_summary.rst
    datasets.rst
    models.rst
+   discussion.rst
+   conclusions.rst
    appendix.rst
    psm.rst
    ARIMA_&_VAR.rst
