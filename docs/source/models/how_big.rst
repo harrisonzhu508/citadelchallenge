@@ -1,4 +1,7 @@
-How Big Are Epidemics?
+.. _bayesian:
+
+======================
+How big will an influenza epidemic be?
 ======================
 
 Motivation
@@ -150,7 +153,7 @@ positive virus as:
     \mathcal{M}_{3} &:  m_{t} = \mu + \theta t + \alpha \sin^{12}\Big(\frac{\pi}{52}t - \ell\pi\Big) \\
     \mathcal{M}_{4} &:  m_{t} = \mu + \theta t + \alpha \sin^{16}\Big(\frac{\pi}{52}t - \ell\pi\Big) \\
     \mathcal{M}_{5} &:  m_{t} = \mu + \theta t + \alpha \sin^{20}\Big(\frac{\pi}{52}t - \ell\pi\Big) \\
-    \mathcal{M}_{6} &:  m_{t} = \mu + \theta t + \alpha \sin^{30}\Big(\frac{\pi}{52}t - \ell\pi\Big)  \end{aligned}.
+    \mathcal{M}_{6} &:  m_{t} = \mu + \theta t + \alpha \sin^{30}\Big(\frac{\pi}{52}t - \ell\pi\Big).  \end{aligned}
 
 Note that all models considered are even powers of sine as we know the weekly mean number of influenza positive virus to be always positive.
 Here a finite number of model comparisons is made. If one wants to
@@ -183,7 +186,7 @@ Posterior sampling
 Now that we are confident with the prior model, we proceed to generate approximate
 samples of the posterior distribution given observed European data.
 Whilst it would be possible to generate true posterior samples, for
-example by using Metropolis Hastings and assessing the quality of fit
+example by using Metropolis-Hastings and assessing the quality of fit
 with ACFs, trace plots, and checking that marginal distributions agree,
 we instead deploy ABC to generate approximate uncorrelated samples.
 
