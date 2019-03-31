@@ -33,3 +33,4 @@ MPhil in Economic Research.
    notparleytest1.rst
    references.rst
    setup.md
+   ARIMA_&_VAR.rst
