@@ -86,9 +86,57 @@ par(mfrow = c(1,2))
 plot(train$num_influenza)
 plot(train$temperature, type = "l")
 
+pred_gp <- read.csv("../exploration/pred_full.csv")
+pred_gp <- data.frame(t(as.matrix(pred_gp)))
+
+plot(pred_gp$X1, type = "l")
+lines(pred_gp$X1 + 2*pred_gp$X2, type="l", col = "blue")
+lines(pred_gp$X1 - 2*pred_gp$X2, type="l", col = "red")
+
+max_countries <- c()
+for (country in complete_countries)
+{
+  #rescale countries based on proportions
+  max_countries <- c(max_countries, max(influenza[influenza$Country == country,]$num_influenza))
+}
+
+df_prediction_gp <- cbind(test, pred_gp[-77,])
+df_prediction_gp$upper <- pred_gp$X1[-77] + 2*sqrt(pred_gp$X2[-77])
+df_prediction_gp$lower <- pred_gp$X1[-77] - 2*sqrt(pred_gp$X2[-77])
+c<-1
+df_prediction_gp$pred_class <- 0
+df_prediction_gp$pred_class_upper <- 0
+df_prediction_gp$pred_class_lower <- 0
+
+for (country in c("BEL", "DEU", "ITA", "LUX", "NET", "POR", "SVN", "ESP", "GBR"))
+{
+  #rescale countries based on proportions
+  max_country <- max_countries[1]
+  df_prediction_gp[df_prediction_gp$country_code == country,]$pred_class <- as.numeric(df_prediction_gp[df_prediction_gp$country_code
+                                                                                                        == country,]$X1>max_country*0.05)
+  df_prediction_gp[df_prediction_gp$country_code == country,]$pred_class_upper <- as.numeric(df_prediction_gp[df_prediction_gp$country_code
+                                                                                                        == country,]$upper>max_country*0.05)
+  df_prediction_gp[df_prediction_gp$country_code == country,]$pred_class_lower <- as.numeric(df_prediction_gp[df_prediction_gp$country_code
+                                                                                                        == country,]$lower>max_country*0.05)
+  c <- c+1
+}
+table(df_prediction_gp$pred_class , test_y)
+table(df_prediction_gp$pred_class_lower , test_y)
+table(df_prediction_gp$pred_class_upper , test_y)
+
+plot(test_y[test_x$country_code=="GBR"], main = "Probability of Outbreak for the UK", 
+     ylab = "Probability of Outbreak")
+
+plot(roc(test_y, df_prediction_gp$pred_class), print.auc=TRUE, col = 'red', lwd = 3,
+     main = "ROC-AUC Plot of XGBoost_GP Model")
+
+write.csv(df_prediction_gp, "predictions_gp_tableau.csv",row.names = FALSE)
+
+sort(df_prediction_gp[df_prediction_gp$country_code=="SVN",]$week)
+
+sum(df_prediction_gp$pred_class == test_y) / length(test_y)
 
 
-colnames(train_x)
 #xgboost
 # XGboost requires a special data structure
 library(xgboost)

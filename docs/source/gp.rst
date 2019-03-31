@@ -2,7 +2,11 @@ Spatiotemporal Modelling
 ========================
 
 Motivation
-------------
+----------
+
+For policy makers, it would be a paramount importance to understand when and where outbreaks of influenza will occur: allowing for suitable allocation of resources for disaster prevention and planning. The study of the spatiotemporal and geographical factors to disease outbreaks have only recently become a source of research interest (Bhatt et al., 2017; Chen et al, 2019).
+
+**In this contribution**, we propose 3 classes of models: Gaussian process regression, Deep Gaussian processes and, to the best of our knowledge, a new Gaussian process mixture with XGBoost mean function model to provide a surveillance model for influenza outbreaks.
 
 Suppose :math:`\{X_i,y_i\}_{i=1}^N` as our features and response (number of positive influenza cases). We
 will assume the following underlying relationship:
@@ -24,7 +28,7 @@ variation. On the other hand, stochastic processes such as Gaussian processes (G
 or solutions to stochastic partial differential equations (SPDE) (Hairer, 2009) are
 well-adapted to what we would like to accomplish.
 
-SPDEs are the most natural approach to modelling spatiotemporal
+Influenza outbreaks often contain complicated causal relationships between many different social, geographical and political factors. SPDEs are the most natural approach to modelling spatiotemporal
 phenomenon, by adding a driven white noise to a partial differential
 equation (PDE) to obtain
 
@@ -37,7 +41,7 @@ is a driven white noise. However, there is limited software to provide
 solutions to these SPDEs. ``R-INLA`` (Lindgren et al., 2015) is a library that uses the Bayesian
 method integrated nested Laplace approximation (INLA) to construct weak
 solutions to linear fractional SPDEs, but this places too much
-restriction of the underlying SPDE and would result in blackbox
+restriction of the underlying SPDE and would result in black-box
 modelling. 
 
 Gaussian Processes Review
@@ -67,7 +71,7 @@ we obtain the posterior predictive distribution of :math:`f_*` (Rasmussen et al,
 
 where the notations are :math:`f, f_*` denote the value of the function for the training and test set,
 for the GP function, :math:`K, K_*,K_{**}` are the covariance matrices of the training, test-training and
-test sets, and :math:`\mu` is taken to be the short hand for the mean of the training set. Finally, 
+test sets, and :math:`\mu` is taken to be the short hand for the mean of the training set. In addition, 
 standard results from decision theory (Rasmussen et al., 2006) show that taking the loss
 function as the expected square error gives the optimal prediction as 
 
@@ -80,6 +84,8 @@ we have a graphical model of :math:`p` dimensions (:math:`p` types of inputs). B
 1-dimensional example visualisation of a Gaussian process random field.
 
 .. image:: ./img/gp_field.png
+
+Finally, we will also use a Gaussian process classification model, but the theory is more complicated, requiring variation inference, and we will omit the details. We similarly state the result that the optimal predictor for a classification problem with the 0-1 loss is the Bayes's classifier.
 
 The data
 --------
@@ -96,7 +102,7 @@ We can make the following observations.
 - Influenza outbreaks seems to appear in clusters of regions. Especially for Europe and Central + South America.
 One of our goals could be to identity how the spread occurs over space and time.
 - There are more outbreak reports in Europe and fewer in South America. This may be due to better surveying and medical
-infrustructure in Europe. Another subject of study for us would be to use the existing data for 
+infrastructure in Europe. Another subject of study for us would be to use the existing data for 
 South America to interpolate what could happen in countries where there is little or no observation, 
 using a spatiotemporal model.
 
@@ -137,26 +143,67 @@ rigorous treatment of reproducing kernel Hilbert spaces for Gaussian processes).
 Model 1: Gaussian process
 -------------------------
 
-To treat the seasonal trend, we will choose a kernel 
+To treat the seasonal effects, we will choose a kernel 
 
 .. math::
-	k_{\text{se}}(t', t) =  \exp\Bigg(\frac{2\sin^2(\pi||t-t'||_1/\rho)}{l^2} \Bigg
+	
+	k_{\text{se}}(t', t) =  \exp\Bigg(\frac{2\sin^2(\pi||t-t'||_1 f)}{l^2} \Bigg)
 
-for years :math:`t,t'`,
+for years :math:`t,t'`, where :math:`f,l'` are the kernel frequency and length scale. We encode a prior distribution
+for the frequency to favour the value 1, as we believe that influenza outbreak occurs seasonally during winter.
 
+The weekly effects, through our exploratory data analysis, reviews a relatively smooth trend and so we use. a
+radial basis kernel:
 
-Model 2: Deep Kernel Learning 
------------------------------
+.. math::
+	
+	k_{\text{se}}(x', x) =  \exp\Bigg(-\frac{(x_1-x_2)^T(x_1-x_2)}{l} \Bigg),
 
-Suppose now that we have a latent feature extractor :math:`g:\mathbb{R}^p\rightarrow\mathbb{R}^2`, and 
-:math:`f:\mathbb{R}^2\rightarrow\mathbb{R}^1` being a Gaussian process. 
+where :math:`l` is the length scale. The theory of reproducing
+Hilbert kernel spaces (see http://www.stats.ox.ac.uk/~sejdinov/teaching/atml14/Theory_2014.pdf) justifies our
+claim, since if the underlying functional relationship of the weekly effect is sufficiently regular (Holder-Sobolev of
+certain exponents), then we are able to estimate it well with a GP. 
 
-Model 3: XGBoost
------------------------------
+For the spatial and remote sensing features, we use Matérn covariance kernels each respectively. This is defined as
+
+.. math::
+	
+	k_{\text{se}}(x', x) =  \frac{2^{1-\nu}}{\Gamma(\nu)}(\sqrt{2\nu}d)K_\nu(\sqrt{2\nu}d),
+
+where :math:`K_\nu,v'` are the modified Bessel function and smoothness parameter, and :math:`d=||x_1-x_2||_\Theta'`,
+with :math:`\Theta` being a lengthscale parameter in matrix form.
+
+For the mean, we will use by default a zero-mean for simplicity.
+
+Model 2: Deep Gaussian processes
+--------------------------------
+
+Suppose now that we have a latent feature extractor a Gaussian process. We will perform GP classification with variational inference to approximate the posterior and marginal likelihood, and use 3 layers of linear regressor-ReLU as the feature extractor. This forms a Deep Gaussian process but with linear layers in between. 
+
+Model 3: Gaussian process mixture with XGBoost mean function
+------------------------------------------------------------
+
+To account for large extreme values of outbreaks, we construct, to the best of our knowledge, a new type of GP mixture model by replacing the mean function with a pre-trained XGBoost regressor. Through this transfer learning procedure, we are able to provide uncertainty quantification for the previously pure black-box XGBoost model and augment the mean function of the GP with a more sophisticated feature regressor. The replacement could also be understood as encoding our prior belief of the true underlying function :math:`f`. Finally, we are also able to understand the spatiotemporal and climatic relationship in our data.
+
 
 Experimental Results
 --------------------
+To conduct prediction, we first learn the underlying function :math:`f` and then obtain a prediction of the number of influenza cases. It is clear from the nature of the data that outbreaks are often extreme, and therefore without extreme value or SPDE theory it unfeasible to make predictions of the peaks with Gaussian processes. However, the GP is very good at capturing the trend, and therefore we take 5% of the maximum value of the number of influenza cases for each country as the threshold for classifying an outbreak there respectively.
+
+We found that our newly proposed model was most suitable for policy-making purposes, as it provides adequate predictions and uncertainty quantification. The pure Gaussian process model was good at estimating the trend but performed poorly when looking at the magnitude. The Deep Gaussian process similarly had the same issue, which justifies the use of the transfer learning with the XGBoost prior function. The below figure illustrates an optimal prediction of whether there is an outbreak or not in space-time. The dataset is explain in the previous section  {INSERT HYPERLINK!}. 
 
 .. raw:: html
 
 	<iframe src="_static/xgboostgp_2018.html" height="530px" width="100%"></iframe>
+
+Our new model gives us an AUC (area under curve) or 0.762, as illustrated below. From a policy perspective, it is important to see the proportion of false negatives, as a false positive will only strengthen the prevention of an outbreak. We observe that out of 382 test points in 2018, we have a 95% credible interval of (10.2%,13.1%) of the percentage of false negatives, with the optimal prediction yielding 11.8%.
+
+.. image:: ./img/xgboost_GP.png
+
+Potential improvements
+----------------------
+
+As already mentioned in the analysis, we have mainly focused ourselves with predicting the occurrence of outbreaks, rather than the exact number of cases. To predict the latter, there has been recent studies on stochastic partial differential equations and INLA (Lindgren et al., 2015) that fit naturally into this framework. Finally, there is also an existing framework for extreme value statistics that would be a more suitable model for predicting either the extreme events or looking at the probability of threshold exceedances. 
+
+
+
