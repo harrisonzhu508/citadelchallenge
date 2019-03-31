@@ -74,8 +74,21 @@ The prediction, as shown below, are actually similar amongst the two. However, a
 .. image:: ./img/ARIMA323.jpg
 
 
+Comparing across
+~~~~~~~~
+In terms of information criterion, the two ARIMA(p,2,q) models have slightly lower information criteria for both AIC and BIC amongst the four. The difference amongst is tight though, within 2% of each other.
+
+In terms of Mean Sum of Squared Errors (MSE), however, ARIMA(p,2,q) models perform much worse than the other --- 40-50 times larger than ARIMA(p,0,q)'s, which could be understood as ARIMA(p,2,q) models fail to predict precise large movements at the spike time.
+
+
+
 Germany (DEU)
 -----------
+As an interest of this report in general, we also look at DEU's data. 
+
+DEU's data is not as good as the American one --- it has more empty slots than the USA data, which makes less complete time series to run ARIMA fittings.
+
+We start by the Dickey Fuller stationarity test, which gives a p-value of 0 up to the 5\ :sup:`th` significant level. Therefore we fit ARIMA(p,0,q) model for :math:`DEU_t`.
 
 
 
