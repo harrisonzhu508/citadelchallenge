@@ -6,7 +6,7 @@ Motivation
 ============
 
 A major infectious disease surveillance body, the Centre for Disease
-Control in the US, currently deploy an adaptation [#first]_) for influenza modelling. The method uses
+Control in the US, currently deploy an adaptation [#first]_ for influenza modelling. The method uses
 cyclic regression to model the weekly proportion of deaths from
 pneumonia and influenza. Since then adaptations have incorporated
 indicators such as counts of patient visits for influenza like illness
@@ -176,7 +176,7 @@ Bayes factors depend on estimates of the marginal likelihood for the
 observation in question, that is, the first year falling in line with
 recorded data. We make use of the following consistent estimator:
 
-.. image:: ./img/naive.png.png
+.. image:: ./img/naive.png
 
 When implemented using :math:`n=100,000` the approximation produced
 unstable results despite efforts to reduce computational underflow. To
