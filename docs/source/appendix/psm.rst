@@ -59,8 +59,25 @@ Test against the following hypothesis:
 
 .. math:: H_A: \mathbb{E}[{uphill}_{PRES,t}] \neq \mathbb{E}[{uphill}_{ABS,t}] 
 
-By constructing the mean statistic :math:`\overline{{uphill}_{PRES,t}-{uphill}_{ABS,t}} `We get a t-statistic of 1.23, associated with a p-value of 0.22, which means we can not reject the :math:`H_0` ,despite the uphill speed for ABS seems to be slightly quicker than the PRES.
+By constructing the mean statistic :math:`\overline{{uphill}_{PRES,t}-{uphill}_{ABS,t}} `, we get a t-statistic of 1.23, associated with a p-value of 0.22, which means we can not reject the :math:`H_0` ,despite the uphill speed for 
+PRES seems to be slightly quicker than the ABS one.
 
+The histogram confirms such slight trend, where PRES has slightly more rightward weight than left.
+
+.. image:: ./hist1.jpg
+
+
+Likewise, when testing against the following hypothesis:
+
+.. math:: H_0: \mathbb{E}[{downhill}_{PRES,t}] = \mathbb{E}[{downhill}_{ABS,t}] 
+
+.. math:: H_A: \mathbb{E}[{downhill}_{PRES,t}] \neq \mathbb{E}[{downhill}_{ABS,t}] 
+
+With the mean statistic :math:`\overline{{uphill}_{PRES,t}-{uphill}_{ABS,t}} `, we get a t-statistic of 0.21, associated with a p-value of 0.83, which means we definitely can not reject the :math:`H_0`. In fact, we could conclude that the downhill speed for ABS is quite similar to the PRES one.
+
+
+
+As a conclusive remark, we may thus say that ABS may have a quicker acceleration than PRES in terms of infection transmission, but not the curing part. However, for the statistical rigour, nothing could be concluded apart from they are similar, at 5% significance level.
 
 
 
