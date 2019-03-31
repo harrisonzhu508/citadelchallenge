@@ -17,17 +17,19 @@ University of Cambridge, 1st year PhD in Natural Language Processing.
 `Benjamin Hillyard <https://www.linkedin.com/in/benjamin-hillyard/?originalSubdomain=uk>`_,
 University of Oxford, MSc in Statistics.
 
-`Parley Yang <https://www.linkedin.com/in/parleyyang/>`_, University of Cambridge,
+`Parley Yang <https://parleyyang.wordpress.com/>`_, University of Cambridge,
 MPhil in Economic Research.
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
+   executive_summary.rst
    introduction.rst
    datasets.rst
-   feature_selection.rst
    gp.rst
+   models.rst
    Bayes.rst
+   notparleytest1.rst
    references.rst
    setup.md

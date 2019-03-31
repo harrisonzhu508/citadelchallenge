@@ -4,9 +4,10 @@ import numpy as np
 from sklearn.metrics import mean_squared_error, r2_score
 import numpy as np
 import matplotlib as mpl
+import pprint
 mpl.use('TkAgg')
 import matplotlib.pyplot as plt
-
+pp = pprint.PrettyPrinter(indent=4)
 
 class VariableNames:
     country_code = 'country_code'
@@ -20,7 +21,6 @@ class VariableNames:
     aet = 'aet'
     srad = 'srad'
     vap = 'vap'
-    ndvi = 'NDVI'
     hours_worked = 'Hours_worked_per_year'
     expenditure_ppp = 'expenditure_PPP'
     num_physician = 'num_physician'
@@ -30,6 +30,7 @@ class VariableNames:
 
 
 regions_interested = ["European Region of WHO", "Region of the Americas of WHO", "Western Pacific Region of WHO"]
+# regions_interested = ['Western Pacific Region of WHO']
 variables_interested = [
                         # VariableNames.capital_lat,
                         # VariableNames.capital_long,
@@ -58,11 +59,23 @@ variables_scales = {
                     VariableNames.aet: (0, 1389.73),
                     VariableNames.srad: (23.13, 3189.91),
                     VariableNames.vap: (94.67, 2864.35),
-                    VariableNames.ndvi: (-919.58, 8071.03),
                     VariableNames.hours_worked: (1289.2, 2359.0),
-                    VariableNames.expenditure_ppp: (100.3, 428.2),
+                    VariableNames.expenditure_ppp: (0.0, 428.2),
                     VariableNames.num_physician: (0.9, 6.25),
                     }
+
+human_readable_names = {
+    VariableNames.tmmn: 'Minimum temperature',
+    VariableNames.tmmx: 'Maximum temperature',
+    VariableNames.pr: 'Precipitation',
+    VariableNames.def_: 'Climate water deficit',
+    VariableNames.aet: 'Actual evapotranspiration',
+    VariableNames.srad: 'Downward surface shortwave radiation',
+    VariableNames.vap: 'Vapour pressure',
+    VariableNames.hours_worked: 'Hours worked per year',
+    VariableNames.expenditure_ppp: 'Total healthcare expenditure per capita, adjusted for PPP',
+    VariableNames.num_physician: 'Number of physicians per capita'
+}
 
 xs = []
 ys = []
@@ -104,5 +117,8 @@ print(len(ys_test))
 print(na_variables)
 reg = linear_model.ElasticNet(max_iter=100000)
 reg.fit(xs, ys)
+print_dictionary = {}
 for (variable_name, coefficient) in zip(variables_interested, reg.coef_):
-    print(variable_name, coefficient)
+    print(human_readable_names[variable_name], ': ', coefficient)
+
+# pp.pprint(print_dictionary)

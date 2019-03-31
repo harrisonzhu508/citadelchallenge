@@ -1,0 +1,684 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<!-- build 20182.18.0925.2120                               -->
+<workbook source-build='2018.2.2 (20182.18.0925.2120)' source-platform='mac' version='18.1' xml:base='https://public.tableau.com' xmlns:user='http://www.tableausoftware.com/xml/user'>
+  <repository-location id='gp_prediction' path='/workbooks' revision='1.1' />
+  <preferences>
+    <preference name='ui.encoding.shelf.height' value='24' />
+    <preference name='ui.shelf.height' value='26' />
+  </preferences>
+  <datasources>
+    <datasource caption='predictions_gp_tableau' inline='true' name='federated.17t5ffa1vkhx8m14o59nb11eqfqe' version='18.1'>
+      <connection class='federated'>
+        <named-connections>
+          <named-connection caption='predictions_gp_tableau' name='textscan.11ea0zv1sr8uhl1h97g5r0z02gc0'>
+            <connection class='textscan' directory='/Users/harrisonzhu/Documents/GitHub/citadelchallenge/exploration' filename='predictions_gp_tableau.csv' password='' server='' workgroup-auth-mode='as-is' />
+          </named-connection>
+        </named-connections>
+        <relation connection='textscan.11ea0zv1sr8uhl1h97g5r0z02gc0' name='predictions_gp_tableau.csv' table='[predictions_gp_tableau#csv]' type='table'>
+          <columns character-set='UTF-8' header='yes' locale='en' separator=','>
+            <column datatype='string' name='country_code' ordinal='0' />
+            <column datatype='integer' name='year' ordinal='1' />
+            <column datatype='integer' name='week' ordinal='2' />
+            <column datatype='real' name='CapitalLatitude' ordinal='3' />
+            <column datatype='real' name='CapitalLongitude' ordinal='4' />
+            <column datatype='real' name='surface_height' ordinal='5' />
+            <column datatype='real' name='temperature' ordinal='6' />
+            <column datatype='real' name='evaporation' ordinal='7' />
+            <column datatype='real' name='humidity' ordinal='8' />
+            <column datatype='real' name='Pressure_surface' ordinal='9' />
+            <column datatype='integer' name='num_influenza' ordinal='10' />
+            <column datatype='integer' name='outbreak' ordinal='11' />
+            <column datatype='real' name='X1' ordinal='12' />
+            <column datatype='real' name='X2' ordinal='13' />
+            <column datatype='real' name='upper' ordinal='14' />
+            <column datatype='real' name='lower' ordinal='15' />
+            <column datatype='integer' name='pred_class' ordinal='16' />
+            <column datatype='integer' name='pred_class_upper' ordinal='17' />
+            <column datatype='integer' name='pred_class_lower' ordinal='18' />
+          </columns>
+        </relation>
+        <refresh increment-key='' incremental-updates='false' />
+        <metadata-records>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[predictions_gp_tableau.csv]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
+              <attribute datatype='string' name='collation'>&quot;en_GB&quot;</attribute>
+              <attribute datatype='string' name='currency'>&quot;¤&quot;</attribute>
+              <attribute datatype='string' name='field-delimiter'>&quot;,&quot;</attribute>
+              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
+              <attribute datatype='string' name='locale'>&quot;en&quot;</attribute>
+              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>country_code</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[country_code]</local-name>
+            <parent-name>[predictions_gp_tableau.csv]</parent-name>
+            <remote-alias>country_code</remote-alias>
+            <ordinal>0</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RGB' />
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>year</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[year]</local-name>
+            <parent-name>[predictions_gp_tableau.csv]</parent-name>
+            <remote-alias>year</remote-alias>
+            <ordinal>1</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>week</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[week]</local-name>
+            <parent-name>[predictions_gp_tableau.csv]</parent-name>
+            <remote-alias>week</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>CapitalLatitude</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[CapitalLatitude]</local-name>
+            <parent-name>[predictions_gp_tableau.csv]</parent-name>
+            <remote-alias>CapitalLatitude</remote-alias>
+            <ordinal>3</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>CapitalLongitude</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[CapitalLongitude]</local-name>
+            <parent-name>[predictions_gp_tableau.csv]</parent-name>
+            <remote-alias>CapitalLongitude</remote-alias>
+            <ordinal>4</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>surface_height</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[surface_height]</local-name>
+            <parent-name>[predictions_gp_tableau.csv]</parent-name>
+            <remote-alias>surface_height</remote-alias>
+            <ordinal>5</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>temperature</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[temperature]</local-name>
+            <parent-name>[predictions_gp_tableau.csv]</parent-name>
+            <remote-alias>temperature</remote-alias>
+            <ordinal>6</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>evaporation</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[evaporation]</local-name>
+            <parent-name>[predictions_gp_tableau.csv]</parent-name>
+            <remote-alias>evaporation</remote-alias>
+            <ordinal>7</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>humidity</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[humidity]</local-name>
+            <parent-name>[predictions_gp_tableau.csv]</parent-name>
+            <remote-alias>humidity</remote-alias>
+            <ordinal>8</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Pressure_surface</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[Pressure_surface]</local-name>
+            <parent-name>[predictions_gp_tableau.csv]</parent-name>
+            <remote-alias>Pressure_surface</remote-alias>
+            <ordinal>9</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>num_influenza</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[num_influenza]</local-name>
+            <parent-name>[predictions_gp_tableau.csv]</parent-name>
+            <remote-alias>num_influenza</remote-alias>
+            <ordinal>10</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>outbreak</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[outbreak]</local-name>
+            <parent-name>[predictions_gp_tableau.csv]</parent-name>
+            <remote-alias>outbreak</remote-alias>
+            <ordinal>11</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>X1</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[X1]</local-name>
+            <parent-name>[predictions_gp_tableau.csv]</parent-name>
+            <remote-alias>X1</remote-alias>
+            <ordinal>12</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>X2</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[X2]</local-name>
+            <parent-name>[predictions_gp_tableau.csv]</parent-name>
+            <remote-alias>X2</remote-alias>
+            <ordinal>13</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>upper</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[upper]</local-name>
+            <parent-name>[predictions_gp_tableau.csv]</parent-name>
+            <remote-alias>upper</remote-alias>
+            <ordinal>14</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>lower</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[lower]</local-name>
+            <parent-name>[predictions_gp_tableau.csv]</parent-name>
+            <remote-alias>lower</remote-alias>
+            <ordinal>15</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>pred_class</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[pred_class]</local-name>
+            <parent-name>[predictions_gp_tableau.csv]</parent-name>
+            <remote-alias>pred_class</remote-alias>
+            <ordinal>16</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>pred_class_upper</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[pred_class_upper]</local-name>
+            <parent-name>[predictions_gp_tableau.csv]</parent-name>
+            <remote-alias>pred_class_upper</remote-alias>
+            <ordinal>17</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>pred_class_lower</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[pred_class_lower]</local-name>
+            <parent-name>[predictions_gp_tableau.csv]</parent-name>
+            <remote-alias>pred_class_lower</remote-alias>
+            <ordinal>18</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+        </metadata-records>
+      </connection>
+      <aliases enabled='yes' />
+      <column aggregation='Avg' caption='Capital Latitude' datatype='real' name='[CapitalLatitude]' role='measure' semantic-role='[Geographical].[Latitude]' type='quantitative' />
+      <column aggregation='Avg' caption='Capital Longitude' datatype='real' name='[CapitalLongitude]' role='measure' semantic-role='[Geographical].[Longitude]' type='quantitative' />
+      <column datatype='integer' name='[Number of Records]' role='measure' type='quantitative' user:auto-column='numrec'>
+        <calculation class='tableau' formula='1' />
+      </column>
+      <column caption='Pressure surface' datatype='real' name='[Pressure_surface]' role='measure' type='quantitative' />
+      <column caption='Country Code' datatype='string' name='[country_code]' role='dimension' semantic-role='[Country].[ISO3166_2]' type='nominal' />
+      <column caption='Evaporation' datatype='real' name='[evaporation]' role='measure' type='quantitative' />
+      <column caption='Humidity' datatype='real' name='[humidity]' role='measure' type='quantitative' />
+      <column caption='Num Influenza' datatype='integer' name='[num_influenza]' role='measure' type='quantitative' />
+      <column caption='Outbreak' datatype='integer' name='[outbreak]' role='measure' type='quantitative' />
+      <column caption='Pred Class' datatype='integer' name='[pred_class]' role='measure' type='quantitative' />
+      <column caption='Surface Height' datatype='real' name='[surface_height]' role='measure' type='quantitative' />
+      <column caption='Temperature' datatype='real' name='[temperature]' role='measure' type='quantitative' />
+      <column caption='Week' datatype='integer' name='[week]' role='dimension' type='quantitative' />
+      <column caption='Year' datatype='integer' name='[year]' role='dimension' type='quantitative' />
+      <extract count='-1' enabled='true' units='records'>
+        <connection access_mode='readonly' authentication='auth-none' author-locale='en_US' class='hyper' dbname='/Users/harrisonzhu/Documents/My Tableau Repository/Datasources/citadel/predictions_gp_tableau.hyper' default-settings='yes' schema='Extract' sslmode='' tablename='Extract' update-time='' username='tableau_internal_user'>
+          <relation name='Extract' table='[Extract].[Extract]' type='table' />
+          <metadata-records>
+            <metadata-record class='column'>
+              <remote-name>country_code</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[country_code]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>country_code</remote-alias>
+              <ordinal>0</ordinal>
+              <family>predictions_gp_tableau.csv</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>9</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RGB' />
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>year</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[year]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>year</remote-alias>
+              <ordinal>1</ordinal>
+              <family>predictions_gp_tableau.csv</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>1</approx-count>
+              <contains-null>true</contains-null>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>week</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[week]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>week</remote-alias>
+              <ordinal>2</ordinal>
+              <family>predictions_gp_tableau.csv</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>51</approx-count>
+              <contains-null>true</contains-null>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>CapitalLatitude</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[CapitalLatitude]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>CapitalLatitude</remote-alias>
+              <ordinal>3</ordinal>
+              <family>predictions_gp_tableau.csv</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>9</approx-count>
+              <contains-null>true</contains-null>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>CapitalLongitude</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[CapitalLongitude]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>CapitalLongitude</remote-alias>
+              <ordinal>4</ordinal>
+              <family>predictions_gp_tableau.csv</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>9</approx-count>
+              <contains-null>true</contains-null>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>surface_height</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[surface_height]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>surface_height</remote-alias>
+              <ordinal>5</ordinal>
+              <family>predictions_gp_tableau.csv</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>9</approx-count>
+              <contains-null>true</contains-null>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>temperature</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[temperature]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>temperature</remote-alias>
+              <ordinal>6</ordinal>
+              <family>predictions_gp_tableau.csv</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>382</approx-count>
+              <contains-null>true</contains-null>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>evaporation</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[evaporation]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>evaporation</remote-alias>
+              <ordinal>7</ordinal>
+              <family>predictions_gp_tableau.csv</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>382</approx-count>
+              <contains-null>true</contains-null>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>humidity</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[humidity]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>humidity</remote-alias>
+              <ordinal>8</ordinal>
+              <family>predictions_gp_tableau.csv</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>382</approx-count>
+              <contains-null>true</contains-null>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>Pressure_surface</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[Pressure_surface]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>Pressure_surface</remote-alias>
+              <ordinal>9</ordinal>
+              <family>predictions_gp_tableau.csv</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>382</approx-count>
+              <contains-null>true</contains-null>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>num_influenza</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[num_influenza]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>num_influenza</remote-alias>
+              <ordinal>10</ordinal>
+              <family>predictions_gp_tableau.csv</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>161</approx-count>
+              <contains-null>true</contains-null>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>outbreak</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[outbreak]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>outbreak</remote-alias>
+              <ordinal>11</ordinal>
+              <family>predictions_gp_tableau.csv</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>2</approx-count>
+              <contains-null>true</contains-null>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>X1</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[X1]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>X1</remote-alias>
+              <ordinal>12</ordinal>
+              <family>predictions_gp_tableau.csv</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>382</approx-count>
+              <contains-null>true</contains-null>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>X2</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[X2]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>X2</remote-alias>
+              <ordinal>13</ordinal>
+              <family>predictions_gp_tableau.csv</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>382</approx-count>
+              <contains-null>true</contains-null>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>upper</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[upper]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>upper</remote-alias>
+              <ordinal>14</ordinal>
+              <family>predictions_gp_tableau.csv</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>382</approx-count>
+              <contains-null>true</contains-null>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>lower</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[lower]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>lower</remote-alias>
+              <ordinal>15</ordinal>
+              <family>predictions_gp_tableau.csv</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>382</approx-count>
+              <contains-null>true</contains-null>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>pred_class</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[pred_class]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>pred_class</remote-alias>
+              <ordinal>16</ordinal>
+              <family>predictions_gp_tableau.csv</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>2</approx-count>
+              <contains-null>true</contains-null>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>pred_class_upper</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[pred_class_upper]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>pred_class_upper</remote-alias>
+              <ordinal>17</ordinal>
+              <family>predictions_gp_tableau.csv</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>2</approx-count>
+              <contains-null>true</contains-null>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>pred_class_lower</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[pred_class_lower]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>pred_class_lower</remote-alias>
+              <ordinal>18</ordinal>
+              <family>predictions_gp_tableau.csv</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>2</approx-count>
+              <contains-null>true</contains-null>
+            </metadata-record>
+          </metadata-records>
+        </connection>
+        <filter class='categorical' column='[country_code]'>
+          <groupfilter from='&quot;BEL&quot;' function='range' level='[country_code]' to='&quot;SVN&quot;' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+        </filter>
+        <filter class='quantitative' column='[pred_class]' included-values='in-range'>
+          <min>0</min>
+          <max>1</max>
+        </filter>
+        <filter class='quantitative' column='[week]' included-values='in-range'>
+          <min>1</min>
+          <max>51</max>
+        </filter>
+      </extract>
+      <layout dim-ordering='alphabetic' dim-percentage='0.356164' measure-ordering='alphabetic' measure-percentage='0.643836' show-structure='true' />
+    </datasource>
+  </datasources>
+  <mapsources>
+    <mapsource name='Tableau' />
+  </mapsources>
+  <worksheets>
+    <worksheet name='Sheet 1'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run>2018 European Forecast&#10;</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='predictions_gp_tableau' name='federated.17t5ffa1vkhx8m14o59nb11eqfqe' />
+          </datasources>
+          <mapsources>
+            <mapsource name='Tableau' />
+          </mapsources>
+          <datasource-dependencies datasource='federated.17t5ffa1vkhx8m14o59nb11eqfqe'>
+            <column caption='Country Code' datatype='string' name='[country_code]' role='dimension' semantic-role='[Country].[ISO3166_2]' type='nominal' />
+            <column-instance column='[country_code]' derivation='None' name='[none:country_code:nk]' pivot='key' type='nominal' />
+            <column-instance column='[week]' derivation='None' name='[none:week:ok]' pivot='key' type='ordinal' />
+            <column caption='Pred Class' datatype='integer' name='[pred_class]' role='measure' type='quantitative' />
+            <column-instance column='[pred_class]' derivation='Sum' name='[sum:pred_class:qk]' pivot='key' type='quantitative' />
+            <column caption='Week' datatype='integer' name='[week]' role='dimension' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='axis'>
+            <encoding attr='space' class='0' field='[federated.17t5ffa1vkhx8m14o59nb11eqfqe].[Longitude (generated)]' field-type='quantitative' max='5459075.7242069989' min='-3985399.0299046412' projection='EPSG:3857' range-type='fixed' scope='cols' type='space' />
+            <encoding attr='space' class='0' field='[federated.17t5ffa1vkhx8m14o59nb11eqfqe].[Latitude (generated)]' field-type='quantitative' max='9066556.3475589976' min='3088515.1845169049' projection='EPSG:3857' range-type='fixed' scope='rows' type='space' />
+          </style-rule>
+          <style-rule element='mark'>
+            <encoding attr='color' field='[federated.17t5ffa1vkhx8m14o59nb11eqfqe].[sum:pred_class:qk]' num-steps='2' palette='red_green_diverging_10_0' reverse='true' type='interpolated' />
+          </style-rule>
+          <style-rule element='map-layer'>
+            <format attr='enabled' id='tab_base' value='true' />
+            <format attr='enabled' id='um_lcover' value='true' />
+            <format attr='enabled' id='tab_coastline' value='false' />
+            <format attr='enabled' id='pp2_line' value='false' />
+            <format attr='enabled' id='light_adm0_bnd' value='false' />
+            <format attr='enabled' id='light_adm0_lbl' value='false' />
+            <format attr='enabled' id='um_adm0_bnd' value='true' />
+            <format attr='enabled' id='um_adm0_lbl' value='true' />
+            <format attr='enabled' id='light_pp2_statebounds' value='false' />
+            <format attr='enabled' id='light_pp2_statelabels' value='false' />
+            <format attr='enabled' id='pp2_adminlabels' value='false' />
+            <format attr='enabled' id='pp2_statebounds' value='true' />
+            <format attr='enabled' id='pp2_statelabels' value='true' />
+            <format attr='enabled' id='countybounds' value='false' />
+            <format attr='enabled' id='countylabels' value='false' />
+            <format attr='enabled' id='zipbounds' value='false' />
+            <format attr='enabled' id='ziplabels' value='false' />
+            <format attr='enabled' id='tab_areabounds' value='false' />
+            <format attr='enabled' id='tab_arealabels' value='false' />
+            <format attr='enabled' id='tab_msabounds' value='false' />
+            <format attr='enabled' id='tab_msalabels' value='false' />
+          </style-rule>
+          <style-rule element='map'>
+            <format attr='washout' value='0.0' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <color column='[federated.17t5ffa1vkhx8m14o59nb11eqfqe].[sum:pred_class:qk]' />
+              <lod column='[federated.17t5ffa1vkhx8m14o59nb11eqfqe].[none:country_code:nk]' />
+              <geometry column='[federated.17t5ffa1vkhx8m14o59nb11eqfqe].[Geometry (generated)]' />
+            </encodings>
+          </pane>
+        </panes>
+        <rows>[federated.17t5ffa1vkhx8m14o59nb11eqfqe].[Latitude (generated)]</rows>
+        <cols>[federated.17t5ffa1vkhx8m14o59nb11eqfqe].[Longitude (generated)]</cols>
+        <pages>
+          <column>[federated.17t5ffa1vkhx8m14o59nb11eqfqe].[none:week:ok]</column>
+        </pages>
+      </table>
+    </worksheet>
+  </worksheets>
+  <windows source-height='30'>
+    <window class='worksheet' maximized='true' name='Sheet 1'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card type='currpage' />
+            <card pane-specification-id='0' param='[federated.17t5ffa1vkhx8m14o59nb11eqfqe].[sum:pred_class:qk]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <current-page>
+          <multibucket>
+            <bucket>36</bucket>
+          </multibucket>
+        </current-page>
+        <default-map-tool-selection tool='1' />
+      </viewpoint>
+    </window>
+  </windows>
+</workbook>
