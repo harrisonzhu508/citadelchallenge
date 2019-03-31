@@ -108,6 +108,7 @@ mean weekly flu count is 3934 (Credible Interval: 1313, 6629) which provides
 a reasonable fit to the reality of the weekly average of 4611 patients in 2018 in Europe.
 
 .. image:: ../img/synthetic.png
+	:scale: 60 %
 
 It is important to scrutinise the prior for informativeness with respect
 to the quantities we are particularly interested in. In the below figure, the
@@ -120,6 +121,7 @@ of the approximate maximum. Both distributions reflect reality well and
 do not over-inform.
 
 .. image:: ../img/max.avg.png
+	:scale: 60 %
 
 A Quick Remark
 ~~~~~~~~~~~~~~
@@ -203,6 +205,7 @@ accepted by ABC in green. These samples provide a satisfactory fit to
 the observed process.
 
 .. image:: ../img/ABC.png
+	:scale: 60 %
 
 Results
 -----------------
@@ -216,7 +219,8 @@ strategically allocate their resources to regions with a higher probability of o
 To demonstrate its usefulness, we consider 2018 model predictions given 2017 cycle observations. While we observe the peaks to be consistently above the mean prediction, we find that the observations for 2018 consistently fell within our tight Highest Posterior Density (HPD) interval. Given that the European Centre for Disease Prevention and Control recognised 2018 as a reasonably large season, we are encouraged by the fact the observations still fell within our bounds [#forth]_.
 
 .. image:: ../img/forecast2018.png
-
+	:scale: 60 %
+    
 These results demonstrate our model's usefulness; with a traditional model based off Serfling's method, we could not have estimated the amount of extra resources required to manage large seasons such as this one, but our model gives a credible interval which can even account for these. We envision that policy makers could use our model to make sure that they are well prepared for large events whilst also ensuring that they do not overbudget.
 
 Using 2018 observations for 2019 predictions, we observe an expected maximum number of viruses
@@ -225,6 +229,7 @@ testing positive for influenza at 14,487 with a 95% credible interval of
 with a 95% credible interval at (14507,20085), putting the 2019 flu season on track to be about as large if not larger than the 2018 one. Below we also produce the expected flu cycle for 2019 with 95% HPD intervals.
 
 .. image:: ../img/eu2019.png
+	:scale: 60 %
 
 We also believe that this could provide an alternative epidemic threshold to that currently used by the Centre for Disease Control; if we were to find that the number of infections lies outside the HPD region, this would be an indication that we are failing to control the outbreaks and on the verge of an epidemic, and suitable measures should be taken.
 

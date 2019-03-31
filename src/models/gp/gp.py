@@ -1,7 +1,3 @@
-"""
-Module for Gaussian process regression
-
-"""
 import gpytorch
 import torch
 import gc   
@@ -12,8 +8,32 @@ from matplotlib import pyplot as plt
 plt.style.use('seaborn-darkgrid')
 import gc
 gc.collect()
+import xgboost as xgb
+    
+train = pd.read_csv("weekly_SWEurope_train.csv")
+train = train.dropna()
+test = pd.read_csv("weekly_SWEurope_test.csv")
+test = test.dropna()
 
+print("Number train:{}".format(train.shape[0]))
+print("Number test:{}".format(test.shape[0]))
 
+train_x = Tensor(train.iloc[:, :-1].values)
+train_y = Tensor(train.iloc[:, -1].values)
+
+test_x = Tensor(test.iloc[:, :-1].values)
+test_y = Tensor(test.iloc[:, -1].values)
+
+if torch.cuda.is_available():
+    train_x = train_x.cuda()
+    train_y = train_y.cuda()
+    test_x = test_x.cuda()
+
+data_dmatrix = xgb.DMatrix(data=train.iloc[:, 1:10],label=train.iloc[:, -2])
+params = {"objective":"reg:linear",'learning_rate': 0.1,
+            'max_depth': 7}
+data_testmatrix = xgb.DMatrix(data=test.iloc[:, 1:10])
+xgb_regression = xgb.train(params, dtrain=data_dmatrix, num_boost_round=2000)
 class Simple_GP(gpytorch.models.ExactGP):
     """Spatiotemporal Gaussian Process model class
 
@@ -53,13 +73,13 @@ class Spatiotemporal_GP(gpytorch.models.ExactGP):
     def __init__(self, train_x, train_y, likelihood):
         super(Spatiotemporal_GP, self).__init__(train_x, train_y, likelihood)
 
-        self.mean_module = gpytorch.means.ConstantMean()
+        self.mean_module = gpytorch.means.ZeroMean()
 
         self.covar_season = gpytorch.kernels.PeriodicKernel()
         self.covar_season.period_length = Tensor([1])
         #self.covar_season.period_length(1) # year seasonality indicating 1
 
-        self.covar_week = gpytorch.kernels.RBFKernel()
+        self.covar_week = gpytorch.kernels.MaternKernel()
         self.covar_spatial = gpytorch.kernels.MaternKernel()
         self.covar_remote = gpytorch.kernels.MaternKernel()
 
@@ -72,20 +92,21 @@ class Spatiotemporal_GP(gpytorch.models.ExactGP):
         year = x.narrow(1,0,1)
         week = x.narrow(1,1,1)
         spatial = x.narrow(1,2,2)
-        remote = x.narrow(1,4,5)
-        #social = x.narrow(1,8,1)
+        remote = x.narrow(1,4,2)
         # prevent period to reset
-        mean = self.mean_module(x).view(-1)
+        x_pandas = pd.DataFrame(x.cpu().numpy(), columns=data_testmatrix.feature_names)
+        data_x = xgb.DMatrix(data=x_pandas)
+        predictions = xgb_regression.predict(data_x)
+        mean = self.mean_module(x).view(-1) + Tensor(predictions).cuda()
 
         #compute covariances
-        self.covar_season.period_length = Tensor([1]) # year seasonality indicating 1
+        #self.covar_season.period_length = Tensor([1]) # year seasonality indicating 1
         covar_season = self.covar_season(year)
         covar_week = self.covar_week(week)
         covar_spatial = self.covar_spatial(spatial)
         covar_remote = self.covar_remote(remote)
-        #covar_social = self.covar_social(social)
         
-        covariance = (covar_season + covar_week) * (covar_remote + covar_spatial)\
+        covariance = covar_season + covar_remote + covar_spatial\
                       + covar_week
 
         return gpytorch.distributions.MultivariateNormal(mean, covariance)
@@ -111,6 +132,10 @@ def train_model(train_x, train_y, model, likelihood, epochs = 50):
     
     model.train()
     likelihood.train()
+
+    if torch.cuda.is_available():
+        likelihood = likelihood.cuda()
+        gp_model = gp_model.cuda()
 
     # Use the adam optimizer
     optimizer = torch.optim.Adam([
@@ -172,43 +197,16 @@ def predict(test_x, model, likelihood):
     
 
 def main():
-    """main method
-
-    """
-    
-    train = pd.read_csv("weekly_SWEurope_train.csv")
-    train = train.dropna()
-    test = pd.read_csv("weekly_SWEurope_test.csv")
-    test = test.dropna()
-    
-    
-    print("Number train:{}".format(train.shape[0]))
-    print("Number test:{}".format(test.shape[0]))
-
-    train_x = Tensor(train.iloc[:, :-1].values)
-    train_y = Tensor(train.iloc[:, -1].values)
-
-    test_x = Tensor(test.iloc[:, :-1].values)
-    test_y = Tensor(test.iloc[:, -1].values)
-    
-    if torch.cuda.is_available():
-        train_x = train_x.cuda()
-        train_y = train_y.cuda()
-        test_x = test_x.cuda()
     
     # initialize likelihood and model
     likelihood = gpytorch.likelihoods.GaussianLikelihood()
     gp_model = Spatiotemporal_GP(train_x, train_y, likelihood)
-    
-    if torch.cuda.is_available():
-        likelihood = likelihood.cuda()
-        gp_model = gp_model.cuda()
-    
+
     print("Start Training \n")
     gp_model = train_model(train_x, train_y, gp_model, likelihood, epochs=200)
     # posterior prediction
     posterior_pred = predict(test_x, gp_model, likelihood)
-    
+
     if torch.cuda.is_available():
         posterior_mean = posterior_pred.mean.cpu()
         print("Test RSME:{}".format(torch.norm(test_y - posterior_mean)/ posterior_mean.shape[0]))
@@ -216,11 +214,6 @@ def main():
     else:
         posterior_mean = posterior_pred.mean
         print("Test RSME:{}".format((torch.norm(test_y - posterior_mean) / posterior_mean.shape[0])))
-    
-    #plt.figure(0)
-    #plt.scatter([i for i in range(1,223)], test_y.cpu(), marker = ".")
-    #plt.scatter([i for i in range(1,223)], posterior_pred.mean.cpu().numpy())
-    #plt.show()
 
     with torch.no_grad():
     # Initialize plot

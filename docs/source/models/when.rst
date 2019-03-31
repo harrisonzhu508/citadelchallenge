@@ -72,6 +72,7 @@ Another way to understand Gaussian processes is to think of it as a graphical mo
 1-dimensional example visualisation of a Gaussian process random field [#rasmussen]_.
 
 .. image:: ../img/gp_field.png
+	:scale: 50%
 
 While we will also deploy a Gaussian process classification model, we will omit the details as the theory is more complicated and requires variational inference. If we were to go through the derivation, however, we would find that the optimal predictor for a classification problem with the 0-1 loss is the Bayes' classifier.
 
@@ -119,6 +120,7 @@ We conducted hyperparameter tuning and training using the PyTorch framework on t
 `Figure source <https://public.tableau.com/profile/harrison4446#!/vizhome/gp_prediction/Sheet1?publish=yes/>`_. The Gaussian Process mixture with XGBoost mean function results in an AUC (area under curve) on the ROC(Receiver Operating Characteristic) curve of 0.762, as shown below. From a policy perspective, within reasonable bounds, the proportion of false negatives is more important, as a false positive will only strengthen the prevention of an outbreak. We find that out of 382 test points in 2018, we have a 95% credible interval of (10.2%,13.1%) on the percentage of false negatives, with the optimal prediction yielding 11.8%.
 
 .. image:: ../img/xgboost_GP.png
+	:scale: 60 %
 
 We also observe exactly what we hypothesised - the spread of influenza in space - in the above diagram. We can see that when an outbreak is observed in 1 country, it spreads very rapidly to neighbouring countries (especially visible during the transition from week 49 to 50).
 
@@ -127,7 +129,7 @@ Shortcomings
 
 As mentioned in the analysis, we have mainly focused on predicting the occurrence of outbreaks, rather than the exact number of cases. To predict the latter, there have been multiple recent studies on stochastic partial differential equations and INLA [#lindgren]_. Our team decided to implement a Bayesian model to do this, which is detailed in :ref:`the next section <bayesian>`.
 
-Finally, there is also an existing framework for extreme value statistics that would be a more suitable model for predicting either the extreme events or looking at the probability of threshold exceedances. Moreover, the current remote sensing data focusses on capital cities, while a finer grain data source would improve the quality of the fit.
+Finally, there is also an existing framework for extreme value statistics that would be a more suitable model for predicting either the extreme events or looking at the probability of threshold exceedances. However, spatiotemporal extremes is still an active area of research, and we expect more contributions in this field that can have applications to disease mapping in the future. Moreover, the current remote sensing data focusses on capital cities, while a finer grain data source would improve the quality of the fit.
 
 .. [#bhatt] Bhatt, S., Cameron, E., Flaxman, S.R., Weiss, D.J., Smith, D.L. and Gething, P.W., 2017. Improved prediction accuracy for disease risk mapping using Gaussian process stacked generalization. Journal of The Royal Society Interface, 14(134), p.20170520.
 
