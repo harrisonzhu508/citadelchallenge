@@ -64,12 +64,11 @@ We obtained the coordinates of the capitals of each country and performed an SQL
 the coordinates. We picked the coordinates of the capitals because these would usually indicate the regions with
 most of the population. We can make the following observations.
 
-- Influenza outbreaks seems to appear in clusters of regions. Especially for Europe and Central + South America.
-One of our goals could be to identity how the spread occurs over space and time.
-- There are more outbreak reports in Europe and fewer in South America. This may be due to better surveying and medical
-infrastructure in Europe. Another subject of study for us would be to use the existing data for 
-South America to interpolate what could happen in countries where there is little or no observation, 
-using a spatiotemporal model. **To use the dragging cursor**, click on the play icon and select the second icon.
+- Influenza outbreaks seems to appear in clusters of regions. Especially for Europe and Central + South America. One of our goals could be to identity how the spread occurs over space and time.
+
+- There are more outbreak reports in Europe and fewer in South America. This may be due to better surveying and medical infrastructure in Europe. Another subject of study for us would be to use the existing data to interpolate what could happen in countries where there is little or no observation, using a spatiotemporal model. 
+
+**To use the dragging cursor**, click on the play icon and select the second icon.
 
 .. raw:: html
 
@@ -77,7 +76,7 @@ using a spatiotemporal model. **To use the dragging cursor**, click on the play 
 `Figure link <https://public.tableau.com/profile/harrison4446#!/vizhome/outbreak_influenza/Spatialoutbreak/>`_. Our previous visualisation and studies view that there is a yearly seasonality. Many recent studies have been 
 on studying the relationship of spatiotemporal spread of influenza and diseases over a particular regional clusters. 
 For example, Bhatt et al., 2017 [#bhatt]_ looked at mapping disease over space-time using a GP in sub-Saharan Africa, 
-Chen et al, 2019 [#chen]_ looked at seasonal influenza spread in Shenzhen, China and [#]_ on weekly flu
+Chen et al., 2019 [#chen]_ looked at seasonal influenza spread in Shenzhen, China and Senanayake et al., 2016 [#senanayake]_ on weekly flu
 occurrence in the USA. 
 
 Motivated by Bhatt et al., 2017, we use live satellite imagery (NOOA, MODIS, TERRACLIMATE) 
@@ -97,9 +96,6 @@ Using Lasso regularised regression, we select the following features for our Gau
 - Surface Height
 - Year 
 - Month
-
-In particular, we found that spatial, temporal and the number of physicians to be highly 
-significant features to the occurrence of influenza.
 
 Google Trends
 ================
