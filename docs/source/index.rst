@@ -28,6 +28,3 @@ MPhil in Economic Research.
    introduction.rst
    datasets.rst
    models.rst
-   notparleytest1.rst
-   setup.md
-   ARIMA_&_VAR.rst
