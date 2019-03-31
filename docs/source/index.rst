@@ -30,6 +30,4 @@ MPhil in Economic Research.
    gp.rst
    models.rst
    Bayes.rst
-   notparleytest1.rst
-   setup.md
-   ARIMA_&_VAR.rst
+   appendix.rst
