@@ -27,9 +27,7 @@ MPhil in Economic Research.
    executive_summary.rst
    introduction.rst
    datasets.rst
-   gp.rst
    models.rst
-   Bayes.rst
    notparleytest1.rst
    setup.md
    ARIMA_&_VAR.rst
