@@ -1,4 +1,4 @@
-Efficient Resource Allocation for Influenza Outbreaks
+Efficient Resource Allocation during Influenza cycles
 ==========================================================
 
 Please navigate our submission via the contents side bar!
