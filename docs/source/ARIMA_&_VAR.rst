@@ -25,12 +25,19 @@ Univariate examples
 USA
 -----------
 
-We pick a country which has small empty reports over 2000-2018 and large numbers so that spikes c.f. usual observations can be seen clearly. USA seems to be a good choice, with time plot as follows:
+We pick a country which has small empty reports over 2000-2018 and sizable numbers so that spikes compared to usual observations can be seen clearly. USA seems to be a good choice, with time plot as follows:
 
 .. image:: ./img/USA.png
 
+Indeed, compared to the globe, despite some other countries like Australia have yearly spike time being different from American, America data still captures the global trend as well as spikes.
 
 
+
+Now, write the sequence as :math:`(USA_{t})_{t=1}^{T}`, and let us firstly check the stationarity: we run a Dickey-Fluller test on the sequence, and obtained a p-value of 0.022; a Dicky-Fuller on :math:`\Delta USA_t` to be having a p-value of 0.013; and on :math:`\Delta \Delta USA_t` gets a p-value of 0.009. Hence, upon the choice of significance level, we can have the following conclusion:
+
+- djkfl
+
+- fdklxm
 
 
 Germany (DEU)
