@@ -169,7 +169,6 @@ observation in question, that is, the first year falling in line with
 recorded data. We make use of the following consistent estimator:
 
 .. image:: ../img/naive.png
-	:scale: 60 %
 
 When implemented using :math:`n=100,000` the approximation produced
 unstable results despite efforts to reduce computational underflow. To
@@ -221,7 +220,7 @@ To demonstrate its usefulness, we consider 2018 model predictions given 2017 cyc
 
 .. image:: ../img/forecast2018.png
 	:scale: 60 %
-
+    
 These results demonstrate our model's usefulness; with a traditional model based off Serfling's method, we could not have estimated the amount of extra resources required to manage large seasons such as this one, but our model gives a credible interval which can even account for these. We envision that policy makers could use our model to make sure that they are well prepared for large events whilst also ensuring that they do not overbudget.
 
 Using 2018 observations for 2019 predictions, we observe an expected maximum number of viruses
