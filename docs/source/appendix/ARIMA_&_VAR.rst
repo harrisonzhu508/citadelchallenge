@@ -128,4 +128,7 @@ In order to compare whether VAR does good to our model fitting, we consider a un
 .. image:: ../img/DEUcomparison.jpg
 
 
-MSE suggests the baseline AR(3) model to be 20% better than the more advanced VAR(2) model, which is counter-intuitive. This fact can also be seen by the above graph, where VAR predictions seem to be jumping too largely at the event of outbreaks.
+MSE suggests the baseline AR(3) model to be 20% better than the more advanced VAR(2) model, which is counter-intuitive. This fact can also be seen by the above graph, where VAR predictions seem to be jumping too largely at the event of outbreaks. The reason of such counter-intuitive feature may be hard to be fully explained, but a contributing factor is that German data are still quite solid, in the sense of continuity and regularity, thus German data may be self-explanatory. Anotehr factor could be that Germany is relatively big compared to its neighbours, especially at the time when we drop FRA, hence foreign influence to Germany may be relatively insignificant.
+
+
+
