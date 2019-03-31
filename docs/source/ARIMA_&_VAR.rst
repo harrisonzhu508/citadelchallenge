@@ -58,6 +58,20 @@ It turns out that the difference between these two models aren't huge --- the di
 .. image:: ./img/ARIMA702.png
 
 
+ARIMA(p,2,q)
+~~~~~~~~
+Likewise, by observing the ACF and PACF, we found 1-4 significant lags in both ACF and PACF, thus run all 16 possible combinations of ARIMA, and select the following top two:
+
+- ARIMA(1,2,4), which has the lowest BIC and the third lowest AIC;
+
+- ARIMA(3,2,3), which has the second lowest BIC and the second lowest AIC.
+
+
+The prediction, as shown below, are actually similar amongst the two. However, as one can see, perform poorly when facing spikes.
+
+.. image:: ./img/ARIMA124.png
+
+.. image:: ./img/ARIMA323.png
 
 
 Germany (DEU)
