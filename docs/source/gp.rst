@@ -87,59 +87,6 @@ we have a graphical model of :math:`p` dimensions (:math:`p` types of inputs). B
 
 Finally, we will also use a Gaussian process classification model, but the theory is more complicated, requiring variation inference, and we will omit the details. We similarly state the result that the optimal predictor for a classification problem with the 0-1 loss is the Bayes's classifier.
 
-The data
---------
-
-Below is a spatiotemporal exploratory analysis of the number of influenza cases from the ``influenza`` dataset. 
-We obtained the coordinates of the capitals of each country and performed an SQL left join of ``influenza`` on
-the coordinates. We picked the coordinates of the capitals because these would usually indicate the regions with
-most of the population.
-
-To use the dragging cursor, click on the play icon and select the second icon.
-
-We can make the following observations.
-
-- Influenza outbreaks seems to appear in clusters of regions. Especially for Europe and Central + South America.
-One of our goals could be to identity how the spread occurs over space and time.
-- There are more outbreak reports in Europe and fewer in South America. This may be due to better surveying and medical
-infrastructure in Europe. Another subject of study for us would be to use the existing data for 
-South America to interpolate what could happen in countries where there is little or no observation, 
-using a spatiotemporal model.
-
-.. raw:: html
-
-	<iframe src="_static/spatial_outbreak.html" height="530px" width="100%"></iframe>
-
-Our previous visualisation and studies view that there is a yearly seasonality. Many recent studies have been 
-on studying the relationship of spatiotemporal spread of influenza and diseases over a particular regional clusters. 
-For example, Bhatt et al., 2017 looked at mapping disease over space-time using a GP in sub-Saharan Africa, 
-Chen et al, 2019 looked at seasonal influenza spread in Shenzhen, China and Senanayake et al., 2016 on weekly flu
-occurrence in the USA. 
-
-Motivated by Bhatt et al., 2017, we use live satellite imagery (NOOA, MODIS, TERRACLIMATE) 
-to obtain aggregated remote sensing data of temperature, precipitation, 
-humidity etc... to augment our existing feature space. The data can be found from 
-Google Earth Engine API (Gorelick et al., 2017) newly-developed by Google. An extraction pipeline is illustrated below.
-
-.. image:: ./img/ee_pipeline.png
-
-Using Lasso regularised regression, we select the following features for our Gaussian process model
-
-- Capital city latitude 
-- Capital city longitude 
-- Weekly temperature 
-- Evapotranspiration, derived using a one-dimensional soil water balance model 
-- Surface pressure
-- Surface Height
-- Year 
-- Month
-
-In particular, we found that spatial, temporal and the number of physicians to be highly 
-significant features to the occurrence of influenza. Of course, as GPs are nonparametric models,
-keeping these variables will not have a bad effect on the model fit as GPs are able to fit sufficiently
-regular underlying functions (see http://www.stats.ox.ac.uk/~sejdinov/teaching/atml14/Theory_2014.pdf for a 
-rigorous treatment of reproducing kernel Hilbert spaces for Gaussian processes).
-
 Model 1: Gaussian process
 -------------------------
 
@@ -196,7 +143,7 @@ To conduct hyperparameter tuning and training, we trained our models using the P
 
 	<iframe src="_static/xgboostgp_2018.html" height="530px" width="100%"></iframe>
 
-Our new model gives us an AUC (area under curve) or 0.762, as illustrated below. From a policy perspective, it is important to see the proportion of false negatives, as a false positive will only strengthen the prevention of an outbreak. We observe that out of 382 test points in 2018, we have a 95% credible interval of (10.2%,13.1%) of the percentage of false negatives, with the optimal prediction yielding 11.8%.
+`Figure link <https://public.tableau.com/profile/harrison4446#!/vizhome/gp_prediction/Sheet1?publish=yes/>`_. Our new model gives us an AUC (area under curve) or 0.762, as illustrated below. From a policy perspective, it is important to see the proportion of false negatives, as a false positive will only strengthen the prevention of an outbreak. We observe that out of 382 test points in 2018, we have a 95% credible interval of (10.2%,13.1%) of the percentage of false negatives, with the optimal prediction yielding 11.8%.
 
 .. image:: ./img/xgboost_GP.png
 
@@ -204,6 +151,4 @@ Potential improvements
 ----------------------
 
 As already mentioned in the analysis, we have mainly focused ourselves with predicting the occurrence of outbreaks, rather than the exact number of cases. To predict the latter, there has been recent studies on stochastic partial differential equations and INLA (Lindgren et al., 2015) that fit naturally into this framework. Finally, there is also an existing framework for extreme value statistics that would be a more suitable model for predicting either the extreme events or looking at the probability of threshold exceedances. 
-
-
 
