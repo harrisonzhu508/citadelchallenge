@@ -112,7 +112,7 @@ As a matter of geographical fact, (note: see `datasets section <datasets.html>`_
 
 .. raw:: html
 
-	<iframe src="_static/p_break.html" height="530px" width="100%"></iframe>
+	<iframe src="../_static/p_break.html" height="500px" width="110%"></iframe>
 `Figure link <https://public.tableau.com/profile/harrison4446#!/vizhome/influenza_15538744094150/Spatialoutbreak>`_. 
 
 
