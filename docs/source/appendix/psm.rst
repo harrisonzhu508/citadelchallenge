@@ -55,17 +55,22 @@ Descriptive Statistical Tests
 
 Test against the following hypothesis: 
 
-.. math:: H_0: \mathbb{E}[{uphill}_{ABS,t}] = \mathbb{E}[{uphill}_{PRES,t}] 
+.. math:: H_0: \mathbb{E}[{uphill}_{PRES,t}] = \mathbb{E}[{uphill}_{ABS,t}] 
 
-.. math:: H_A: \mathbb{E}[{uphill}_{ABS,t}] = \mathbb{E}[{uphill}_{PRES,t}] 
+.. math:: H_A: \mathbb{E}[{uphill}_{PRES,t}] \neq \mathbb{E}[{uphill}_{ABS,t}] 
 
-
+By constructing the mean statistic :math:`\overline{{uphill}_{PRES,t}-{uphill}_{ABS,t}} `We get a t-statistic of 1.23, associated with a p-value of 0.22, which means we can not reject the :math:`H_0` ,despite the uphill speed for ABS seems to be slightly quicker than the PRES.
 
 
 
 
 Time Series
 ~~~~~~
+
+
+
+
+
 
 .. [#elasticnet] https://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.124.4696
 .. [#temperatureflu] https://jvi.asm.org/content/88/14/7692s
