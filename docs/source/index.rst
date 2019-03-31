@@ -26,3 +26,4 @@ MPhil in Economic Research.
    introduction.rst
    datasets.rst
    models.rst
+   appendix.rst
