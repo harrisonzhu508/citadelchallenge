@@ -3,7 +3,7 @@ Efficient Resource Allocation during Influenza cycles
 
 Please navigate our submission via the contents side bar!
 
-Team 18 members:
+Members of Team 18:
 -------------
 .. image:: img/logo.png
 `Taketomo Isazawa <http://www.mole.phy.cam.ac.uk/people/ti250.php>`_,

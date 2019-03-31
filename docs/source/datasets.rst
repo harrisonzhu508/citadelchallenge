@@ -17,7 +17,7 @@ The dataset was used as-is but a version was also made where the data was collec
 
 Below we consider the distribution of outbreak type for each WHO region. We find that the European region has the highest recorded level. While it is not possible to comment on whether this is due to better reporting standards in Europe, population size, or greater susceptibility to outbreak, this visualisation motivates a European focus due to increased size. 
 
-.. image:: ../img/dist.outbreak.who.png
+.. image:: ../img/dist.outbreak.png
 
 In contrast to the above, a similar visualisation of outbreak type in European countries does not yield a large number of observations in any particular country. The smallest number of total outbreaks were observed in the Republic of Macedonia and Montenegro with respectively 1 Regional Outbreak and 1 Widespread Outbreak. The largest number of outbreaks was recorded at 197 in Russia.
 
