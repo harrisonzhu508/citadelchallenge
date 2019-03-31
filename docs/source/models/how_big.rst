@@ -1,3 +1,5 @@
+.. _bayesian:
+
 =================
 Bayesian Approach
 =================
