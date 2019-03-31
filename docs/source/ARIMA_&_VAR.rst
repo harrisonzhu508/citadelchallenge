@@ -3,7 +3,6 @@ Univariate ARIMA & VAR trials
 =================
 
 
-============
 Motivation & Introduction
 ============
 
@@ -18,7 +17,6 @@ with :math:`\varepsilon_t \sim iidN(0,\sigma^2)` as a usual distributional assum
 We start by looking at univariate case, which :math:`X_{t}\in\mathbb{R}`.
 
 
-============
 Univariate examples
 ============
 
@@ -103,7 +101,6 @@ As shown below, peaks are nicely captured.
 
 
 
-=================
 VAR example: DEU and its neighbourhoods
 =================
 
