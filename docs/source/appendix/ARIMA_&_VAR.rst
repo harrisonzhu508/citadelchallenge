@@ -139,7 +139,11 @@ As another matter of interest, we want to see how traditional time series model 
 
 As a exploratory note, we see BEL to have zero as median, which means more than half of the non-empty entires are zero, therefore BEL shall be droped, as otherwise a collinearity/data-hungry issue may be faced. CZE, just like before, has only 111 observations throughout 2013-2016, thus to avoid data-hungriness, CZE is dropped.
 
-We also realised that, even by dropping BEL and CZE, data missing are still ample, and effective observations of the entire vector becomes scarer than required, which does bad to the availability of VAR(p) regressions. Hence, we fill all the empty entires by zero, which could be understood as a reasonable action --- those countries which 
+We also realised that, even by dropping BEL and CZE, data missing are still ample, and effective observations of the entire vector becomes scarer than required, which does bad to the availability of VAR(p) regressions. Hence, we fill all the empty entires by zero, which could be understood as a reasonable action --- those countries which didn't opt to report for a few weeks shall just be assumed they have nothing to report. This may be a trouble if the dataset of interest is in 2000s period, when countries purely do not opt to report independent of any number-related facts. In 2013-16 however, missing filligns occur at the time when no major outbreak occured and usually before and after zero or small number of reports being made. Hence such filling should not distort the nature of the data, whilst benefit largely to the subsequent modelling.
+
+
+
+
 
 
 
