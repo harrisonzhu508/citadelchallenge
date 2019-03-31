@@ -43,26 +43,31 @@ for (country in complete_countries[7:9])
   print(country)
   hist(influenza[influenza$Country == country,]$num_influenza)
 }
+
+influenza$rate <- 0
 for (country in complete_countries)
 {
   #rescale countries based on proportions
-  influenza$num_scaled <- 
+  num_obs <- length(influenza[influenza$Country == country,]$country_code)
+  influenza[influenza$Country == country,]$rate[2:num_obs] <- diff(influenza[influenza$Country == country,]$num_influenza+1)/(influenza[influenza$Country == country,]$num_influenza[1:(num_obs-1)]+1)
+  plot(influenza[influenza$Country == country,]$rate)
 }
 
 
 
-influenza$outbreak <- as.numeric((influenza$num_influenza > 50))
+#influenza$outbreak <- as.numeric((influenza$num_influenza > 50))
+influenza$rate
 
-head(influenza)
-influenza <- select(influenza, c("year", "week", "CapitalLatitude",
+
+influenza <- select(influenza, c("country_code","year", "week","CapitalLatitude",
                                  "CapitalLongitude", "surface_height",
                                  "temperature", "evaporation", "humidity",
                                  "humidity", "Pressure_surface", "num_influenza",
                                  "outbreak"))
 
 #train test split
-train <- influenza[influenza$year <= 2016 & influenza$year >= 2010,]
-test <- influenza[influenza$year <= 2018 & influenza$year >= 2017,]
+train <- influenza[influenza$year <= 2017 & influenza$year >= 2010,]
+test <- influenza[influenza$year <= 2018 & influenza$year >= 2018,]
 
 head(train)
 
@@ -80,6 +85,7 @@ head(train_y)
 par(mfrow = c(1,2))
 plot(train$num_influenza)
 plot(train$temperature, type = "l")
+
 
 
 colnames(train_x)
@@ -103,10 +109,12 @@ xgb.plot.importance(importance_matrix = importance_xgboost)
 
 pred_test <- predict(model_xgboost, d_test)
 
-plot(test_y)
-lines(pred_test)
 
-sum(as.numeric(pred_test >= 0.5) == test_y)
+plot(test_y[test_x$country_code=="GBR"], main = "Probability of Outbreak for the UK", 
+                    ylab = "Probability of Outbreak")
+lines(pred_test[test_x$country_code=="GBR"])
+
+sum(as.numeric(pred_test >= 0.5) == test_y) / length(test_y)
 
 library(pROC)
 table(as.numeric(pred_test >= 0.5) , test_y)
@@ -114,12 +122,7 @@ table(as.numeric(pred_test >= 0.5) , test_y)
 plot(roc(test_y, as.numeric(pred_test>=0.5)), print.auc=TRUE, col = 'red', lwd = 3,
      main = "ROC-AUC Plot of XGBoost Model")
 
-roc_obj <- roc(test_y, as.numeric(pred_test>=0.5))
-auc(roc_obj)
-
-plot(pred_test, type = "l")
-points(test_y, cex=0.2)
-
+write.csv(cbind(test_x,pred_test),"./RFpredictions.csv", row.names = FALSE)
 
 # random forest
 model_rf <- randomForest(train_y ~ temperature + week + year,data=train_x)
