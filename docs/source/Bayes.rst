@@ -6,13 +6,11 @@ Introduction
 ============
 
 A major infectious disease surveillance body, the Centre for Disease
-Control in the Untied States, currently deploy an adaptation of
-Serfling’s method (cite here) for influenza modelling. The method uses
+Control in the US, currently deploy an adaptation[#first]_) for influenza modelling. The method uses
 cyclic regression to model the weekly proportion of deaths from
 pneumonia and influenza. Since then adaptations have incorporated
 indicators such as counts of patient visits for influenza like illness
-(ILI). However, regardless of modern modifications the methodology has a
-particular flaw in its assumption that observations are independent and
+(ILI), [#second]_,[#third]_. However, regardless of modern modifications the methodology is limited by its unfounded assumption that observations are independent and
 identically distributed.
 
 In this section we attempt to shift the methodology towards the Bayesian
@@ -112,13 +110,13 @@ real world to ensure our posterior inference is justified.
 
 We first consider 100,000 samples from the prior model in Figure XXX.
 This graph demonstrates likeness to real observed data for Europe over
-the past 5 years (CITE THE GRAPH? OR WHAT?). Additionally, the credible
+the past 5 years. Additionally, the credible
 intervals plotted show a sufficiently large range of realisations. The
 mean weekly flu count is 3934 (CI: 1313,6629) which further provide
 reasonable fit to reality, for example, in 2018 the European weekly
 average was 4611 patients.
 
-#### INSERT SYNTHETIC GRAPH ####
+.. image:: ./img/synthetic.png
 
 It is important to scrutinise the prior for informativeness with respect
 to quantities we are particularly interested in. In Figure XXX the
@@ -130,7 +128,7 @@ maximum of 19,074 patients infected also sits in the high density region
 of the approximate maximum. Both distributions reflect reality well and
 do not over-inform.
 
-#### INSERT MAX/AVG GRAPH ####
+.. image:: ./img/max.avg.png
 
 A Quick Remark
 ~~~~~~~~~~~~~~
@@ -216,23 +214,60 @@ Below we observe the first year of some synthetic data, with samples
 accepted by ABC in green. These samples provide a satisfactory fit to
 the observed process.
 
-#### INSERT ABC GRAPH ####
+.. image:: ./img/ABC.png
 
 Results
 =======
 
 Using the posterior distribution we can inform policy makers about the
-probability of particular magnitude outbreaks. This information allows
+probability of particular magnitude outbreaks, allowing
 for improved emergency planning and resource allocation. The methodology
-also provides the opportunity to look at the posterior for different
-local areas within a country. Doing so allows medical professionals to
-strategically allocate their resources within a country to be best
-prepared for combating influenza outbreaks.
+further provides an opportunity to look at the posterior for different regions of a country. Medical professionals can then
+strategically allocate their resources within their country to areas with higher probability of outbreak. 
 
-For our prior model we observe an expected maximum number of viruses
+To demonstrate its usefullness we consdier 2018 model predictions given 2017 cycle observations. Below we find that the observation for 2018 fell within our reasonablly tight HPD interval. Given that the European Centre for Disease Prevention and Control recognised 2018 as reasonably large season we are encoraged by the fact the observations still fell within our bounds, [#forth]_. Note we observe the peak of the season above the mean prediction. 
+
+.. image:: ./img/forecast2018.png
+
+Returning to 2018 observations for 2019 predictions, we observe an expected maximum number of viruses
 testing positive for influenza at 14,487 with a 95% credible interval of
-(3882,24675). This expected maximum shifts to 19,413 in the posterior
-with a 95% credible interval at (12507,22085). When the observed year
-does not contain an epidemic these statistics also provide more
-justified epidemic thresholds for the following year than those
-currently used by the Centre of Disease Control.
+(3882,24675) in the prior. This expected maximum shifts to 19,413 in the posterior
+with a 95% credible interval at (14507,20085). Below we also produce the expected flu cycle for 2019 with 95% HPD intervals. This can provide an alternative epidemic threshold to that currently used by the Centre for Disease Control.
+
+.. image:: ./img/eu2019.png
+
+Shortcomings
+=======
+
+Whilst we achieved success in developing a model that reframed and extended the existing approach, there are a few shortcomings to be mentioned. Firstly, it is generally difficult to assess whether arbitrary features of the prior do not predominate our posterior analysis. The question of robustness has been tackled in the literature and further work could extend this by considering the prior belonging to a class of distributions as proposed by Berger’s classification [#five]_. Attempts could then be made to derive bounds on posterior quantities and hence produce analysis less sensitive to the choice of prior. 
+
+Beyond criticism of the arbitrariness and importance of the prior, we consider the use of ABC. The applications of ABC are often based on improved versions of the basic rejection scheme [#six]_, and have already yielded valuable insights into questions concerning the rate of spread of pathogens [#seven]_,[#eight]_. Past applications have typically focused on parameter estimation rather than posterior prediction. In our case, ABC provides the benefit of independant samples. However, true posterior samples could be found by the implimentation of Hamiltonian Monte Carlo [#nine]_. 
+
+Finally, the Naive approximation of Bayes factors in this setting proved unstable. Future work could focus on deploying more stable estimators for the marginal likelihood, such as a Harmonic approximation.
+
+
+.. [#first] Robert E. Serfling. (1963). Methods for Current Statistical Analysis of Excess Pneumonia-Influenza Deaths. Public Health Reports (1896-1970), 78(6), 494-506. doi:10.2307/4591848
+.. [#second] L. Simenson, K. Fukuda, L. B. Schonberg, and N. J. Cox. The impact of influenza epidemics on hospitalizations. The Journal of Infectious Diseases, 181:831–837, 2000.
+.. [#third] F. C. Tsui, M. M. Wagner, V. Dato, and C. C. H. Chang. Value ICD-9-Coded chief complaints for detection of epidemics. In Proceedings of the Annual AMIA Fall Symposium, 2001.
+.. [#forth] https://ecdc.europa.eu/en/seasonal-influenza/season-2017-18
+.. [#five] (Berger’s (1990a))
+.. [#six] Beaumont, M.A. et al. (2002) Approximate Bayesian Computation in population genetics. Genetics 162, 2025–2035
+.. [#seven] Tanaka, M. et al. (2006) Estimating tuberculosis transmission parameters from genotype data using approximate Bayesian computation. Genetics 173, 1511–1520
+.. [#eight] Shriner, D. et al. (2006) Evolution of intrahost HIV-1 genetic diversity during chronic infection. Evolution 60, 1165–1176
+.. [#nine] https://arxiv.org/abs/1701.02434
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

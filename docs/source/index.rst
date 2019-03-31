@@ -27,6 +27,5 @@ MPhil in Economic Research.
    setup.md
    datasets.rst
    gp.rst
-   test.rst
-   references.rst
    Bayes.rst
+   references.rst
