@@ -29,3 +29,4 @@ MPhil in Economic Research.
    gp.rst
    test.rst
    references.rst
+   Bayes.rst
