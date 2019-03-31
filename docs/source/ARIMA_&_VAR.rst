@@ -47,9 +47,15 @@ ARIMA(p,0,q)
 When d=0, i.e. using USAt we observed 1-2 significant lags in PACF and 1-9 in ACF, thus all 18 possible comibnations of ARIMA are ran, and based on Akaike Information Criterion (AIC) and the Bayesian Information Criterion (BIC), we selected the following two models for fitting:
 
 
-- asdf
+- ARIMA(5,0,2), which has the lowest BIC and the second lowest AIC;
 
-- asdf
+- ARIMA(7,0,2), which has the lowest AIC and the forth lowest BIC.
+
+It turns out that the difference between these two models aren't huge --- the difference is within -350 to 300 interval throughout, and the plot is clearly similar as shown below:
+
+.. image:: ./img/ARIMA502.png
+
+.. image:: ./img/ARIMA702.png
 
 
 
