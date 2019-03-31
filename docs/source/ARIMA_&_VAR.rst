@@ -88,7 +88,12 @@ As an interest of this report in general, we also look at DEU's data.
 
 DEU's data is not as good as the American one --- it has more empty slots than the USA data, which makes less complete time series to run ARIMA fittings.
 
-We start by the Dickey Fuller stationarity test, which gives a p-value of 0 up to the 5\ :sup:`th` significant level. Therefore we fit ARIMA(p,0,q) model for :math:`DEU_t`.
+We start by the Dickey Fuller stationarity test, which gives a p-value of 0 up to the 5\ :sup:`th` significant level. Therefore we fit ARIMA(p,0,q) model for :math:`DEU_t`. 
+
+By getting 1-5 significant lags via sample ACF and 1-2 significant lags via sample PACF, we get 10 possible combinations, and similar to the USA case, the top two are:
+
+- ARIMA(5,0,2), which has the lowest BIC and the lowest AIC;
+- ARIMA(3,0,2), which has the second lowest BIC and the third lowest AIC.
 
 
 
