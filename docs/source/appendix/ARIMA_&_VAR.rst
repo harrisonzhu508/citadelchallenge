@@ -148,9 +148,9 @@ Such surprising result might be reasonsed by the following plot:
 .. image:: ../img/forec.jpg
 
 
+Indeed, none of them are any good, VAR(9) is just simply performing much worse than AR(3) by turning around at the time it should stay flat, and forecasting nonsense-like value below zero.
 
-
-
+All above trials have shown how terribile traditional time series could fit the data, despite ss
 
 
 
