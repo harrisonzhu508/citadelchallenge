@@ -11,9 +11,23 @@ Influenza Data
 
 As the project was focussed on the spread of influenza, the logical choice was to use the WHO FluNet database provided in the :code:`influenza_activity` dataset. As the different types of influenza have similar levels of symptoms, we decided that the field of most interest was the number of total detected influenza viruses as opposed to the data for each subtype of influenza. This also had the advantage of giving us more data to work with; many countries recorded total influenza activity while not necessarily recording data for each type of influenza.
 
-The dataset was relatively clean and didn't require further cleaning, and any dates with missing values were ignored. To create predictive models, a large number of other datasets were also created and joined with this dataset using the :code:`country_code` as the primary key.
+The dataset was relatively clean and did not require extensive processing. Missing influenza counts, accounting for 0.06% of the all count records, were imputed by the mean. To create predictive models, a large number of other datasets were also created and joined with this cleaned dataset using the :code:`country_code` as the primary key.
 
 The dataset was used as-is but a version was also made where the data was collected such that it was at a monthly timescale as opposed to a weekly one, due to many of the other variables having a monthly or yearly timescale.
+
+Below we consider the distribution of outbreak type for each WHO region. We find that the European region has the highest recorded level. While it is not possible to comment on whether this is due to better reporting standards in Europe, population size, or greater susceptibility to outbreak, this visualisation motivates a European focus due to increased size. 
+
+.. image:: ../img/dist.outbreak.who.png
+
+In contrast to the above, a similar visualisation of outbreak type in European countries does not yield a large number of observations in any particular country. The smallest number of total outbreaks were observed in the Republic of Macedonia and Montenegro with respectively 1 Regional Outbreak and 1 Widespread Outbreak. The largest number of outbreaks was recorded at 197 in Russia.
+
+.. image:: ../img/seasonEU.png
+
+By observing the seasonality of influenza cycles we are able to understand whether or not it is justified to aggregate European data for modelling purposes. The below graphic depicts the influenza cycles within the WHOs European region, each normalised by their maximum weekly count. A distinct influenza season is observed approximately between week 45 (Nov) to week 19 (Apr). This seasonal property leads us to question how climatological features play a role in the spread of influenza. We consider such data in the following section. This observation also justifies the decision to model European wide influenza cycles in our :ref:`Bayesian approach <bayesian>`.
+
+.. image:: ../img/Outbreak.eu.png
+
+
 
 Remote Sensing Data
 ===================
