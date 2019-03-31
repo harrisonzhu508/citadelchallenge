@@ -137,7 +137,13 @@ rigorous treatment of reproducing kernel Hilbert spaces for Gaussian processes).
 Model 1: Gaussian process
 -------------------------
 
-To treat the seasonal trend, we will choose a kernel :math:`k_{\text{se}}(t', t) = ` for years :math:`t,t'`.
+To treat the seasonal trend, we will choose a kernel 
+
+.. math::
+	k_{\text{se}}(t', t) =  \exp\Bigg(\frac{2\sin^2(\pi||t-t'||_1/\rho)}{l^2} \Bigg
+
+for years :math:`t,t'`,
+
 
 Model 2: Deep Kernel Learning 
 -----------------------------
