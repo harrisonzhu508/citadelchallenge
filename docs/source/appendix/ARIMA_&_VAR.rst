@@ -25,7 +25,7 @@ USA
 
 We pick a country which has small empty reports over 2000-2018 and sizable numbers so that spikes compared to usual observations can be seen clearly. USA seems to be a good choice, with time plot as follows:
 
-.. image:: ./img/USA.png
+.. image:: ../img/USA.png
 
 Indeed, compared to the globe, despite some other countries like Australia have yearly spike time being different from American, America data still captures the global trend as well as spikes.
 
@@ -51,9 +51,9 @@ When d=0, i.e. using USAt we observed 1-2 significant lags in PACF and 1-9 in AC
 
 It turns out that the difference between these two models aren't huge --- the difference is within -350 to 300 interval throughout, and the plot is clearly similar as shown below:
 
-.. image:: ./img/ARIMA502.png
+.. image:: ../img/ARIMA502.png
 
-.. image:: ./img/ARIMA702.png
+.. image:: ../img/ARIMA702.png
 
 
 ARIMA(p,2,q)
@@ -67,9 +67,9 @@ Likewise, by observing the ACF and PACF, we found 1-4 significant lags in both A
 
 The prediction, as shown below, are actually similar amongst the two. However, as one can see, perform poorly when facing spikes.
 
-.. image:: ./img/ARIMA124.jpg
+.. image:: ../img/ARIMA124.jpg
 
-.. image:: ./img/ARIMA323.jpg
+.. image:: ../img/ARIMA323.jpg
 
 
 Comparing across
@@ -95,7 +95,7 @@ By getting 1-5 significant lags via sample ACF and 1-2 significant lags via samp
 
 As shown below, peaks are nicely captured.
 
-.. image:: ./img/DEUARIMA.png
+.. image:: ../img/DEUARIMA.png
 
 
 
@@ -112,8 +112,8 @@ As a matter of geographical fact, (note: see `datasets section <datasets.html>`_
 
 .. raw:: html
 
-	<iframe src="_static/spatial_outbreak.html" height="530px" width="100%"></iframe>
-`Figure link <https://public.tableau.com/profile/harrison4446#!/vizhome/outbreak_influenza/Spatialoutbreak/>`_. 
+	<iframe src="_static/p_break.html" height="530px" width="100%"></iframe>
+`Figure link <https://public.tableau.com/profile/harrison4446#!/vizhome/influenza_15538744094150/Spatialoutbreak>`_. 
 
 
 Now, by observing each individual countries, we found that NLD, DNK, POL, and CHE have no significant data before 2009, LUX has no data before 2003, AUT has no data before 2011, and FRA has no data before 2013. Hence, to run the VAR smoothly, we drop FRA and AUT, and only consider years after 2008. Additionally, CZE has numerous empty observations throughout, which would make the VAR restricted due to shrunk sample size. Hence CZE is dropped, too.
@@ -125,7 +125,7 @@ Due to data availability, the maximum p that would sustain the regression would 
 In order to compare whether VAR does good to our model fitting, we consider a univariate AR(p) model for DEU and see if by considering wider dataset, whether the VAR fitting could be of good. We run all possible p until 52, and by BIC, found :math:`p =3` to be optimal. The two models' fitting results as follows: 
 
 
-.. image:: ./img/DEUcomparison.jpg
+.. image:: ../img/DEUcomparison.jpg
 
 
 MSE suggests the baseline AR(3) model to be 20% better than the more advanced VAR(2) model, which is counter-intuitive. This fact can also be seen by the above graph, where VAR predictions seem to be jumping too largely at the event of outbreaks.
