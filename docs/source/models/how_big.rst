@@ -169,7 +169,6 @@ observation in question, that is, the first year falling in line with
 recorded data. We make use of the following consistent estimator:
 
 .. image:: ../img/naive.png
-	:scale: 60 %
 
 When implemented using :math:`n=100,000` the approximation produced
 unstable results despite efforts to reduce computational underflow. To
