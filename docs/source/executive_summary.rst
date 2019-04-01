@@ -20,7 +20,7 @@ To obtain these pieces of information we created two models, one to predict in t
 
 The short-term model uses, to the best of our knowledge, a newly proposed Gaussian process mixture model with an XGBoost mean function, taking into account geographical and spatiotemporal factors to identify, with high precision, when and where an outbreak will occur. During evaluation we found that it performed well on predicting outbreaks in 2018, with an AUC of 0.762 and a false negative rate lying in a credible interval of (10.2%, 13.1%). The surveillance system was also able to capture how influenza spreads spatiotemporally, as explained in the `Models section <models.html.html>`_.
 
-We also developed a Bayesian model that accurately predicts the severity of next year's influenza season given the data from the current year. We found this model to also perform exceptionally well, with demonstration on the European 2018 cycle. 
+We also developed a Bayesian model that accurately predicts the severity of next year's influenza season given the data from the current year. We found this model to also perform well, with demonstration on the European 2018 cycle. 
 
 Applications
 ==============
