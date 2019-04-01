@@ -4,7 +4,7 @@
 Datasets
 =================
 
-While most of the data we required was provided, and already in a fairly structured form, we had to take care to process data to account for missing data, at times interpolating between data points. This section will outline the procedures undertaken to obtain/clean the data for each dataset used. Missing data in general was marked as :code:`N/A` and the time steps where such data occurred were disregarded during modelling.
+While most of the data we required was provided and already in a fairly structured form, we had to take care to process data to account for missing data, at times interpolating between data points. This section will outline the procedures undertaken to obtain/clean the data for each dataset used. Missing data in general was marked as :code:`N/A` and the time steps where such data occurred were disregarded during modelling.
 
 Influenza Data
 --------------
