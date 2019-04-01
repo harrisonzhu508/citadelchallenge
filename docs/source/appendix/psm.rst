@@ -30,12 +30,10 @@ As we know and expect, the higher the temperature, the fewer the positive instan
 
 We believe that a potential explanation for this is the effect of presenteeism culture. So-called presenteeism, when ill workers come into work due to societal pressure and spread disease, can contribute to the spread of disease, with a study estimating that presenteeism costing the U.S. economy a staggering $150 billion a year [#presenteeism]_, and we can reasonably assume that the number of hours worked per year correlates with presenteeism culture.
 
-Methodology
+Methodology & Construction
 =====
 
 
-Construction
-~~~~~~
 
 We obtain the working hour of dependent work data from OECD dataset during 2000-2017, and as is aimed by the report, the focus is restricted to the Europe region outlined by WHO. Amongst the 24 countries who reported, a yearly average is calculated, above which gets allocated to the group PRES (Presenteeism), and the rest to the group ABS (Absenteeism). There are 10 countries which stays in ABS throughout 2000-2017, 10 countries in PRES throughout, and the remaining 4 has switched for at least once. Those 4 are ruled out of the dataset for simplicity. Full breakdown can be seen in the below map.
 
@@ -50,8 +48,9 @@ What drives us the interest is the speed of going up or down in terms of the out
 
 Now, we run some interesting statistical tests to see if factually the speed of changes in infection could be different across these two groups. 
 
+
 Descriptive Statistical Tests
-~~~~
+==========
 
 Test against the following hypothesis: 
 
@@ -84,12 +83,15 @@ As a conclusive remark, we may thus say that PRES may have a quicker acceleratio
 
 
 Time Series
-~~~~~~
+========
 
 We start by asking a slightly "upgraded" question, which, knowing classical time series doesn't work --- would massive AR models by of good? This question is also motivated by the fact that Kalman filters could theoretically be more useful, in terms of fitness, compared to classical time series methods.
 
-After a few trials, the following model is presented. We drop all observations before March 2014 for the purpose of higher quality data, and put aside year 2018 for assessment. A 3-year-long AR filter is then applied, using Time Series language, a big AR(156) model is fitted. The result
+After a few trials, the following model is presented. We drop all observations before March 2014 for the purpose of higher quality data, and put aside year 2018 for assessment. A 3-year-long AR filter is then applied, using Time Series language, a big AR(156) model is fitted. The result 
 
+
+
+.. image:: ./pgraph.jpg
 
 
 
