@@ -6,6 +6,8 @@ Please navigate our submission via the contents side bar!
 Members of Team 18:
 -------------
 .. image:: img/logo.png
+
+
 `Taketomo Isazawa <http://www.mole.phy.cam.ac.uk/people/ti250.php>`_,
 University of Cambridge, 1st year PhD in Natural Language Processing.
 
