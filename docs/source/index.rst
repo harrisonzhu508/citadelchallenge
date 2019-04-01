@@ -1,4 +1,4 @@
-Efficient Resource Allocation during Influenza cycles
+How can we better allocate resources to contain influenza?
 ==========================================================
 
 Please navigate our submission via the contents side bar!
