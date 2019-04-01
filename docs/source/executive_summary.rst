@@ -11,14 +11,14 @@ Influenza is different. Approximately 80,000 people died in the United States in
 
 As can be seen from the constant budget crises facing the British National Health Services [#nhsbudget]_, our society seems to have priorities other than human life. It is therefore of paramount importance that we allocate the limited resources available to most effectively contain influenza and minimise its impact. We will be focussing on the developed world to ensure that the hypotheses we explore and the policies we propose go beyond the state-of-the-art.
 
-To answer our question of how to better allocate resources to contain influenza, we must first think about what information we need to make these decisions. We believe that to make the best decisions, what we need to be able to do is predict, ahead of time, when, and with what severity a region will be impacted by influenza. Once we know that, we can simply apply procedures that would usually be applied after we find an influenza outbreak, but apply it earlier, to contain the disease before it can spread.
+To answer our question of how to better allocate resources to contain influenza, we must first think about what information we need to make these decisions. We believe that to make optimal decisions we must be able to predict, ahead of time, when, and with what severity a region will be impacted by influenza. Once we have that information, we can simply apply procedures that would usually be applied after we find an influenza outbreak, but apply it earlier, to contain the disease before it can spread.
 
 Models
 ===============
 
-To obtain these pieces of information, we created two models, one to predict in the short term when and where influenza will strike, and another long-term model which predicts the severity of the influenza season.
+To obtain these pieces of information we created two models, one to predict in the short term when and where influenza will strike, and another long-term model which predicts the severity of the influenza season.
 
-The short-term model uses, to the best of our knowledge, a newly proposed Gaussian process mixture model with an XGBoost mean function, taking into account of geographical and spatiotemporal factors to identify, with high precision, when and where an outbreak will occur. During evaluation we found that it performed well on predicting outbreaks in 2018. The surveillance system was also able to capture how influenza spreads spatiotemporally, as explained in the `Models section <models.html.html>`_.
+The short-term model uses, to the best of our knowledge, a newly proposed Gaussian process mixture model with an XGBoost mean function, taking into account geographical and spatiotemporal factors to identify, with high precision, when and where an outbreak will occur. During evaluation we found that it performed well on predicting outbreaks in 2018, with an AUC of 0.762 and a false negative rate lying in a credible interval of (10.2%, 13.1%). The surveillance system was also able to capture how influenza spreads spatiotemporally, as explained in the `Models section <models.html.html>`_.
 
 We also developed a Bayesian model that accurately predicts the severity of next year's influenza season given the data from the current year. We found this model to also perform exceptionally well, with demonstration on the European 2018 cycle. 
 
