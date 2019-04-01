@@ -79,14 +79,14 @@ With the mean statistic :math:`\overline{{uphill}_{PRES,t}-{uphill}_{ABS,t}} `, 
 
 
 
-As a conclusive remark, we may thus say that ABS may have a quicker acceleration than PRES in terms of infection transmission, but not the curing part. However, for the statistical rigour, nothing could be concluded apart from they are similar, at 5% significance level.
+As a conclusive remark, we may thus say that PRES may have a quicker acceleration than ABS in terms of infection transmission, but not the curing part. However, for the statistical rigour, nothing could be concluded apart from they are similar, at 5% significance level.
 
 
 
 Time Series
 ~~~~~~
 
-
+We start by asking a slightly "upgraded" question, which, knowing classical time series doesn't work.
 
 
 
