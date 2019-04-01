@@ -88,7 +88,9 @@ Time Series
 
 We start by asking a slightly "upgraded" question, which, knowing classical time series doesn't work --- would massive AR models by of good? This question is also motivated by the fact that Kalman filters could theoretically be more useful, in terms of fitness, compared to classical time series methods.
 
-After a few trials, the following model is presented. We drop all observations, for the purpose of higher 
+After a few trials, the following model is presented. We drop all observations before March 2014 for the purpose of higher quality data, and put aside year 2018 for assessment. A 3-year-long AR filter is then applied, using Time Series language, a big AR(156) model is fitted. The result
+
+
 
 
 .. [#elasticnet] https://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.124.4696
