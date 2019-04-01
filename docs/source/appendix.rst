@@ -7,5 +7,5 @@ Appendix
    :caption: Contents:
 
    appendix/additional_datasets.rst
-   appendix/psm.rst
    appendix/ARIMA_&_VAR.rst
+   appendix/psm.rst
