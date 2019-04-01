@@ -22,12 +22,12 @@ Below we consider the distribution of outbreak type for each WHO region. We find
 
 In contrast to the above, a similar visualisation of outbreak type in European countries does not yield a large number of observations in any particular country. The smallest number of total outbreaks were observed in the Republic of Macedonia and Montenegro with respectively 1 Regional Outbreak and 1 Widespread Outbreak. The largest number of outbreaks was recorded at 197 in Russia.
 
-.. image:: ./img/seasonEU.png
+.. image:: ./img/Outbreak.png
 	:scale: 60 %
 
 By observing the seasonality of influenza cycles we are able to understand whether or not it is justified to aggregate European data for modelling purposes. The below graphic depicts the influenza cycles within the WHOs European region, each normalised by their maximum weekly count. A distinct influenza season is observed approximately between week 45 (Nov) to week 19 (Apr). This seasonal property leads us to question how climatological features play a role in the spread of influenza. We consider such data in the following section. This observation also justifies the decision to model European wide influenza cycles in our :ref:`Bayesian approach <bayesian>`.
 
-.. image:: ./img/Outbreak.png
+.. image:: ./img/seasonEU.png
 	:scale: 60 %
 
 
