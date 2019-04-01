@@ -40,9 +40,7 @@ We obtained the coordinates of the capitals of each country and performed an SQL
 the coordinates. We picked the coordinates of the capitals because these would usually indicate the regions with
 most of the population. We can make the following observations.
 
-- Influenza outbreaks seems to appear in clusters of regions. Especially for Europe and Central + South America. One of our goals could be to identity how the spread occurs over space and time.
-
-- There are more outbreak reports in Europe and fewer in South America. This may be due to better surveying and medical infrastructure in Europe. Another subject of study for us would be to use the existing data to interpolate what could happen in countries where there is little or no observation, using a spatiotemporal model.
+- Influenza outbreaks seems to appear in clusters of regions. Especially for Europe and Central + South America. One of our goals could be to identify how the spread occurs over space and time.
 
 **To use the dragging cursor**, click on the play icon and select the second icon.
 
