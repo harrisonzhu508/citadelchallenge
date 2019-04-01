@@ -87,7 +87,7 @@ Time Series
 
 We start by asking a slightly "upgraded" question, which, knowing classical time series doesn't work --- would massive AR models by of good? This question is also motivated by the fact that Kalman filters could theoretically be more useful, in terms of fitness, compared to classical time series methods.
 
-After a few trials, the following model is presented. We drop all observations before March 2014 for the purpose of higher quality data, and put aside year 2018 for assessment. A 3-year-long AR filter is then applied, using Time Series language, a big AR(156) model is fitted. The result 
+After a few trials, the following model is presented. We drop all observations before March 2014 for the purpose of higher quality data, and put aside year 2018 for assessment. A 3-year-long AR filter is then applied to the accumulated :math:`PRES_t` , using Time Series language, a big AR(156) model is fitted. The result, as shown below, is quite a good one, where the forecast meats the actual data  quite well, and rarely did the actual data go out of the 95% Confidence Interval.
 
 
 
