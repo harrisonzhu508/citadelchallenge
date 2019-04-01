@@ -37,7 +37,7 @@ The short-term knowledge provided by the Gaussian Processes can also inform imme
 
 - The transportation of antiviral drugs to the region in advance. As antiviral medication must be administered early (within 48 hours of first symptoms) [#antivirals]_, this measure would be especially effective in conjunction with the Public Service Announcements.
 
-- It is well known that influenza outbreaks can occur in hospitals, which is of particular concern due to the number of at-risk individuals at these locations [#crossinfection]_. By informing healthcare professionals ahead of time, they could take extra caution, e.g. ensuring facemasks are worn by all staff and patients, disinfecting surfaces more regularly, to prevent outbreaks.
+- It is well known that influenza outbreaks can occur in hospitals, which is of particular concern due to the number of at-risk individuals at these locations [#crossinfection]_. By informing healthcare professionals ahead of time, they could take extra caution, e.g. ensuring facemasks are worn by all staff and patients or disinfecting surfaces more regularly, to prevent outbreaks.
 
 These are just some of the ways influenza could be better contained given the data that our models provide, and we believe that in the hands of healthcare professionals who have decades of knowledge on how to contain influenza outbreaks, even more powerful and effective measures could be undertaken.
 
