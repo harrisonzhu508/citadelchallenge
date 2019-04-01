@@ -124,7 +124,7 @@ table(df_prediction_gp$pred_class , test_y)
 table(df_prediction_gp$pred_class_lower , test_y)
 table(df_prediction_gp$pred_class_upper , test_y)
 
-plot(test_y[test_x$country_code=="GBR"], main = "Probability of Outbreak for the UK", 
+plot(df_prediction_gp[df_prediction_gp$country_code=="GBR",], main = "Probability of Outbreak for the UK", 
      ylab = "Probability of Outbreak")
 
 plot(roc(test_y, df_prediction_gp$pred_class), print.auc=TRUE, col = 'red', lwd = 3,
